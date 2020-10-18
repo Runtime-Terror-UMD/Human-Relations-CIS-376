@@ -1,4 +1,4 @@
-﻿using Hotel_Reservation_Overhaul;
+﻿using Human_Relations;
 using MySql.Data.MySqlClient;
 using System;
 public class LoggedActivity
