@@ -23,7 +23,7 @@ public class LoggedActivity
         logActivity.Parameters.Add("@effectedUser", MySqlDbType.Int32).Value = effectedUserID;
         logActivity.Parameters.Add("@activityType", MySqlDbType.Int32).Value = activityType;
         logActivity.Parameters.Add("@refID", MySqlDbType.Int32).Value = refID;
-        logActivity.Parameters.Add("@created", MySqlDbType.Date).Value = created;
+        logActivity.Parameters.Add("@created", MySqlDbType.DateTime).Value = created;
         logActivity.Parameters.Add("@createdBy", MySqlDbType.Int32).Value = createdBy;
         if (logActivityConn.NonQuery(logActivity) > 0)
             return true;
