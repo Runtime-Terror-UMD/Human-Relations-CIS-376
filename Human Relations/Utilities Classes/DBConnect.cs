@@ -9,8 +9,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 
-namespace Hotel_Reservation_Overhaul
-{
+namespace Human_Relations
+{ 
     class DBConnect
     {
         private MySqlConnection connection;
