@@ -52,8 +52,75 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Account Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Account Settings.designer.cs">
+      <DependentUpon>Account Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\History.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\History.Designer.cs">
+      <DependentUpon>History.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Menu.designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NewAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\NewAccount.designer.cs">
+      <DependentUpon>NewAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Recovery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Recovery.designer.cs">
+      <DependentUpon>Recovery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Summary Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Summary Reports.designer.cs">
+      <DependentUpon>Summary Reports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities Classes\ActivityType.cs" />
+    <Compile Include="Utilities Classes\LoggedActivity.cs" />
+    <Compile Include="Utilities Classes\User.cs" />
+    <Compile Include="Utilities Classes\Utilities.cs" />
+    <EmbeddedResource Include="Pages\Account Settings.resx">
+      <DependentUpon>Account Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\History.resx">
+      <DependentUpon>History.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\NewAccount.resx">
+      <DependentUpon>NewAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Recovery.resx">
+      <DependentUpon>Recovery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Summary Reports.resx">
+      <DependentUpon>Summary Reports.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -76,9 +143,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="Utilities Classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
