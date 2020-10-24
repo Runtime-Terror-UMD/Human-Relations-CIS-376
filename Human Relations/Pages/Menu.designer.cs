@@ -1,4 +1,4 @@
-﻿namespace Hotel_Reservation_Overhaul
+﻿namespace Human_Relations
 {
     partial class Menu
     {
@@ -71,26 +71,9 @@
             // 
             // btnReservations
             // 
-            this.btnReservations.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReservations.Location = new System.Drawing.Point(150, 200);
-            this.btnReservations.Name = "btnReservations";
-            this.btnReservations.Size = new System.Drawing.Size(200, 50);
-            this.btnReservations.TabIndex = 1;
-            this.btnReservations.Text = "Reservations";
-            this.btnReservations.UseVisualStyleBackColor = true;
-            this.btnReservations.Click += new System.EventHandler(this.btnReservations_Click);
-            // 
+                // 
             // btnRooms
-            // 
-            this.btnRooms.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRooms.Location = new System.Drawing.Point(450, 200);
-            this.btnRooms.Name = "btnRooms";
-            this.btnRooms.Size = new System.Drawing.Size(200, 50);
-            this.btnRooms.TabIndex = 2;
-            this.btnRooms.Text = "Hotel Rooms";
-            this.btnRooms.UseVisualStyleBackColor = true;
-            this.btnRooms.Click += new System.EventHandler(this.btnRooms_Click);
-            // 
+          // 
             // btnAccount
             // 
             this.btnAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -115,14 +98,6 @@
             // 
             // btnHotelManagement
             // 
-            this.btnHotelManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHotelManagement.Location = new System.Drawing.Point(300, 400);
-            this.btnHotelManagement.Name = "btnHotelManagement";
-            this.btnHotelManagement.Size = new System.Drawing.Size(200, 50);
-            this.btnHotelManagement.TabIndex = 5;
-            this.btnHotelManagement.Text = "Hotel Management";
-            this.btnHotelManagement.UseVisualStyleBackColor = true;
-            this.btnHotelManagement.Click += new System.EventHandler(this.btnHotelManagement_Click);
             // 
             // lblNotification
             // 

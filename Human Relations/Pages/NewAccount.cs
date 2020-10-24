@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-namespace Hotel_Reservation_Overhaul
+namespace Human_Relations
 {
     public partial class NewAccount : Form
     {

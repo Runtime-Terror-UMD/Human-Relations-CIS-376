@@ -1,4 +1,4 @@
-﻿namespace Hotel_Reservation_Overhaul.Pages
+﻿namespace Human_Relations.Pages
 {
     partial class History
     {

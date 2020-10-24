@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Hotel_Reservation_Overhaul.Pages;
+using Human_Relations.Pages;
 
-namespace Hotel_Reservation_Overhaul
+namespace Human_Relations
 {
     public partial class Menu : Form
     {
@@ -56,18 +56,12 @@ namespace Hotel_Reservation_Overhaul
         // DESCRIPTION: Opens Reservation Management page
         private void btnReservations_Click(object sender, EventArgs e)
         {
-            var reservationMgmt = new ReservationList(UserID, currentDate);
-            reservationMgmt.FormClosed += new FormClosedEventHandler(resMgmt_FormClosed);
-            this.Hide();
-            reservationMgmt.Show();
+       
         }
 
         private void btnHotelManagement_Click(object sender, EventArgs e)
         {
-            var hotelMgmt = new HotelManagement(UserID, currentDate, this);
-            hotelMgmt.FormClosed += new FormClosedEventHandler(hotMgmt_FormClosed);
-            this.Hide();
-            hotelMgmt.Show();
+          
         }
 
         public void updateDate(DateTime newDay)
@@ -102,10 +96,7 @@ namespace Hotel_Reservation_Overhaul
 
         private void btnRooms_Click(object sender, EventArgs e)
         {
-            var rooms = new HotelRooms();
-            rooms.FormClosed += new FormClosedEventHandler(rooms_FormClosed);
-            this.Hide();
-            rooms.Show();
+   
         }
 
         private void rooms_FormClosed(object sender, EventArgs e)

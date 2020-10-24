@@ -1,4 +1,4 @@
-﻿namespace Hotel_Reservation_Overhaul
+﻿namespace Human_Relations
 {
     partial class Recovery
     {

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hotel_Reservation_Overhaul.Pages
+namespace Human_Relations.Pages
 {
 
     public partial class Summary_Reports : Form

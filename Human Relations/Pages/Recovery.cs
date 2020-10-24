@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hotel_Reservation_Overhaul
+namespace Human_Relations
 {
     public partial class Recovery : Form
     {
