@@ -73,7 +73,7 @@ namespace Human_Relations
                         if(isAdmin(txtUsername.Text))
                         {
                             // re-drecit to menu, hide hotel management button
-                            var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this, true);
+                            var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
                             menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
                             this.Hide();
                             menuScreen.Show();

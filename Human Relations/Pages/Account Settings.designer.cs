@@ -239,7 +239,7 @@ namespace Human_Relations.Pages
             this.btnChangeQuestion.TabIndex = 9;
             this.btnChangeQuestion.Text = "Change Question";
             this.btnChangeQuestion.UseVisualStyleBackColor = true;
-            this.btnChangeQuestion.Click += new System.EventHandler(this.btnChangeQuestion_Click);
+            //this.btnChangeQuestion.Click += new System.EventHandler(this.btnChangeQuestion_Click);
             // 
             // txtNewAnswer
             // 

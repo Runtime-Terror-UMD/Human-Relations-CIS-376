@@ -22,11 +22,11 @@ namespace Human_Relations.Pages
             Utilities accountInfo = new Utilities();
             userInfo = new User(userID);
             lblUsername.Text = userInfo.username;
-            lblRewardsPoints.Text = "" + userInfo.rewardPoints;
+            //lblRewardsPoints.Text = "" + userInfo.rewardPoints;
             lblEmail.Text = userInfo.email;
             txtFirstName.Text = userInfo.firstName;
             txtLastName.Text = userInfo.lastName;
-            lblCurrentQuestion.Text = userInfo.secretQuestion;
+            //lblCurrentQuestion.Text = userInfo.secretQuestion;
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -95,40 +95,40 @@ namespace Human_Relations.Pages
             txtNewPassword.Clear();
         }
 
-        private void btnChangeQuestion_Click(object sender, EventArgs e)
-        {
-            Utilities accountInfo = new Utilities();
-            if(string.IsNullOrWhiteSpace(txtCurrentAnswer.Text))
-            {
-                MessageBox.Show("Unable to change question");
-            }    
-            else if(string.IsNullOrWhiteSpace(txtNewQuestion.Text))
-            {
-                MessageBox.Show("Unable to change question");
-            }
-            else if(userInfo.secretAnswer == txtCurrentAnswer.Text)
-            {
-                userInfo.secretQuestion = txtNewQuestion.Text;
-                userInfo.secretAnswer = txtNewAnswer.Text;
+        //private void btnChangeQuestion_Click(object sender, EventArgs e)
+        //{
+        //    Utilities accountInfo = new Utilities();
+        //    if(string.IsNullOrWhiteSpace(txtCurrentAnswer.Text))
+        //    {
+        //        MessageBox.Show("Unable to change question");
+        //    }    
+        //    else if(string.IsNullOrWhiteSpace(txtNewQuestion.Text))
+        //    {
+        //        MessageBox.Show("Unable to change question");
+        //    }
+        //    else if(userInfo.secretAnswer == txtCurrentAnswer.Text)
+        //    {
+        //        userInfo.secretQuestion = txtNewQuestion.Text;
+        //        userInfo.secretAnswer = txtNewAnswer.Text;
                 
-                if(userInfo.updateUser(userInfo))
-                {
-                    MessageBox.Show("Account secret question and answer has been change successfully.");
-                }
-                else
-                {
-                    MessageBox.Show("Account secret question and answer could not be changed.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Incorrect secret answer. Account secret question and answer could not be changed.");
-            }
-            txtCurrentAnswer.Clear();
-            txtNewAnswer.Clear();
-            txtNewQuestion.Clear();
-            lblCurrentQuestion.Text = userInfo.secretQuestion.ToString();
-        }
+        //        if(userInfo.updateUser(userInfo))
+        //        {
+        //            MessageBox.Show("Account secret question and answer has been change successfully.");
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Account secret question and answer could not be changed.");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Incorrect secret answer. Account secret question and answer could not be changed.");
+        //    }
+        //    txtCurrentAnswer.Clear();
+        //    txtNewAnswer.Clear();
+        //    txtNewQuestion.Clear();
+        //    lblCurrentQuestion.Text = userInfo.secretQuestion.ToString();
+        //}
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {

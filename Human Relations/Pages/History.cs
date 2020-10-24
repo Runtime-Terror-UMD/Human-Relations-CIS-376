@@ -24,14 +24,14 @@ namespace Human_Relations.Pages
             lblLastName.Text = userInfo.lastName;
             lblEmail.Text = userInfo.email;
             lblUsername.Text = userInfo.username;
-            lblRewardsPoints.Text = userInfo.rewardPoints.ToString();
+            //lblRewardsPoints.Text = userInfo.rewardPoints.ToString();
 
             DBConnect reportConn = new DBConnect();
             DataTable ReportData = new DataTable();
             BindingSource bindingSource1 = new BindingSource();
             MySqlCommand cmd = new MySqlCommand();
 
-            if (userInfo.isCustomer == true)
+            if (userInfo.isAdmin == false)
             {
                 try
                 {

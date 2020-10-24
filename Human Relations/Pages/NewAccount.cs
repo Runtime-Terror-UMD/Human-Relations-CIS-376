@@ -133,7 +133,7 @@ namespace Human_Relations
                     {
                         // return to login page
                         this.Close();
-                        loginForm.accountCreated("Account created successfully!");
+                        //loginForm.accountCreated("Account created successfully!");
                     }
                     else
                     {
