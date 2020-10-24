@@ -7,28 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Hotel_Reservation_Overhaul.Pages;
+using Human_Relations.Pages;
 
-namespace Hotel_Reservation_Overhaul
+namespace Human_Relations
 {
     public partial class Menu : Form
     {
         public int UserID;
+        private DateTime currentDate;
         Login loginWind;
-        public Menu(Login loginInstance)
+        public Menu(Login loginInstance, DateTime current)
         {
             InitializeComponent();
+            currentDate = current;
             loginWind = loginInstance;
+            lblNotification.Text = "Current Date: " + currentDate.Date;
         }
 
         // DESCRIPTION: Initializer. Shows/hides hotel management button based on isCustomer
-        public Menu(bool isEmployee, int userID, Login loginInstance, bool isAdmin)
+        public Menu(bool isCustomer, int userID, Login loginInstance, DateTime current)
         {
             InitializeComponent();
             loginWind = loginInstance;
             UserID = userID;
-            //if (isAdmin == true)
-            //    btnHotelManagement.Visible = true;
+            if (isCustomer == true)
+                btnHotelManagement.Visible = false;
+            currentDate = current;
+            lblNotification.Text = "Current Date: " + currentDate.Date;
 
         }
         //DESCRIPTION: Opens account settings page
@@ -40,6 +45,33 @@ namespace Hotel_Reservation_Overhaul
             accountSettings.Show();
         }
         void accountSettings_FormClosed(object send, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+        void resMgmt_FormClosed(object send, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        // DESCRIPTION: Opens Reservation Management page
+        private void btnReservations_Click(object sender, EventArgs e)
+        {
+       
+        }
+
+        private void btnHotelManagement_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        public void updateDate(DateTime newDay)
+        {
+            currentDate = newDay;
+            lblNotification.Text = "Current Date: " + currentDate.Date;
+            loginWind.updateDate(newDay);
+        }
+
+        void hotMgmt_FormClosed(object send, FormClosedEventArgs e)
         {
             this.Show();
         }
@@ -62,5 +94,14 @@ namespace Hotel_Reservation_Overhaul
             this.Show();
         }
 
+        private void btnRooms_Click(object sender, EventArgs e)
+        {
+   
+        }
+
+        private void rooms_FormClosed(object sender, EventArgs e)
+        {
+            this.Show();
+        }
     }
 }

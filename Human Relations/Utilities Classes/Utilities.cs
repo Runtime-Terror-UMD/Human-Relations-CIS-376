@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Hotel_Reservation_Overhaul
+namespace Human_Relations
 {
     class Utilities
     {

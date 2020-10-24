@@ -1,4 +1,4 @@
-﻿namespace Hotel_Reservation_Overhaul
+﻿namespace Human_Relations
 {
     partial class Menu
     {
@@ -31,8 +31,11 @@
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblDescribe = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.btnReservations = new System.Windows.Forms.Button();
+            this.btnRooms = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
             this.btnHistory = new System.Windows.Forms.Button();
+            this.btnHotelManagement = new System.Windows.Forms.Button();
             this.lblNotification = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -63,9 +66,14 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(400, 40);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Human Relations System";
+            this.lblTitle.Text = "Hotel Reservation System";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btnReservations
+            // 
+                // 
+            // btnRooms
+          // 
             // btnAccount
             // 
             this.btnAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -88,6 +96,9 @@
             this.btnHistory.UseVisualStyleBackColor = true;
             this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
+            // btnHotelManagement
+            // 
+            // 
             // lblNotification
             // 
             this.lblNotification.BackColor = System.Drawing.SystemColors.Window;
@@ -106,8 +117,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.lblNotification);
+            this.Controls.Add(this.btnHotelManagement);
             this.Controls.Add(this.btnAccount);
             this.Controls.Add(this.btnHistory);
+            this.Controls.Add(this.btnRooms);
+            this.Controls.Add(this.btnReservations);
             this.Controls.Add(this.lblDescribe);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnLogOut);
@@ -122,8 +136,11 @@
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Label lblDescribe;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Button btnReservations;
+        private System.Windows.Forms.Button btnRooms;
         private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.Button btnHistory;
+        private System.Windows.Forms.Button btnHotelManagement;
         private System.Windows.Forms.Label lblNotification;
     }
 }

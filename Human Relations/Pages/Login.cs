@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Hotel_Reservation_Overhaul
+namespace Human_Relations
 {
     public partial class Login : Form
     {
