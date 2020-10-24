@@ -16,27 +16,9 @@ namespace Hotel_Reservation_Overhaul
     public partial class Login : Form
     {
         private Utilities verifyCredentials = new Utilities();
-        private DateTime currentDate;
         public Login()
         {
             InitializeComponent();
-            DateTime current;
-            try
-            {
-                string[] fileLines = File.ReadAllLines("HotelSettings.txt");
-                if (DateTime.TryParse(fileLines[5].Substring(fileLines[5].IndexOf(' ')), out current))
-                {
-                    currentDate = current;
-                }
-                else
-                {
-                    currentDate = DateTime.Today;
-                }
-            }
-            catch(Exception ex)
-            {
-                currentDate = DateTime.Today;
-            }
         }
 
         // DESCRIPTION: Utility function for error display
@@ -46,54 +28,22 @@ namespace Hotel_Reservation_Overhaul
             lblError.Text = "Error: " + errorMessage;
             lblError.Visible = true;
         }
-        //DESCRIPTION: opens NewAccount page
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            var newAcct = new NewAccount(this);
-            newAcct.FormClosed += new FormClosedEventHandler(newAcct_FormClosed);
-            this.Hide();
-            newAcct.Show();
-        }
-
-        // DESCRIPTION: un-hides page after newAccount page is closed
-        void newAcct_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            txtUsername.Text = String.Empty;
-            txtPassword.Text = String.Empty;
-            this.Show();
-        }
-
-        void recovery_FormClosed(object send, FormClosedEventArgs e)
-        {
-            txtUsername.Text = String.Empty;
-            txtPassword.Text = String.Empty;
-            this.Show();
-        }
-
-        // DESCRIPTION: Display "account created" message
-        public void accountCreated(string message)
-        {
-            lblError.ForeColor = System.Drawing.Color.Green;
-            lblError.Text = message;
-            lblError.Visible = true;
-
-        }
 
         
 
         // DESCRIPTION: checks if user is customer account
-        private bool isCustomer(string username)
+        private bool isAdmin(string username)
         {
             Utilities getUserID = new Utilities();
             int userID = getUserID.getUserIDFromUsername(username);
-            User isCustomerCheck = new User(userID);
-            bool customerAcct = false;
+            User isAdminCheck = new User(userID);
+            bool adminAcct = false;
 
-            if(isCustomerCheck.isCustomer == true)
+            if(isAdminCheck.isAdmin == true)
             
-            { customerAcct = true; }
+            { adminAcct = true; }
         
-            return customerAcct;
+            return adminAcct;
         }
         
          // DESCRIPTION: Login process
@@ -120,17 +70,17 @@ namespace Hotel_Reservation_Overhaul
                 {
                     if(verifyCredentials.passwordMatches(txtUsername.Text, txtPassword.Text))
                     {
-                        if(isCustomer(txtUsername.Text))
+                        if(isAdmin(txtUsername.Text))
                         {
                             // re-drecit to menu, hide hotel management button
-                            var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this, currentDate);
+                            var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this, true);
                             menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
                             this.Hide();
                             menuScreen.Show();
                         }
                         else
                         {   // re-drecit to menu, show hotel management button
-                            var menuScreen = new Menu(false, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this, currentDate);
+                            var menuScreen = new Menu(false, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
                             menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
                             this.Hide();
                             menuScreen.Show();
@@ -155,28 +105,6 @@ namespace Hotel_Reservation_Overhaul
             this.Show();
         }
 
-        //DESCRIPTION: re-directs to username recovery page
-        private void linklblUsername_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var recoverUsername = new Recovery("username");
-            recoverUsername.FormClosed += new FormClosedEventHandler(recovery_FormClosed);
-            this.Hide();
-            recoverUsername.Show();
-        }
-
-        //DESCRIPTION: re-directs to password reset page
-        private void linklblPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var resetPassword = new Recovery("password");
-            resetPassword.FormClosed += new FormClosedEventHandler(recovery_FormClosed);
-            this.Hide();
-            resetPassword.Show();
-        }
-
-        public void updateDate(DateTime newDay)
-        {
-            currentDate = newDay;
-        }
 
     }
 }

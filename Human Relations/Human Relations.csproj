@@ -83,12 +83,6 @@
     <Compile Include="Pages\NewAccount.designer.cs">
       <DependentUpon>NewAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Recovery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pages\Recovery.designer.cs">
-      <DependentUpon>Recovery.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Summary Reports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,9 +109,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\NewAccount.resx">
       <DependentUpon>NewAccount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Recovery.resx">
-      <DependentUpon>Recovery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Summary Reports.resx">
       <DependentUpon>Summary Reports.cs</DependentUpon>

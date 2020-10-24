@@ -9,15 +9,19 @@ public class User
     public int userID { get; set; }
     public string firstName { get; set; }
     public string lastName { get; set; }
-    public int rewardPoints { get { return pointsBalance; } set { } }
-    public decimal balance { get; set; }
     public string email { get; set; }
     public string username { get; set; }
     public string password { get; set; }
-    public string secretQuestion { get; set; }
-    public string secretAnswer { get; set; }
-    public bool isCustomer { get; set; }
-    public int pointsBalance { get; set; }
+    public bool isAdmin { get; set; }
+    public bool isActive { get; set; }
+    public DateTime hireDate { get; set; }
+    public DateTime lastDate { get; set; }
+    public decimal payRate { get; set; }
+    public int roleID { get; set; }
+    public int depID { get; set; }
+    public decimal ptoDays { get; set; }
+
+
     public User(int UserID)
     {
         // declare and parameterize mySQL Command
@@ -38,12 +42,17 @@ public class User
             firstName = dataReader["firstName"].ToString();
             lastName = dataReader["lastName"].ToString();
             email = dataReader["email"].ToString();
-            secretQuestion = dataReader["secretQuestion"].ToString();
-            secretAnswer = dataReader["secretAnswer"].ToString();
             username = dataReader["username"].ToString();
             password = dataReader["password"].ToString();
-            isCustomer = Convert.ToBoolean(dataReader["isCustomer"]);
-            pointsBalance = Convert.ToInt32(dataReader["pointsBalance"]);
+            isAdmin = Convert.ToBoolean(dataReader["isAdmin"]);
+            isActive = Convert.ToBoolean(dataReader["isActive"]);
+            hireDate = Convert.ToDateTime(dataReader["hireDate"]);
+            lastDate = Convert.ToDateTime(dataReader["lastDate"]);
+            payRate = Convert.ToDecimal(dataReader["payRate"]);
+            roleID = Convert.ToInt32(dataReader["roleID"]);
+            depID = Convert.ToInt32(dataReader["depID"]);
+            ptoDays = Convert.ToDecimal(dataReader["ptoDays"]);
+
         }
 
         //close Data Reader
@@ -59,20 +68,30 @@ public class User
                                                         firstName = @firstName,
                                                         lastName = @lastName,
                                                         email = @email,
-                                                        secretQuestion = @secretQuestion,
-                                                        secretAnswer= @secretAnswer,
                                                         username = @userName,
                                                         password = @password,
-                                                        pointsBalance = @points
+                                                        isActive = @isActive,
+                                                        hireDate = @hireDate,
+                                                        lastDate = @lastDate,
+                                                        payRate = @payRate,
+                                                        roleID = @roleID,
+                                                        depID = @depID,
+                                                        ptoDays = @ptoDays,
                                                         WHERE userID = @userID;");
         updateUserCmd.Parameters.Add("@firstName", MySqlDbType.VarChar, 45).Value = userinfo.firstName;
         updateUserCmd.Parameters.Add("@lastName", MySqlDbType.VarChar, 45).Value = userinfo.lastName;
         updateUserCmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = userinfo.email;
-        updateUserCmd.Parameters.Add("@secretQuestion", MySqlDbType.VarChar, 45).Value = userinfo.secretQuestion;
-        updateUserCmd.Parameters.Add("@secretAnswer", MySqlDbType.VarChar, 45).Value = userinfo.secretAnswer;
         updateUserCmd.Parameters.Add("@userName", MySqlDbType.VarChar, 45).Value = userinfo.username;
         updateUserCmd.Parameters.Add("@password", MySqlDbType.VarChar, 45).Value = userinfo.password;
-        updateUserCmd.Parameters.Add("@points", MySqlDbType.Int32).Value = userinfo.pointsBalance;
+        updateUserCmd.Parameters.Add("@hireDate", MySqlDbType.DateTime).Value = userinfo.hireDate;
+        updateUserCmd.Parameters.Add("@lastDate", MySqlDbType.DateTime).Value = userinfo.lastDate;
+        updateUserCmd.Parameters.Add("@payRate", MySqlDbType.Decimal, 10).Value = userinfo.payRate;
+        updateUserCmd.Parameters.Add("@roleID", MySqlDbType.Int32).Value = userinfo.roleID;
+        updateUserCmd.Parameters.Add("@depID", MySqlDbType.Int32).Value = userinfo.depID;
+        updateUserCmd.Parameters.Add("@ptoDays", MySqlDbType.Decimal, 10).Value = userinfo.ptoDays;
+
+
+
         updateUserCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userinfo.userID;
         if (updateUserConn.NonQuery(updateUserCmd) > 0)
             return true;

@@ -14,26 +14,21 @@ namespace Hotel_Reservation_Overhaul
     public partial class Menu : Form
     {
         public int UserID;
-        private DateTime currentDate;
         Login loginWind;
-        public Menu(Login loginInstance, DateTime current)
+        public Menu(Login loginInstance)
         {
             InitializeComponent();
-            currentDate = current;
             loginWind = loginInstance;
-            lblNotification.Text = "Current Date: " + currentDate.Date;
         }
 
         // DESCRIPTION: Initializer. Shows/hides hotel management button based on isCustomer
-        public Menu(bool isCustomer, int userID, Login loginInstance, DateTime current)
+        public Menu(bool isEmployee, int userID, Login loginInstance, bool isAdmin)
         {
             InitializeComponent();
             loginWind = loginInstance;
             UserID = userID;
-            if (isCustomer == true)
-                btnHotelManagement.Visible = false;
-            currentDate = current;
-            lblNotification.Text = "Current Date: " + currentDate.Date;
+            //if (isAdmin == true)
+            //    btnHotelManagement.Visible = true;
 
         }
         //DESCRIPTION: Opens account settings page
@@ -45,39 +40,6 @@ namespace Hotel_Reservation_Overhaul
             accountSettings.Show();
         }
         void accountSettings_FormClosed(object send, FormClosedEventArgs e)
-        {
-            this.Show();
-        }
-        void resMgmt_FormClosed(object send, FormClosedEventArgs e)
-        {
-            this.Show();
-        }
-
-        // DESCRIPTION: Opens Reservation Management page
-        private void btnReservations_Click(object sender, EventArgs e)
-        {
-            var reservationMgmt = new ReservationList(UserID, currentDate);
-            reservationMgmt.FormClosed += new FormClosedEventHandler(resMgmt_FormClosed);
-            this.Hide();
-            reservationMgmt.Show();
-        }
-
-        private void btnHotelManagement_Click(object sender, EventArgs e)
-        {
-            var hotelMgmt = new HotelManagement(UserID, currentDate, this);
-            hotelMgmt.FormClosed += new FormClosedEventHandler(hotMgmt_FormClosed);
-            this.Hide();
-            hotelMgmt.Show();
-        }
-
-        public void updateDate(DateTime newDay)
-        {
-            currentDate = newDay;
-            lblNotification.Text = "Current Date: " + currentDate.Date;
-            loginWind.updateDate(newDay);
-        }
-
-        void hotMgmt_FormClosed(object send, FormClosedEventArgs e)
         {
             this.Show();
         }
@@ -100,17 +62,5 @@ namespace Hotel_Reservation_Overhaul
             this.Show();
         }
 
-        private void btnRooms_Click(object sender, EventArgs e)
-        {
-            var rooms = new HotelRooms();
-            rooms.FormClosed += new FormClosedEventHandler(rooms_FormClosed);
-            this.Hide();
-            rooms.Show();
-        }
-
-        private void rooms_FormClosed(object sender, EventArgs e)
-        {
-            this.Show();
-        }
     }
 }

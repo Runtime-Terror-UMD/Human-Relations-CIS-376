@@ -107,25 +107,25 @@ namespace Hotel_Reservation_Overhaul
                 return false;
         }
         
-        // DESCRIPTION: Gets userID based on email address
-        public int getUserIDFromEmail(string email)
-        {
-            int userID = -1;
-            DBConnect getUserIDFromEmailConn = new DBConnect();
+        //// DESCRIPTION: Gets userID based on email address
+        //public int getUserIDFromEmail(string email)
+        //{
+        //    int userID = -1;
+        //    DBConnect getUserIDFromEmailConn = new DBConnect();
 
-            // build query
-            MySqlCommand cmd = new MySqlCommand("SELECT userid from dbo.user where email = @email");
-            cmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = email;
+        //    // build query
+        //    MySqlCommand cmd = new MySqlCommand("SELECT userid from dbo.user where email = @email");
+        //    cmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = email;
             
-            // assign value to variable
-            userID = getUserIDFromEmailConn.intScalar(cmd);
-            return userID;
-        }
+        //    // assign value to variable
+        //    userID = getUserIDFromEmailConn.intScalar(cmd);
+        //    return userID;
+        //}
 
-        public bool isCustomer(int userID)
+        public bool isAdmin(int userID)
         {
             User userInfo = new User(userID);
-            if(userInfo.isCustomer == false)
+            if(userInfo.isAdmin == false)
                 return false;
             return true;
         }
