@@ -36,10 +36,6 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblDescribe = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rdoEmployee = new System.Windows.Forms.RadioButton();
-            this.rdoAdmin = new System.Windows.Forms.RadioButton();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -124,46 +120,12 @@
             this.lblError.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblError.Visible = false;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rdoAdmin);
-            this.groupBox1.Controls.Add(this.rdoEmployee);
-            this.groupBox1.Location = new System.Drawing.Point(300, 179);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 45);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Account Type";
-            // 
-            // rdoEmployee
-            // 
-            this.rdoEmployee.AutoSize = true;
-            this.rdoEmployee.Location = new System.Drawing.Point(10, 19);
-            this.rdoEmployee.Name = "rdoEmployee";
-            this.rdoEmployee.Size = new System.Drawing.Size(71, 17);
-            this.rdoEmployee.TabIndex = 0;
-            this.rdoEmployee.TabStop = true;
-            this.rdoEmployee.Text = "Employee";
-            this.rdoEmployee.UseVisualStyleBackColor = true;
-            // 
-            // rdoAdmin
-            // 
-            this.rdoAdmin.AutoSize = true;
-            this.rdoAdmin.Location = new System.Drawing.Point(135, 19);
-            this.rdoAdmin.Name = "rdoAdmin";
-            this.rdoAdmin.Size = new System.Drawing.Size(54, 17);
-            this.rdoAdmin.TabIndex = 1;
-            this.rdoAdmin.TabStop = true;
-            this.rdoAdmin.Text = "Admin";
-            this.rdoAdmin.UseVisualStyleBackColor = true;
-            // 
             // Login
             // 
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.lblDescribe);
             this.Controls.Add(this.btnLogin);
@@ -174,8 +136,6 @@
             this.Controls.Add(this.lblTitle);
             this.Name = "Login";
             this.Text = "Hotel Reservation: Login";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,9 +151,6 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblDescribe;
         private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rdoAdmin;
-        private System.Windows.Forms.RadioButton rdoEmployee;
     }
 }
 

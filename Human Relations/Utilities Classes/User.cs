@@ -16,10 +16,10 @@ public class User
     public bool isActive { get; set; }
     public DateTime hireDate { get; set; }
     public DateTime lastDate { get; set; }
-    public decimal payRate { get; set; }
+    public double payRate { get; set; }
     public int roleID { get; set; }
     public int depID { get; set; }
-    public decimal ptoDays { get; set; }
+    public double ptoDays { get; set; }
 
 
     public User(int UserID)
@@ -47,11 +47,18 @@ public class User
             isAdmin = Convert.ToBoolean(dataReader["isAdmin"]);
             isActive = Convert.ToBoolean(dataReader["isActive"]);
             hireDate = Convert.ToDateTime(dataReader["hireDate"]);
-            lastDate = Convert.ToDateTime(dataReader["lastDate"]);
-            payRate = Convert.ToDecimal(dataReader["payRate"]);
+            if(dataReader["lastDate"] == DBNull.Value) //cannot convert null to DateTime
+            {
+                lastDate = DateTime.MinValue;
+            }
+            else
+            {
+                lastDate = Convert.ToDateTime(dataReader["lastDate"]);
+            }
+            payRate = Convert.ToDouble(dataReader["payRate"]);
             roleID = Convert.ToInt32(dataReader["roleID"]);
             depID = Convert.ToInt32(dataReader["depID"]);
-            ptoDays = Convert.ToDecimal(dataReader["ptoDays"]);
+            ptoDays = Convert.ToDouble(dataReader["ptoDays"]);
 
         }
 
@@ -85,10 +92,10 @@ public class User
         updateUserCmd.Parameters.Add("@password", MySqlDbType.VarChar, 45).Value = userinfo.password;
         updateUserCmd.Parameters.Add("@hireDate", MySqlDbType.DateTime).Value = userinfo.hireDate;
         updateUserCmd.Parameters.Add("@lastDate", MySqlDbType.DateTime).Value = userinfo.lastDate;
-        updateUserCmd.Parameters.Add("@payRate", MySqlDbType.Decimal, 10).Value = userinfo.payRate;
+        updateUserCmd.Parameters.Add("@payRate", MySqlDbType.Decimal).Value = userinfo.payRate;
         updateUserCmd.Parameters.Add("@roleID", MySqlDbType.Int32).Value = userinfo.roleID;
         updateUserCmd.Parameters.Add("@depID", MySqlDbType.Int32).Value = userinfo.depID;
-        updateUserCmd.Parameters.Add("@ptoDays", MySqlDbType.Decimal, 10).Value = userinfo.ptoDays;
+        updateUserCmd.Parameters.Add("@ptoDays", MySqlDbType.Decimal).Value = userinfo.ptoDays;
 
 
 
