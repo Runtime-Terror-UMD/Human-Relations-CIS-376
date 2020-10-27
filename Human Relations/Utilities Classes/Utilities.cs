@@ -107,20 +107,20 @@ namespace Human_Relations
                 return false;
         }
         
-        //// DESCRIPTION: Gets userID based on email address
-        //public int getUserIDFromEmail(string email)
-        //{
-        //    int userID = -1;
-        //    DBConnect getUserIDFromEmailConn = new DBConnect();
+        // DESCRIPTION: Gets userID based on email address
+        public int getUserIDFromEmail(string email)
+        {
+            int userID = -1;
+            DBConnect getUserIDFromEmailConn = new DBConnect();
 
-        //    // build query
-        //    MySqlCommand cmd = new MySqlCommand("SELECT userid from dbo.user where email = @email");
-        //    cmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = email;
+            // build query
+            MySqlCommand cmd = new MySqlCommand("SELECT userid from dbo.user where email = @email");
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = email;
             
-        //    // assign value to variable
-        //    userID = getUserIDFromEmailConn.intScalar(cmd);
-        //    return userID;
-        //}
+            // assign value to variable
+            userID = getUserIDFromEmailConn.intScalar(cmd);
+            return userID;
+        }
 
         public bool isAdmin(int userID)
         {
@@ -137,7 +137,7 @@ namespace Human_Relations
             DBConnect getUserIDFromUsernameConn = new DBConnect();
            
             // build query
-            MySqlCommand cmd = new MySqlCommand("SELECT userid from dbo.user where username = @username");
+            MySqlCommand cmd = new MySqlCommand("SELECT userID from dbo.user where username = @username");
             cmd.Parameters.Add("@username", MySqlDbType.VarChar, 45).Value = username;
 
             // assign value to variable

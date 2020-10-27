@@ -21,7 +21,10 @@ public class User
     public int depID { get; set; }
     public decimal ptoDays { get; set; }
 
+    public User()
+    {
 
+    }
     public User(int UserID)
     {
         // declare and parameterize mySQL Command
@@ -47,11 +50,11 @@ public class User
             isAdmin = Convert.ToBoolean(dataReader["isAdmin"]);
             isActive = Convert.ToBoolean(dataReader["isActive"]);
             hireDate = Convert.ToDateTime(dataReader["hireDate"]);
-            lastDate = Convert.ToDateTime(dataReader["lastDate"]);
+            //lastDate = Convert.ToDateTime(dataReader["lastDate"]);
             payRate = Convert.ToDecimal(dataReader["payRate"]);
             roleID = Convert.ToInt32(dataReader["roleID"]);
             depID = Convert.ToInt32(dataReader["depID"]);
-            ptoDays = Convert.ToDecimal(dataReader["ptoDays"]);
+            //ptoDays = Convert.ToDecimal(dataReader["ptoDays"]);
 
         }
 

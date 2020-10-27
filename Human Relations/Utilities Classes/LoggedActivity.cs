@@ -5,7 +5,6 @@ public class LoggedActivity
 {
    public LoggedActivity() { }
 
-
     /*
      DESCRIPTION: Adds row to ActivityLog table in database.
      PARAMETERS: ActivityType: ActivityTypeID (value from dbo.activitytype table) 
