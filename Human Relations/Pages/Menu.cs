@@ -22,13 +22,13 @@ namespace Human_Relations
         }
 
         // DESCRIPTION: Initializer. Shows/hides hotel management button based on isCustomer
-        public Menu(bool isCustomer, int userID, Login loginInstance)
+        public Menu(bool isAdmin, int userID, Login loginInstance)
         {
             InitializeComponent();
             loginWind = loginInstance;
             UserID = userID;
-            if (isCustomer == true)
-                btnHotelManagement.Visible = false;
+            //if (isAdmin == false)
+            //    btnHotelManagement.Visible = false;
 
         }
         //DESCRIPTION: Opens account settings page
