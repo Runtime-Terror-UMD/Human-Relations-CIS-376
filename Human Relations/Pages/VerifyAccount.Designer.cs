@@ -68,7 +68,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.groupBoxAddress.SuspendLayout();
+           this.groupBoxAddress.SuspendLayout();
             this.gBoxName.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -151,7 +151,7 @@
             this.groupBoxAddress.Location = new System.Drawing.Point(408, 138);
             this.groupBoxAddress.Name = "groupBoxAddress";
             this.groupBoxAddress.Size = new System.Drawing.Size(387, 252);
-            this.groupBoxAddress.TabIndex = 40;
+           this.groupBoxAddress.TabIndex = 40;
             this.groupBoxAddress.TabStop = false;
             this.groupBoxAddress.Text = "Address";
             // 
@@ -175,7 +175,7 @@
             this.txtAddress2.Location = new System.Drawing.Point(164, 94);
             this.txtAddress2.Name = "txtAddress2";
             this.txtAddress2.Size = new System.Drawing.Size(194, 26);
-            this.txtAddress2.TabIndex = 7;
+           this.txtAddress2.TabIndex = 7;
             // 
             // txtAddress1
             // 
@@ -329,7 +329,7 @@
             this.txtFName.Location = new System.Drawing.Point(115, 48);
             this.txtFName.Name = "txtFName";
             this.txtFName.Size = new System.Drawing.Size(194, 26);
-            this.txtFName.TabIndex = 10;
+           this.txtFName.TabIndex = 10;
             // 
             // txtLName
             // 
@@ -410,7 +410,7 @@
             this.button1.Location = new System.Drawing.Point(3, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(146, 52);
-            this.button1.TabIndex = 47;
+           this.button1.TabIndex = 47;
             this.button1.Text = "Back to Login";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
