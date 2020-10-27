@@ -34,6 +34,7 @@
             this.btnAccount = new System.Windows.Forms.Button();
             this.btnHistory = new System.Windows.Forms.Button();
             this.lblNotification = new System.Windows.Forms.Label();
+            this.btnNewEmployee = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogOut
@@ -100,11 +101,23 @@
             this.lblNotification.Text = "No new notifications.";
             this.lblNotification.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btnNewEmployee
+            // 
+            this.btnNewEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewEmployee.Location = new System.Drawing.Point(150, 394);
+            this.btnNewEmployee.Name = "btnNewEmployee";
+            this.btnNewEmployee.Size = new System.Drawing.Size(200, 50);
+            this.btnNewEmployee.TabIndex = 7;
+            this.btnNewEmployee.Text = "New Employee";
+            this.btnNewEmployee.UseVisualStyleBackColor = true;
+            this.btnNewEmployee.Click += new System.EventHandler(this.btnNewEmployee_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnNewEmployee);
             this.Controls.Add(this.lblNotification);
             this.Controls.Add(this.btnAccount);
             this.Controls.Add(this.btnHistory);
@@ -125,5 +138,6 @@
         private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.Button btnHistory;
         private System.Windows.Forms.Label lblNotification;
+        private System.Windows.Forms.Button btnNewEmployee;
     }
 }
