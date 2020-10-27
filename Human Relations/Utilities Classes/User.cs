@@ -64,7 +64,10 @@ public class User
             payRate = Convert.ToDouble(dataReader["payRate"]);
             roleID = Convert.ToInt32(dataReader["roleID"]);
             depID = Convert.ToInt32(dataReader["depID"]);
-            ptoDays = Convert.ToDouble(dataReader["ptoDays"]);
+            if (dataReader["ptoDays"] == DBNull.Value)
+                ptoDays = 0;
+            else
+                ptoDays = Convert.ToDouble(dataReader["ptoDays"]);
             address1 = Convert.ToString(dataReader["address1"]);
             address2 = Convert.ToString(dataReader["address2"]);
             city = Convert.ToString(dataReader["city"]);
