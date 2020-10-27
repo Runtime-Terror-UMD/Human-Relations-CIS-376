@@ -10,12 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Human_Relations.Pages;
 
 namespace Human_Relations
 {
     public partial class Login : Form
     {
         private Utilities verifyCredentials = new Utilities();
+        private Utilities isFirstLoginCheck = new Utilities();
         public Login()
         {
             InitializeComponent();
@@ -68,23 +70,35 @@ namespace Human_Relations
             {
                 if(verifyCredentials.usernameExists(txtUsername.Text))
                 {
-                    if(verifyCredentials.passwordMatches(txtUsername.Text, txtPassword.Text))
+                    if (verifyCredentials.passwordMatches(txtUsername.Text, txtPassword.Text))
                     {
-                        if(isAdmin(txtUsername.Text))
+                        int userID = isFirstLoginCheck.getUserIDFromUsername(txtUsername.Text);
+                        if (isFirstLoginCheck.isFirstLogin(userID))
                         {
-                            // re-drecit to menu, hide hotel management button
-                            var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
-                            menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
+                            var verifyAccountScreen = new VerifyAccount(userID);
+                            verifyAccountScreen.FormClosed += new FormClosedEventHandler(verifyAccountScreen_formClosed);
                             this.Hide();
-                            menuScreen.Show();
+                            verifyAccountScreen.Show();
                         }
+
                         else
-                        {   // re-drecit to menu, show hotel management button
-                            var menuScreen = new Menu(false, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
-                            menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
-                            this.Hide();
-                            menuScreen.Show();
-                        }                       
+                        {
+                            if (isAdmin(txtUsername.Text))
+                            {
+                                // re-drecit to menu, hide hotel management button
+                                var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
+                                menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
+                                this.Hide();
+                                menuScreen.Show();
+                            }
+                            else
+                            {   // re-direct to menu, show hotel management button
+                                var menuScreen = new Menu(false, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
+                                menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
+                                this.Hide();
+                                menuScreen.Show();
+                            }
+                        }
                     }
                     else
                     {
@@ -105,6 +119,10 @@ namespace Human_Relations
             this.Show();
         }
 
+        private void verifyAccountScreen_formClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
 
     }
 }

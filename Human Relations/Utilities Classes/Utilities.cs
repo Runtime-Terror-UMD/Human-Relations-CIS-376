@@ -106,7 +106,19 @@ namespace Human_Relations
             else
                 return false;
         }
-        
+
+        public bool isFirstLogin(int userID)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT Count(*) from dbo.activityLog where createdBy = @userID and activityTypeID = 14");
+            cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
+
+            DBConnect firstLoginConn = new DBConnect();
+
+            if (firstLoginConn.intScalar(cmd) > 0)
+                return false;
+            return true;
+        }
+
         //// DESCRIPTION: Gets userID based on email address
         //public int getUserIDFromEmail(string email)
         //{
@@ -116,7 +128,7 @@ namespace Human_Relations
         //    // build query
         //    MySqlCommand cmd = new MySqlCommand("SELECT userid from dbo.user where email = @email");
         //    cmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = email;
-            
+
         //    // assign value to variable
         //    userID = getUserIDFromEmailConn.intScalar(cmd);
         //    return userID;
@@ -187,115 +199,6 @@ namespace Human_Relations
                 return true;
             else
                 return false;
-        }
-        //  DESCRIPTION: get minimum charge for a hotel stay from file
-        public double getMinCharge()
-        {
-            double minCharge;
-            string[] fileLines = File.ReadAllLines("HotelSettings.txt");
-            if(double.TryParse(fileLines[0].Substring(fileLines[0].IndexOf(' ')), out minCharge))
-            {
-                return minCharge;
-            }
-            else
-            {
-                MessageBox.Show("Unable to retrieve minimum charge. 0 will be used.");
-                return 0;
-            }
-        }
-        //  DESCRIPTION: get cancelation fee for a hotel stay from file
-        public decimal getCancelCharge()
-        {
-            decimal cancelCharge;
-            string[] fileLines = File.ReadAllLines("HotelSettings.txt");
-            if (decimal.TryParse(fileLines[1].Substring(fileLines[1].IndexOf(' ')), out cancelCharge))
-            {
-                return cancelCharge;
-            }
-            else
-            {
-                MessageBox.Show("Unable to retrieve cancelation charge. 0 will be used.");
-                return 0;
-            }
-        }
-        //  DESCRIPTION: get cancelation window from the file
-        public int getCancelWindow()
-        {
-            int cancelWindow;
-            string[] fileLines = File.ReadAllLines("HotelSettings.txt");
-            if (int.TryParse(fileLines[2].Substring(fileLines[2].IndexOf(' ')), out cancelWindow))
-            {
-                return cancelWindow;
-            }
-            else
-            {
-                MessageBox.Show("Unable to retrieve cancelation window. 0 will be used.");
-                return 0;
-            }
-        }
-        //  DESCRIPTION: get points per day for stay from the file
-        public int getDailyPointAmount()
-        {
-            int points;
-            string[] fileLines = File.ReadAllLines("HotelSettings.txt");
-            if (int.TryParse(fileLines[3].Substring(fileLines[3].IndexOf(' ')), out points))
-            {
-                return points;
-            }
-            else
-            {
-                MessageBox.Show("Unable to retrieve rewards points per night. 0 will be used.");
-                return 0;
-            }
-        }
-        //  DESCRIPTION: get notification window from the file
-        public int getNotificationWindow()
-        {
-            int notifDays;
-            string[] fileLines = File.ReadAllLines("HotelSettings.txt");
-            if (int.TryParse(fileLines[4].Substring(fileLines[4].IndexOf(' ')), out notifDays))
-            {
-                return notifDays;
-            }
-            else
-            {
-                MessageBox.Show("Unable to retrieve notification window. 0 will be used.");
-                return 0;
-            }
-        }
-
-        // DESCRIPTION: calculates total price of reservation
-        public double calculatePrice(double days, double pricePerNight)
-        {
-            double price =pricePerNight * days;
-            return price;
-        }
-
-        // DESCRIPTION: Calculates total points accrued by reservation
-        public double calculatePoints(double days)
-        {
-            double points = days * getDailyPointAmount();
-            return points;
-        }
-
-        // DESCRIPTION: Gets price per night of roomNum at locationID
-        public double getPricePerNight(int locationID, int roomNum)
-        {
-            DBConnect getPricePerNightConn = new DBConnect();
-            MySqlCommand getPricePerNight = new MySqlCommand("SELECT pricePerNight from dbo.room WHERE locationID = @locationID and roomNum = @roomNum");
-            getPricePerNight.Parameters.Add("@locationID", MySqlDbType.Int32).Value = locationID;
-            getPricePerNight.Parameters.Add("@roomNum", MySqlDbType.Int32).Value = roomNum;
-            double pricePerNight = getPricePerNightConn.doubleScalar(getPricePerNight);
-            return pricePerNight;
-        }
-        public bool checkIfRewardApplied(int confirmationID)
-        {
-            DBConnect checkRewardConn = new DBConnect();
-            MySqlCommand checkReward = new MySqlCommand("SELECT ifnull(count(*),0) from payment where confirmationID = @confirmationID and usedRewards = 1");
-            checkReward.Parameters.Add("@confirmationID", MySqlDbType.Int32).Value = confirmationID;
-            int check = checkRewardConn.intScalar(checkReward);
-            return (check == 0)?false:true;
-        }
-        
+        }      
     }
 }
