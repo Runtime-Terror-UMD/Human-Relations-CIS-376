@@ -230,7 +230,7 @@ namespace Human_Relations
                     {
                         displayError("Error creating account");
                     }
-                    
+                    this.Close();
                 }
             }
         }
