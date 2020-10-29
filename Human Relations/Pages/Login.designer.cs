@@ -45,7 +45,7 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(400, 40);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Human Relation System";
+            this.lblTitle.Text = "Human Resources";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblUsername

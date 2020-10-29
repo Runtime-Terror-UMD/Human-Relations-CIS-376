@@ -115,8 +115,8 @@ namespace Human_Relations
                 {
                     // Everything is good. Create user account
                     
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`user`(`isAdmin`,`firstName`,`lastName`,`username`,`email`,`password`,`payrate`,`hiredate`,`roleID`,`depID`,`isActive`)
-                                                        VALUES(@isAdmin,@firstName,@lastName,@username,@email,@password,@payrate,@hiredate,@roleID,@depID,@isActive)");
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`user`(`isAdmin`,`firstName`,`lastName`,`username`,`email`,`password`,`payrate`,`hiredate`,`roleID`,`depID`,`isActive`,`ptoDays`)
+                                                        VALUES(@isAdmin,@firstName,@lastName,@username,@email,@password,@payrate,@hiredate,@roleID,@depID,@isActive,@ptoDays)");
 
                     // assign parameter values
                     cmd.Parameters.Add("@isAdmin", MySqlDbType.Bit);
@@ -126,6 +126,7 @@ namespace Human_Relations
                     cmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = txtEmail.Text;
                     cmd.Parameters.Add("@password", MySqlDbType.VarChar, 45).Value = txtPassword.Text;
                     cmd.Parameters.Add("@payrate", MySqlDbType.Decimal).Value = txtPayRate.Text;
+                    cmd.Parameters.Add("@ptoDays", MySqlDbType.Decimal).Value = 0;
                     cmd.Parameters.Add("@hiredate", MySqlDbType.DateTime).Value = pickHireDate.Value;
                     cmd.Parameters.Add("@roleID", MySqlDbType.VarChar, 45).Value = cBoxRole.SelectedValue;
                     cmd.Parameters.Add("@depID", MySqlDbType.VarChar).Value = cBoxDepartment.SelectedValue;
@@ -138,81 +139,81 @@ namespace Human_Relations
                     { cmd.Parameters["@isAdmin"].Value = 1; }
                     else { cmd.Parameters["@isAdmin"].Value = 0; }
 
-                    //// set department id value
-                    //switch (cBoxDepartment.SelectedIndex)
-                    //{
-                    //    case 0:
-                    //        cmd.Parameters["@depID"].Value = 1;
-                    //        break;
-                    //    case 1:
-                    //        cmd.Parameters["@depID"].Value = 2;
-                    //        break;
-                    //    case 2:
-                    //        cmd.Parameters["@depID"].Value = 3;
-                    //        break;
-                    //    case 3:
-                    //        cmd.Parameters["@depID"].Value = 4;
-                    //        break;
-                    //    case 4:
-                    //        cmd.Parameters["@depID"].Value = 5;
-                    //        break;
-                    //    case 5:
-                    //        cmd.Parameters["@depID"].Value = 6;
-                    //        break;
-                    //    case 6:
-                    //        cmd.Parameters["@depID"].Value = 7;
-                    //        break;
-                    //    case 7:
-                    //        cmd.Parameters["@depID"].Value = 8;
-                    //        break;
-                    //    case 8:
-                    //        cmd.Parameters["@depID"].Value = 9;
-                    //        break;
-                    //    case 9:
-                    //        cmd.Parameters["@depID"].Value = 10;
-                    //        break;
-                    //    case 10:
-                    //        cmd.Parameters["@depID"].Value = 11;
-                    //        break;
-                    //}
+                    // set department id value
+                    switch (cBoxDepartment.SelectedIndex)
+                    {
+                        case 0:
+                            cmd.Parameters["@depID"].Value = 1;
+                            break;
+                        case 1:
+                            cmd.Parameters["@depID"].Value = 2;
+                            break;
+                        case 2:
+                            cmd.Parameters["@depID"].Value = 3;
+                            break;
+                        case 3:
+                            cmd.Parameters["@depID"].Value = 4;
+                            break;
+                        case 4:
+                            cmd.Parameters["@depID"].Value = 5;
+                            break;
+                        case 5:
+                            cmd.Parameters["@depID"].Value = 6;
+                            break;
+                        case 6:
+                            cmd.Parameters["@depID"].Value = 7;
+                            break;
+                        case 7:
+                            cmd.Parameters["@depID"].Value = 8;
+                            break;
+                        case 8:
+                            cmd.Parameters["@depID"].Value = 9;
+                            break;
+                        case 9:
+                            cmd.Parameters["@depID"].Value = 10;
+                            break;
+                        case 10:
+                            cmd.Parameters["@depID"].Value = 11;
+                            break;
+                    }
 
-                    ////set role id type
-                    //switch (cBoxRole.SelectedIndex)
-                    //{
-                    //    case 0:
-                    //        cmd.Parameters["@roleID"].Value = 1;
-                    //        break;
-                    //    case 1:
-                    //        cmd.Parameters["@roleID"].Value = 2;
-                    //        break;
-                    //    case 2:
-                    //        cmd.Parameters["@roleID"].Value = 3;
-                    //        break;
-                    //    case 3:
-                    //        cmd.Parameters["@roleID"].Value = 4;
-                    //        break;
-                    //    case 4:
-                    //        cmd.Parameters["@roleID"].Value = 5;
-                    //        break;
-                    //    case 5:
-                    //        cmd.Parameters["@roleID"].Value = 6;
-                    //        break;
-                    //    case 6:
-                    //        cmd.Parameters["@roleID"].Value = 7;
-                    //        break;
-                    //    case 7:
-                    //        cmd.Parameters["@roleID"].Value = 8;
-                    //        break;
-                    //    case 8:
-                    //        cmd.Parameters["@roleID"].Value = 9;
-                    //        break;
-                    //    case 9:
-                    //        cmd.Parameters["@roleID"].Value = 10;
-                    //        break;
-                    //    case 10:
-                    //        cmd.Parameters["@roleID"].Value = 11;
-                    //        break;
-                    //}
+                    //set role id type
+                    switch (cBoxRole.SelectedIndex)
+                    {
+                        case 0:
+                            cmd.Parameters["@roleID"].Value = 1;
+                            break;
+                        case 1:
+                            cmd.Parameters["@roleID"].Value = 2;
+                            break;
+                        case 2:
+                            cmd.Parameters["@roleID"].Value = 3;
+                            break;
+                        case 3:
+                            cmd.Parameters["@roleID"].Value = 4;
+                            break;
+                        case 4:
+                            cmd.Parameters["@roleID"].Value = 5;
+                            break;
+                        case 5:
+                            cmd.Parameters["@roleID"].Value = 6;
+                            break;
+                        case 6:
+                            cmd.Parameters["@roleID"].Value = 7;
+                            break;
+                        case 7:
+                            cmd.Parameters["@roleID"].Value = 8;
+                            break;
+                        case 8:
+                            cmd.Parameters["@roleID"].Value = 9;
+                            break;
+                        case 9:
+                            cmd.Parameters["@roleID"].Value = 10;
+                            break;
+                        case 10:
+                            cmd.Parameters["@roleID"].Value = 11;
+                            break;
+                    }
 
                     // connect to database
                     DBConnect userCreationConn = new DBConnect();
