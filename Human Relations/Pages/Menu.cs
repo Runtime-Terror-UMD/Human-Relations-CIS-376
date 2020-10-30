@@ -74,5 +74,15 @@ namespace Human_Relations
         {
             this.Show();
         }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnManageEmp_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
