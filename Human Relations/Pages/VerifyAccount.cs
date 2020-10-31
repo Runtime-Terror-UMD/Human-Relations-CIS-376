@@ -86,6 +86,10 @@ namespace Human_Relations.Pages
             {
                 displayError("Invalid ZIP code");
             }
+            else if(txtZIP.TextLength < 5)
+            {
+                displayError("Zip code must have 5 numbers");
+            }
             // checks that phone number is entered
             else if (!(txtPhoneNum.MaskCompleted))
             {
