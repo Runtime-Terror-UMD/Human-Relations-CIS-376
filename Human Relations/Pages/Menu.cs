@@ -82,7 +82,14 @@ namespace Human_Relations
 
         private void btnManageEmp_Click(object sender, EventArgs e)
         {
-
+            var manageEmp = new ManageEmp(UserID);
+            manageEmp.FormClosed += new FormClosedEventHandler(manageEmp_FormClosed);
+            this.Hide();
+            manageEmp.Show();
+        }
+        private void manageEmp_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
         }
     }
 }
