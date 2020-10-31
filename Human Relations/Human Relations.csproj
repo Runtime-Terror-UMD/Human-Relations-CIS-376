@@ -47,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dboDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dboDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +69,12 @@
     </Compile>
     <Compile Include="Pages\UpdateEmpProfile.Designer.cs">
       <DependentUpon>UpdateEmpProfile.cs</DependentUpon>
+
+    <Compile Include="Pages\ManageEmp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ManageEmp.Designer.cs">
+      <DependentUpon>ManageEmp.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\History.cs">
       <SubType>Form</SubType>
@@ -116,6 +127,9 @@
     <EmbeddedResource Include="Pages\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ManageEmp.resx">
+      <DependentUpon>ManageEmp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +154,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="dboDataSet.xsc">
+      <DependentUpon>dboDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="dboDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dboDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dboDataSet.xss">
+      <DependentUpon>dboDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

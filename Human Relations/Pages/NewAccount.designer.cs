@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtPayRate = new System.Windows.Forms.TextBox();
             this.lblPayRate = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -47,6 +48,9 @@
             this.lblHireDate = new System.Windows.Forms.Label();
             this.pickHireDate = new System.Windows.Forms.DateTimePicker();
             this.cBoxDepartment = new System.Windows.Forms.ComboBox();
+            this.departmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dboDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dboDataSet = new Human_Relations.dboDataSet();
             this.lblUsername = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -65,7 +69,14 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.cBoxRole = new System.Windows.Forms.ComboBox();
+            this.roleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.roleTableAdapter = new Human_Relations.dboDataSetTableAdapters.roleTableAdapter();
+            this.departmentTableAdapter = new Human_Relations.dboDataSetTableAdapters.departmentTableAdapter();
             this.grpType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dboDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dboDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roleBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPayRate
@@ -94,7 +105,7 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(400, 40);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Hotel Reservation System";
+            this.lblTitle.Text = "Human Resources";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblError
@@ -225,7 +236,7 @@
             // 
             this.btnReturnToMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReturnToMenu.Location = new System.Drawing.Point(8, 23);
-            this.btnReturnToMenu.Margin = new System.Windows.Forms.Padding(2);
+            this.btnReturnToMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnReturnToMenu.Name = "btnReturnToMenu";
             this.btnReturnToMenu.Size = new System.Drawing.Size(107, 29);
             this.btnReturnToMenu.TabIndex = 0;
@@ -254,24 +265,29 @@
             // 
             // cBoxDepartment
             // 
+            this.cBoxDepartment.DataSource = this.departmentBindingSource;
+            this.cBoxDepartment.DisplayMember = "depName";
             this.cBoxDepartment.FormattingEnabled = true;
-            this.cBoxDepartment.Items.AddRange(new object[] {
-            "Administration",
-            "Executive",
-            "Finance",
-            "Human Resources",
-            "Information Technology",
-            "Maintenance",
-            "Productions",
-            "Projects",
-            "Quality",
-            "Research",
-            "Sales",
-            "Security"});
             this.cBoxDepartment.Location = new System.Drawing.Point(360, 473);
             this.cBoxDepartment.Name = "cBoxDepartment";
             this.cBoxDepartment.Size = new System.Drawing.Size(220, 21);
             this.cBoxDepartment.TabIndex = 11;
+            this.cBoxDepartment.ValueMember = "depID";
+            // 
+            // departmentBindingSource
+            // 
+            this.departmentBindingSource.DataMember = "department";
+            this.departmentBindingSource.DataSource = this.dboDataSetBindingSource;
+            // 
+            // dboDataSetBindingSource
+            // 
+            this.dboDataSetBindingSource.DataSource = this.dboDataSet;
+            this.dboDataSetBindingSource.Position = 0;
+            // 
+            // dboDataSet
+            // 
+            this.dboDataSet.DataSetName = "dboDataSet";
+            this.dboDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // lblUsername
             // 
@@ -307,7 +323,6 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(220, 21);
             this.txtPassword.TabIndex = 7;
-            this.txtPassword.TabStop = false;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label1
@@ -324,7 +339,7 @@
             // 
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Location = new System.Drawing.Point(704, 23);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(107, 29);
             this.btnLogout.TabIndex = 13;
@@ -370,7 +385,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(237, 308);
+            this.label5.Location = new System.Drawing.Point(231, 308);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 24);
             this.label5.TabIndex = 37;
@@ -381,7 +396,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(265, 268);
+            this.label6.Location = new System.Drawing.Point(263, 268);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 24);
             this.label6.TabIndex = 38;
@@ -455,29 +470,33 @@
             // 
             // cBoxRole
             // 
+            this.cBoxRole.DataSource = this.roleBindingSource;
+            this.cBoxRole.DisplayMember = "roleName";
             this.cBoxRole.FormattingEnabled = true;
-            this.cBoxRole.Items.AddRange(new object[] {
-            "Associate Staff",
-            "Intermediate Staff",
-            "Senior Staff",
-            "Manager",
-            "Senior Manager",
-            "Advisor",
-            "Senior Advisor",
-            "Executive",
-            "Senior Executive",
-            "Director",
-            "Senior Director"});
             this.cBoxRole.Location = new System.Drawing.Point(362, 432);
             this.cBoxRole.Name = "cBoxRole";
             this.cBoxRole.Size = new System.Drawing.Size(220, 21);
             this.cBoxRole.TabIndex = 10;
+            this.cBoxRole.ValueMember = "roleID";
+            // 
+            // roleBindingSource
+            // 
+            this.roleBindingSource.DataMember = "role";
+            this.roleBindingSource.DataSource = this.dboDataSet;
+            // 
+            // roleTableAdapter
+            // 
+            this.roleTableAdapter.ClearBeforeFill = true;
+            // 
+            // departmentTableAdapter
+            // 
+            this.departmentTableAdapter.ClearBeforeFill = true;
             // 
             // NewAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 593);
+            this.ClientSize = new System.Drawing.Size(822, 487);
             this.Controls.Add(this.cBoxRole);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -515,7 +534,12 @@
             this.Controls.Add(this.lblTitle);
             this.Name = "NewAccount";
             this.Text = "Hotel Reservation: New Account";
+            this.Load += new System.EventHandler(this.NewAccount_Load);
             this.grpType.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dboDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dboDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roleBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -559,5 +583,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cBoxRole;
+        private dboDataSet dboDataSet;
+        private System.Windows.Forms.BindingSource roleBindingSource;
+        private dboDataSetTableAdapters.roleTableAdapter roleTableAdapter;
+        private System.Windows.Forms.BindingSource dboDataSetBindingSource;
+        private System.Windows.Forms.BindingSource departmentBindingSource;
+        private dboDataSetTableAdapters.departmentTableAdapter departmentTableAdapter;
     }
 }

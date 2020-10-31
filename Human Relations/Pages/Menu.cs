@@ -75,6 +75,7 @@ namespace Human_Relations
             this.Show();
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             var empSettings = new UpdateEmpProfile(UserID);
@@ -87,6 +88,17 @@ namespace Human_Relations
         private void UpdateEmpProfile_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
+        }
+
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnManageEmp_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
