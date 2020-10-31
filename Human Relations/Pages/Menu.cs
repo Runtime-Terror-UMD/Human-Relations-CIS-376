@@ -63,12 +63,6 @@ namespace Human_Relations
         {
             this.Show();
         }
-
-        private void ManageEmp_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Show();
-        }
-
         private void Menu_Load(object sender, EventArgs e)
         {
 
@@ -82,6 +76,19 @@ namespace Human_Relations
             manageEmp.Show();
         }
         private void manageEmp_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void btnManageProfile_Click(object sender, EventArgs e)
+        {
+            var manageProf = new ManageProfile(UserID);
+            manageProf.FormClosed += new FormClosedEventHandler(manageProf_FormClosed);
+            this.Hide();
+            manageProf.Show();
+        }
+
+        private void manageProf_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }
