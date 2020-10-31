@@ -236,7 +236,7 @@
             // 
             this.btnReturnToMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReturnToMenu.Location = new System.Drawing.Point(8, 23);
-            this.btnReturnToMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReturnToMenu.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturnToMenu.Name = "btnReturnToMenu";
             this.btnReturnToMenu.Size = new System.Drawing.Size(107, 29);
             this.btnReturnToMenu.TabIndex = 0;
@@ -339,7 +339,7 @@
             // 
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Location = new System.Drawing.Point(704, 23);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(107, 29);
             this.btnLogout.TabIndex = 13;
@@ -496,7 +496,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 487);
+            this.ClientSize = new System.Drawing.Size(822, 592);
             this.Controls.Add(this.cBoxRole);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);

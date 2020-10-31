@@ -27,9 +27,11 @@ namespace Human_Relations
             InitializeComponent();
             loginWind = loginInstance;
             UserID = userID;
-            //if (isAdmin == false)
-            //    btnHotelManagement.Visible = false;
-
+            if (!isAdmin)
+            {
+                btnManageEmp.Visible = false;
+                
+            }
         }
         //DESCRIPTION: Opens account settings page
         private void btnAccount_Click(object sender, EventArgs e)
@@ -62,15 +64,7 @@ namespace Human_Relations
             this.Show();
         }
 
-        private void btnNewEmployee_Click(object sender, EventArgs e)
-        {
-            var hire = new NewAccount(UserID);
-            hire.FormClosed += new FormClosedEventHandler(NewAccount_FormClosed);
-            this.Hide();
-            hire.Show();
-        }
-
-        private void NewAccount_FormClosed(object sender, FormClosedEventArgs e)
+        private void ManageEmp_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }
@@ -82,7 +76,23 @@ namespace Human_Relations
 
         private void btnManageEmp_Click(object sender, EventArgs e)
         {
+            var manage = new ManageEmp(UserID);
+            manage.FormClosed += new FormClosedEventHandler(ManageEmp_FormClosed);
+            this.Hide();
+            manage.Show();
+        }
 
+        private void btnManageProfile_Click(object sender, EventArgs e)
+        {
+            var profile = new ManageProfile(UserID);
+            profile.FormClosed += new FormClosedEventHandler(profile_FormClosed);
+            this.Hide();
+            profile.Show();
+        }
+
+        private void profile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
         }
     }
 }
