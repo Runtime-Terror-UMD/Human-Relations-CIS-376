@@ -244,6 +244,7 @@ namespace Human_Relations
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.OpenForms["ManageEmp"].Close();
             Application.OpenForms["Menu"].Close();
         }
 
