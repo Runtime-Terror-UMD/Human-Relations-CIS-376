@@ -74,5 +74,20 @@ namespace Human_Relations
         {
             this.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var empSettings = new UpdateEmpProfile(UserID);
+            empSettings.FormClosed += new FormClosedEventHandler(UpdateEmpProfile_FormClosed);
+            this.Hide();
+            empSettings.Show();
+
+        }
+
+        private void UpdateEmpProfile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
     }
 }

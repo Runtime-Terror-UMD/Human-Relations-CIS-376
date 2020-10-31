@@ -59,6 +59,12 @@
     <Compile Include="Pages\Account Settings.designer.cs">
       <DependentUpon>Account Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UpdateEmpProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\UpdateEmpProfile.Designer.cs">
+      <DependentUpon>UpdateEmpProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\History.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Summary Reports.resx">
       <DependentUpon>Summary Reports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\UpdateEmpProfile.resx">
+      <DependentUpon>UpdateEmpProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\VerifyAccount.resx">
       <DependentUpon>VerifyAccount.cs</DependentUpon>
