@@ -76,21 +76,12 @@ namespace Human_Relations
 
         private void btnManageEmp_Click(object sender, EventArgs e)
         {
-            var manage = new ManageEmp(UserID);
-            manage.FormClosed += new FormClosedEventHandler(ManageEmp_FormClosed);
+            var manageEmp = new ManageEmp(UserID);
+            manageEmp.FormClosed += new FormClosedEventHandler(manageEmp_FormClosed);
             this.Hide();
-            manage.Show();
+            manageEmp.Show();
         }
-
-        private void btnManageProfile_Click(object sender, EventArgs e)
-        {
-            var profile = new ManageProfile(UserID);
-            profile.FormClosed += new FormClosedEventHandler(profile_FormClosed);
-            this.Hide();
-            profile.Show();
-        }
-
-        private void profile_FormClosed(object sender, FormClosedEventArgs e)
+        private void manageEmp_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }

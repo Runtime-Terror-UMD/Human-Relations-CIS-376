@@ -47,6 +47,14 @@ namespace Human_Relations
         
             return adminAcct;
         }
+
+        private bool isActive(string username)
+        {
+            Utilities getUserID = new Utilities();
+            int userID = getUserID.getUserIDFromUsername(username);
+            User isActiveCheck = new User(userID);
+            return isActiveCheck.isActive;
+        }
         
          // DESCRIPTION: Login process
          private void btnLogin_Click(object sender, EventArgs e)
@@ -72,32 +80,39 @@ namespace Human_Relations
                 {
                     if (verifyCredentials.passwordMatches(txtUsername.Text, txtPassword.Text))
                     {
-                        int userID = isFirstLoginCheck.getUserIDFromUsername(txtUsername.Text);
-                        if (isFirstLoginCheck.isFirstLogin(userID))
+                        if(isActive(txtUsername.Text))
                         {
-                            var verifyAccountScreen = new VerifyAccount(userID);
-                            verifyAccountScreen.FormClosed += new FormClosedEventHandler(verifyAccountScreen_formClosed);
-                            this.Hide();
-                            verifyAccountScreen.Show();
-                        }
+                            int userID = isFirstLoginCheck.getUserIDFromUsername(txtUsername.Text);
+                            if (isFirstLoginCheck.isFirstLogin(userID))
+                            {
+                                var verifyAccountScreen = new VerifyAccount(userID);
+                                verifyAccountScreen.FormClosed += new FormClosedEventHandler(verifyAccountScreen_formClosed);
+                                this.Hide();
+                                verifyAccountScreen.Show();
+                            }
 
+                            else
+                            {
+                                if (isAdmin(txtUsername.Text))
+                                {
+                                    // re-drecit to menu, hide hotel management button
+                                    var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
+                                    menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
+                                    this.Hide();
+                                    menuScreen.Show();
+                                }
+                                else
+                                {   // re-direct to menu, show hotel management button
+                                    var menuScreen = new Menu(false, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
+                                    menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
+                                    this.Hide();
+                                    menuScreen.Show();
+                                }
+                            }
+                        }
                         else
                         {
-                            if (isAdmin(txtUsername.Text))
-                            {
-                                // re-drecit to menu, hide admin functionalities
-                                var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
-                                menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
-                                this.Hide();
-                                menuScreen.Show();
-                            }
-                            else
-                            {   // re-direct to menu, show admin functionalities
-                                var menuScreen = new Menu(false, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
-                                menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
-                                this.Hide();
-                                menuScreen.Show();
-                            }
+                            displayError("Account is not active within the system.");
                         }
                     }
                     else
