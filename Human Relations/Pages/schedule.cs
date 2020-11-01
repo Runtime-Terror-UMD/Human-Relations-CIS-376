@@ -23,19 +23,23 @@ namespace Human_Relations.Pages
             InitializeComponent();
         }
 
+        // components for schedule viewing
+
         DBConnect scheduleConn = new DBConnect();
         DataTable scheduleData = new DataTable();
         BindingSource scheduleBindingSource = new BindingSource();
         MySqlCommand cmd = new MySqlCommand();
 
 
+        // pulls all user schedules for specified date
         private void btnSearch_Click(object sender, EventArgs e)
         {
-           
             try
             {
+                // formats date value from dateTime picker
                 string formattedDate = scheduleDatePicker.Value.ToString("yyyy-MM-dd");
 
+                // SQL query
                 cmd.CommandText = @"SELECT   
                                     u.userID as 'User ID',
                                     concat(u.firstName, ' ', u.lastName) as 'Name',
@@ -47,6 +51,7 @@ namespace Human_Relations.Pages
                                     WHERE DATE(s.inDateTime) = @date";
                 cmd.Parameters.Add("@date", MySqlDbType.Date).Value = formattedDate;
 
+                // fills data grid
                 scheduleData = scheduleConn.ExecuteDataTable(cmd);
                 scheduleBindingSource.DataSource =scheduleData;
                 scheduleDataGrid.DataSource = scheduleBindingSource;
@@ -56,6 +61,11 @@ namespace Human_Relations.Pages
             {
                 MessageBox.Show(err.ToString());
             }
+        }
+        // returns to menu
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

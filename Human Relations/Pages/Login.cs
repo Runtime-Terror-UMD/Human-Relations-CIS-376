@@ -31,9 +31,8 @@ namespace Human_Relations
             lblError.Visible = true;
         }
 
-        
 
-        // DESCRIPTION: checks if user is customer account
+        // DESCRIPTION: checks if user is admin account
         private bool isAdmin(string username)
         {
             Utilities getUserID = new Utilities();
@@ -48,6 +47,7 @@ namespace Human_Relations
             return adminAcct;
         }
 
+        // DESCRIPTION: checks if user is active
         private bool isActive(string username)
         {
             Utilities getUserID = new Utilities();
