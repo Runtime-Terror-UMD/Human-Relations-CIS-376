@@ -101,6 +101,12 @@
     <Compile Include="Pages\NewAccount.designer.cs">
       <DependentUpon>NewAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\schedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\schedule.Designer.cs">
+      <DependentUpon>schedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Summary Reports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\NewAccount.resx">
       <DependentUpon>NewAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\schedule.resx">
+      <DependentUpon>schedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Summary Reports.resx">
       <DependentUpon>Summary Reports.cs</DependentUpon>

@@ -27,11 +27,9 @@ namespace Human_Relations
             InitializeComponent();
             loginWind = loginInstance;
             UserID = userID;
-            if (!isAdmin)
-            {
-                btnManageEmp.Visible = false;
-                
-            }
+            //if (isAdmin == false)
+            //    btnHotelManagement.Visible = false;
+
         }
         //DESCRIPTION: Opens account settings page
         private void btnAccount_Click(object sender, EventArgs e)
@@ -63,6 +61,20 @@ namespace Human_Relations
         {
             this.Show();
         }
+
+        private void btnNewEmployee_Click(object sender, EventArgs e)
+        {
+            var hire = new NewAccount(UserID);
+            hire.FormClosed += new FormClosedEventHandler(NewAccount_FormClosed);
+            this.Hide();
+            hire.Show();
+        }
+
+        private void NewAccount_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
         private void Menu_Load(object sender, EventArgs e)
         {
 
@@ -80,17 +92,18 @@ namespace Human_Relations
             this.Show();
         }
 
-        private void btnManageProfile_Click(object sender, EventArgs e)
+        private void btnScheduleMgmt_Click(object sender, EventArgs e)
         {
-            var manageProf = new ManageProfile(UserID);
-            manageProf.FormClosed += new FormClosedEventHandler(manageProf_FormClosed);
+            var scheduleMgmt = new schedule();
+            scheduleMgmt.FormClosed += new FormClosedEventHandler(scheduleMgmt_formClosed);
             this.Hide();
-            manageProf.Show();
+            scheduleMgmt.Show();
         }
 
-        private void manageProf_FormClosed(object sender, FormClosedEventArgs e)
+        private void scheduleMgmt_formClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }
+
     }
 }
