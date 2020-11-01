@@ -23,34 +23,39 @@ namespace Human_Relations.Pages
             InitializeComponent();
         }
 
+        DBConnect scheduleConn = new DBConnect();
+        DataTable scheduleData = new DataTable();
+        BindingSource scheduleBindingSource = new BindingSource();
+        MySqlCommand cmd = new MySqlCommand();
 
 
         private void btnSearch_Click(object sender, EventArgs e)
-        { }
+        {
+           
+            try
+            {
+                string formattedDate = scheduleDatePicker.Value.ToString("yyyy-MM-dd");
+
+                cmd.CommandText = @"SELECT   
+                                    u.userID as 'User ID',
+                                    concat(u.firstName, ' ', u.lastName) as 'Name',
+                                    TIME_FORMAT(s.indateTime, '%r') as 'Start Time', 
+                                    TIME_FORMAT(s.outDateTime, '%r') as 'End Time'
+                                    from dbo.schedule s
+                                    join dbo.user u
+	                                    on u.userID = s.userID
+                                    WHERE DATE(s.inDateTime) = @date";
+                cmd.Parameters.Add("@date", MySqlDbType.Date).Value = formattedDate;
+
+                scheduleData = scheduleConn.ExecuteDataTable(cmd);
+                scheduleBindingSource.DataSource =scheduleData;
+                scheduleDataGrid.DataSource = scheduleBindingSource;
+                scheduleDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+        }
     }
 }
-//            DBConnect scheduleConn = new DBConnect();
-//            DataTable scheduleData = new DataTable();
-//            BindingSource scheduleBindingSource = new BindingSource();
-//            MySqlCommand cmd = new MySqlCommand();
-
-//            if ()
-//            {
-//                try
-//                {
-//                    cmd.CommandText = @"select ";
-//                    cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
-
-//                    scheduleData = scheduleConn.ExecuteDataTable(cmd);
-//                    scheduleBindingSource.DataSource = scheduleData;
-//                    scheduleDataGrid.DataSource = scheduleBindingSource;
-//                    scheduleDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-//                }
-
-//                catch (Exception err)
-//                {
-//                    MessageBox.Show(err.ToString());
-//                }
-//            }
-//    }
-//}
