@@ -23,30 +23,34 @@ namespace Human_Relations.Pages
             InitializeComponent();
         }
 
+
+
         private void btnSearch_Click(object sender, EventArgs e)
-        {
-            DBConnect scheduleConn = new DBConnect();
-            DataTable scheduleData = new DataTable();
-            BindingSource scheduleBindingSource = new BindingSource();
-            MySqlCommand cmd = new MySqlCommand();
-
-            if ()
-            {
-                try
-                {
-                    cmd.CommandText = @"select ";
-                    cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
-
-                    scheduleData = scheduleConn.ExecuteDataTable(cmd);
-                    scheduleBindingSource.DataSource = scheduleData;
-                    scheduleDataGrid.DataSource = scheduleBindingSource;
-                    scheduleDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                }
-
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.ToString());
-                }
-            }
+        { }
     }
 }
+//            DBConnect scheduleConn = new DBConnect();
+//            DataTable scheduleData = new DataTable();
+//            BindingSource scheduleBindingSource = new BindingSource();
+//            MySqlCommand cmd = new MySqlCommand();
+
+//            if ()
+//            {
+//                try
+//                {
+//                    cmd.CommandText = @"select ";
+//                    cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
+
+//                    scheduleData = scheduleConn.ExecuteDataTable(cmd);
+//                    scheduleBindingSource.DataSource = scheduleData;
+//                    scheduleDataGrid.DataSource = scheduleBindingSource;
+//                    scheduleDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+//                }
+
+//                catch (Exception err)
+//                {
+//                    MessageBox.Show(err.ToString());
+//                }
+//            }
+//    }
+//}
