@@ -32,6 +32,18 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPayRate = new System.Windows.Forms.TextBox();
+            this.txtHireDate = new System.Windows.Forms.TextBox();
+            this.txtDept = new System.Windows.Forms.TextBox();
+            this.txtRole = new System.Windows.Forms.TextBox();
+            this.lblPayRate = new System.Windows.Forms.Label();
+            this.lblHireDate = new System.Windows.Forms.Label();
+            this.lblDept = new System.Windows.Forms.Label();
+            this.lblRole = new System.Windows.Forms.Label();
+            this.lblPhone = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtlname = new System.Windows.Forms.TextBox();
             this.txtfname = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
@@ -42,27 +54,18 @@
             this.lblfName = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.lblDescribe = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.lblPhone = new System.Windows.Forms.Label();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.txtPayRate = new System.Windows.Forms.TextBox();
-            this.txtHireDate = new System.Windows.Forms.TextBox();
-            this.txtDept = new System.Windows.Forms.TextBox();
-            this.txtRole = new System.Windows.Forms.TextBox();
-            this.lblPayRate = new System.Windows.Forms.Label();
-            this.lblHireDate = new System.Windows.Forms.Label();
-            this.lblDept = new System.Windows.Forms.Label();
-            this.lblRole = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.grpChangePass = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.txtNewPassword = new System.Windows.Forms.TextBox();
             this.lblNewPassDesc = new System.Windows.Forms.Label();
             this.txtCurrentPassword = new System.Windows.Forms.TextBox();
             this.lblPasswordDesc = new System.Windows.Forms.Label();
             this.groupBoxAddress = new System.Windows.Forms.GroupBox();
+            this.btnChangeAddress = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -76,12 +79,9 @@
             this.lblCity = new System.Windows.Forms.Label();
             this.lblAddress2 = new System.Windows.Forms.Label();
             this.lblAddress1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnChangeAddress = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.txtPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             this.grpChangePass.SuspendLayout();
             this.groupBoxAddress.SuspendLayout();
@@ -123,6 +123,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtPhoneNum);
             this.groupBox1.Controls.Add(this.txtPayRate);
             this.groupBox1.Controls.Add(this.txtHireDate);
             this.groupBox1.Controls.Add(this.txtDept);
@@ -131,7 +132,6 @@
             this.groupBox1.Controls.Add(this.lblHireDate);
             this.groupBox1.Controls.Add(this.lblDept);
             this.groupBox1.Controls.Add(this.lblRole);
-            this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.lblPhone);
             this.groupBox1.Controls.Add(this.txtAddress);
             this.groupBox1.Controls.Add(this.txtEmail);
@@ -151,6 +151,113 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "View Profile";
+            // 
+            // txtPayRate
+            // 
+            this.txtPayRate.Enabled = false;
+            this.txtPayRate.Location = new System.Drawing.Point(157, 356);
+            this.txtPayRate.Name = "txtPayRate";
+            this.txtPayRate.Size = new System.Drawing.Size(153, 20);
+            this.txtPayRate.TabIndex = 16;
+            // 
+            // txtHireDate
+            // 
+            this.txtHireDate.Enabled = false;
+            this.txtHireDate.Location = new System.Drawing.Point(157, 329);
+            this.txtHireDate.Name = "txtHireDate";
+            this.txtHireDate.Size = new System.Drawing.Size(153, 20);
+            this.txtHireDate.TabIndex = 15;
+            // 
+            // txtDept
+            // 
+            this.txtDept.Enabled = false;
+            this.txtDept.Location = new System.Drawing.Point(157, 303);
+            this.txtDept.Name = "txtDept";
+            this.txtDept.Size = new System.Drawing.Size(153, 20);
+            this.txtDept.TabIndex = 14;
+            // 
+            // txtRole
+            // 
+            this.txtRole.Enabled = false;
+            this.txtRole.Location = new System.Drawing.Point(157, 277);
+            this.txtRole.Name = "txtRole";
+            this.txtRole.Size = new System.Drawing.Size(153, 20);
+            this.txtRole.TabIndex = 13;
+            // 
+            // lblPayRate
+            // 
+            this.lblPayRate.AutoSize = true;
+            this.lblPayRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblPayRate.Location = new System.Drawing.Point(48, 356);
+            this.lblPayRate.Name = "lblPayRate";
+            this.lblPayRate.Size = new System.Drawing.Size(78, 20);
+            this.lblPayRate.TabIndex = 16;
+            this.lblPayRate.Text = "Pay Rate:";
+            // 
+            // lblHireDate
+            // 
+            this.lblHireDate.AutoSize = true;
+            this.lblHireDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblHireDate.Location = new System.Drawing.Point(45, 329);
+            this.lblHireDate.Name = "lblHireDate";
+            this.lblHireDate.Size = new System.Drawing.Size(81, 20);
+            this.lblHireDate.TabIndex = 15;
+            this.lblHireDate.Text = "Hire Date:";
+            // 
+            // lblDept
+            // 
+            this.lblDept.AutoSize = true;
+            this.lblDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblDept.Location = new System.Drawing.Point(19, 303);
+            this.lblDept.Name = "lblDept";
+            this.lblDept.Size = new System.Drawing.Size(107, 20);
+            this.lblDept.TabIndex = 14;
+            this.lblDept.Text = "Departement:";
+            // 
+            // lblRole
+            // 
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblRole.Location = new System.Drawing.Point(80, 277);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(46, 20);
+            this.lblRole.TabIndex = 13;
+            this.lblRole.Text = "Role:";
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblPhone.Location = new System.Drawing.Point(43, 248);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(83, 20);
+            this.lblPhone.TabIndex = 12;
+            this.lblPhone.Text = "Phone Nb:";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Enabled = false;
+            this.txtAddress.Location = new System.Drawing.Point(157, 158);
+            this.txtAddress.Multiline = true;
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(153, 82);
+            this.txtAddress.TabIndex = 11;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Enabled = false;
+            this.txtEmail.Location = new System.Drawing.Point(157, 131);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(153, 20);
+            this.txtEmail.TabIndex = 10;
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Enabled = false;
+            this.txtUsername.Location = new System.Drawing.Point(157, 104);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(153, 20);
+            this.txtUsername.TabIndex = 9;
             // 
             // txtlname
             // 
@@ -246,121 +353,6 @@
             this.lblDescribe.Text = "Manage Profile";
             this.lblDescribe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // txtUsername
-            // 
-            this.txtUsername.Enabled = false;
-            this.txtUsername.Location = new System.Drawing.Point(157, 104);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(153, 20);
-            this.txtUsername.TabIndex = 9;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Enabled = false;
-            this.txtEmail.Location = new System.Drawing.Point(157, 131);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(153, 20);
-            this.txtEmail.TabIndex = 10;
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Enabled = false;
-            this.txtAddress.Location = new System.Drawing.Point(157, 158);
-            this.txtAddress.Multiline = true;
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(153, 82);
-            this.txtAddress.TabIndex = 11;
-            // 
-            // lblPhone
-            // 
-            this.lblPhone.AutoSize = true;
-            this.lblPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblPhone.Location = new System.Drawing.Point(43, 248);
-            this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(83, 20);
-            this.lblPhone.TabIndex = 12;
-            this.lblPhone.Text = "Phone Nb:";
-            // 
-            // txtPhone
-            // 
-            this.txtPhone.Enabled = false;
-            this.txtPhone.Location = new System.Drawing.Point(157, 248);
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(153, 20);
-            this.txtPhone.TabIndex = 12;
-            // 
-            // txtPayRate
-            // 
-            this.txtPayRate.Enabled = false;
-            this.txtPayRate.Location = new System.Drawing.Point(157, 356);
-            this.txtPayRate.Name = "txtPayRate";
-            this.txtPayRate.Size = new System.Drawing.Size(153, 20);
-            this.txtPayRate.TabIndex = 16;
-            // 
-            // txtHireDate
-            // 
-            this.txtHireDate.Enabled = false;
-            this.txtHireDate.Location = new System.Drawing.Point(157, 329);
-            this.txtHireDate.Name = "txtHireDate";
-            this.txtHireDate.Size = new System.Drawing.Size(153, 20);
-            this.txtHireDate.TabIndex = 15;
-            // 
-            // txtDept
-            // 
-            this.txtDept.Enabled = false;
-            this.txtDept.Location = new System.Drawing.Point(157, 303);
-            this.txtDept.Name = "txtDept";
-            this.txtDept.Size = new System.Drawing.Size(153, 20);
-            this.txtDept.TabIndex = 14;
-            // 
-            // txtRole
-            // 
-            this.txtRole.Enabled = false;
-            this.txtRole.Location = new System.Drawing.Point(157, 277);
-            this.txtRole.Name = "txtRole";
-            this.txtRole.Size = new System.Drawing.Size(153, 20);
-            this.txtRole.TabIndex = 13;
-            // 
-            // lblPayRate
-            // 
-            this.lblPayRate.AutoSize = true;
-            this.lblPayRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblPayRate.Location = new System.Drawing.Point(48, 356);
-            this.lblPayRate.Name = "lblPayRate";
-            this.lblPayRate.Size = new System.Drawing.Size(78, 20);
-            this.lblPayRate.TabIndex = 16;
-            this.lblPayRate.Text = "Pay Rate:";
-            // 
-            // lblHireDate
-            // 
-            this.lblHireDate.AutoSize = true;
-            this.lblHireDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblHireDate.Location = new System.Drawing.Point(45, 329);
-            this.lblHireDate.Name = "lblHireDate";
-            this.lblHireDate.Size = new System.Drawing.Size(81, 20);
-            this.lblHireDate.TabIndex = 15;
-            this.lblHireDate.Text = "Hire Date:";
-            // 
-            // lblDept
-            // 
-            this.lblDept.AutoSize = true;
-            this.lblDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblDept.Location = new System.Drawing.Point(19, 303);
-            this.lblDept.Name = "lblDept";
-            this.lblDept.Size = new System.Drawing.Size(107, 20);
-            this.lblDept.TabIndex = 14;
-            this.lblDept.Text = "Departement:";
-            // 
-            // lblRole
-            // 
-            this.lblRole.AutoSize = true;
-            this.lblRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblRole.Location = new System.Drawing.Point(80, 277);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(46, 20);
-            this.lblRole.TabIndex = 13;
-            this.lblRole.Text = "Role:";
-            // 
             // lblError
             // 
             this.lblError.AutoSize = true;
@@ -370,6 +362,7 @@
             this.lblError.Size = new System.Drawing.Size(35, 13);
             this.lblError.TabIndex = 48;
             this.lblError.Text = "Error: ";
+            this.lblError.Visible = false;
             // 
             // grpChangePass
             // 
@@ -387,6 +380,30 @@
             this.grpChangePass.TabStop = false;
             this.grpChangePass.Text = "Change Password";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(19, 24);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 24);
+            this.label5.TabIndex = 57;
+            this.label5.Text = "*";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(42, 56);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 24);
+            this.label3.TabIndex = 56;
+            this.label3.Text = "*";
+            // 
             // btnChangePassword
             // 
             this.btnChangePassword.Location = new System.Drawing.Point(100, 83);
@@ -395,6 +412,7 @@
             this.btnChangePassword.TabIndex = 5;
             this.btnChangePassword.Text = "Change Password";
             this.btnChangePassword.UseVisualStyleBackColor = true;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // txtNewPassword
             // 
@@ -459,6 +477,28 @@
             this.groupBoxAddress.TabIndex = 50;
             this.groupBoxAddress.TabStop = false;
             this.groupBoxAddress.Text = "Change Address";
+            // 
+            // btnChangeAddress
+            // 
+            this.btnChangeAddress.Location = new System.Drawing.Point(100, 189);
+            this.btnChangeAddress.Name = "btnChangeAddress";
+            this.btnChangeAddress.Size = new System.Drawing.Size(150, 25);
+            this.btnChangeAddress.TabIndex = 58;
+            this.btnChangeAddress.Text = "Change Address";
+            this.btnChangeAddress.UseVisualStyleBackColor = true;
+            this.btnChangeAddress.Click += new System.EventHandler(this.btnChangeAddress_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(45, 152);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 24);
+            this.label7.TabIndex = 58;
+            this.label7.Text = "*";
             // 
             // label9
             // 
@@ -636,51 +676,6 @@
             this.lblAddress1.TabIndex = 0;
             this.lblAddress1.Text = "Address Line 1:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(42, 56);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 24);
-            this.label3.TabIndex = 56;
-            this.label3.Text = "*";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(19, 24);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 24);
-            this.label5.TabIndex = 57;
-            this.label5.Text = "*";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(45, 152);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 24);
-            this.label7.TabIndex = 58;
-            this.label7.Text = "*";
-            // 
-            // btnChangeAddress
-            // 
-            this.btnChangeAddress.Location = new System.Drawing.Point(100, 189);
-            this.btnChangeAddress.Name = "btnChangeAddress";
-            this.btnChangeAddress.Size = new System.Drawing.Size(150, 25);
-            this.btnChangeAddress.TabIndex = 58;
-            this.btnChangeAddress.Text = "Change Address";
-            this.btnChangeAddress.UseVisualStyleBackColor = true;
-            // 
             // btnEdit
             // 
             this.btnEdit.Location = new System.Drawing.Point(516, 482);
@@ -700,6 +695,17 @@
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Visible = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // txtPhoneNum
+            // 
+            this.txtPhoneNum.Enabled = false;
+            this.txtPhoneNum.Location = new System.Drawing.Point(157, 248);
+            this.txtPhoneNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtPhoneNum.Mask = "(999) 000-0000";
+            this.txtPhoneNum.Name = "txtPhoneNum";
+            this.txtPhoneNum.Size = new System.Drawing.Size(153, 20);
+            this.txtPhoneNum.TabIndex = 49;
             // 
             // ManageProfile
             // 
@@ -717,7 +723,7 @@
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblTitle);
             this.Name = "ManageProfile";
-            this.Text = "ManageProfile";
+            this.Text = "Human Resources: Manage Profile";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.grpChangePass.ResumeLayout(false);
@@ -756,7 +762,6 @@
         private System.Windows.Forms.Label lblHireDate;
         private System.Windows.Forms.Label lblDept;
         private System.Windows.Forms.Label lblRole;
-        private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.GroupBox grpChangePass;
@@ -785,5 +790,6 @@
         private System.Windows.Forms.Label lblAddress1;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.MaskedTextBox txtPhoneNum;
     }
 }

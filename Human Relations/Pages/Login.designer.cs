@@ -135,7 +135,7 @@
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblTitle);
             this.Name = "Login";
-            this.Text = "Hotel Reservation: Login";
+            this.Text = "Human Resources: Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -59,12 +59,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Account Settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pages\Account Settings.designer.cs">
-      <DependentUpon>Account Settings.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ManageEmp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,9 +119,6 @@
     <Compile Include="Utilities Classes\LoggedActivity.cs" />
     <Compile Include="Utilities Classes\User.cs" />
     <Compile Include="Utilities Classes\Utilities.cs" />
-    <EmbeddedResource Include="Pages\Account Settings.resx">
-      <DependentUpon>Account Settings.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\History.resx">
       <DependentUpon>History.cs</DependentUpon>
     </EmbeddedResource>

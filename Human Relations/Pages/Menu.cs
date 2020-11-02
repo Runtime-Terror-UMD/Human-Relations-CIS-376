@@ -31,18 +31,6 @@ namespace Human_Relations
             //    btnHotelManagement.Visible = false;
 
         }
-        //DESCRIPTION: Opens account settings page
-        private void btnAccount_Click(object sender, EventArgs e)
-        {
-            var accountSettings = new AccountSettings(UserID);
-            accountSettings.FormClosed += new FormClosedEventHandler(accountSettings_FormClosed);
-            this.Hide();
-            accountSettings.Show();
-        }
-        void accountSettings_FormClosed(object send, FormClosedEventArgs e)
-        {
-            this.Show();
-        }
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -105,5 +93,17 @@ namespace Human_Relations
             this.Show();
         }
 
+        private void btnViewProfile_Click(object sender, EventArgs e)
+        {
+            var viewProfile = new ManageProfile(UserID);
+            viewProfile.FormClosed += new FormClosedEventHandler(viewProfile_formClosed);
+            this.Hide();
+            viewProfile.Show();
+        }
+
+        private void viewProfile_formClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
     }
 }

@@ -533,7 +533,7 @@
             this.Controls.Add(this.lblPayRate);
             this.Controls.Add(this.lblTitle);
             this.Name = "NewAccount";
-            this.Text = "Hotel Reservation: New Account";
+            this.Text = "Human Resources: New Account";
             this.Load += new System.EventHandler(this.NewAccount_Load);
             this.grpType.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).EndInit();
