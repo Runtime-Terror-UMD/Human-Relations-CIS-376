@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Human_Relations.Pages;
+using MySql.Data.MySqlClient;
 
 namespace Human_Relations
 {
@@ -15,6 +16,8 @@ namespace Human_Relations
     {
         public int UserID;
         Login loginWind;
+        Timer t = new Timer();
+        
         public Menu(Login loginInstance, DateTime current)
         {
             InitializeComponent();
@@ -24,9 +27,15 @@ namespace Human_Relations
         // DESCRIPTION: Initializer. Shows/hides hotel management button based on isCustomer
         public Menu(bool isAdmin, int userID, Login loginInstance)
         {
+
             InitializeComponent();
             loginWind = loginInstance;
+            
+            t.Interval = 1000;
+            t.Tick += new EventHandler(this.T_Tick);
+            t.Start();
             UserID = userID;
+            
             //if (isAdmin == false)
             //    btnHotelManagement.Visible = false;
 
@@ -105,5 +114,95 @@ namespace Human_Relations
         {
             this.Show();
         }
+        
+        private void Clock1_Click(object sender, EventArgs e)
+        {
+           
+        }
+        private void T_Tick(object sender, EventArgs e)
+        {
+            string time = "";
+            int hour = DateTime.Now.Hour;
+            int min = DateTime.Now.Minute;
+            int sec = DateTime.Now.Second;
+            
+            if (hour < 10)
+            {
+                time += "0" + hour;
+            }
+            else
+            {
+                time += hour;
+            }
+            time += ":";
+            if (min < 10)
+            {
+                time += "0" + min;
+            }
+            else
+            {
+                time += min;
+            }
+            time += ":";
+            if (sec < 10)
+            {
+                time += "0" + sec;
+            }
+            else
+            {
+                time += sec;
+            }
+            Clock1.Text = time;
+
+        }
+
+        private void ClockOut_Click(object sender, EventArgs e)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO dbo.timetracking(userID,outDate,outTime)VALUES(@userID,@outDate,@outTime)");
+            cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = this.UserID;
+            cmd.Parameters.Add("@outDate", MySqlDbType.Date).Value = DateTime.Now.Date;
+            cmd.Parameters.Add("@outTime", MySqlDbType.Time).Value = Clock1.Text;
+            // connect to database
+            DBConnect userCreationConn = new DBConnect();
+
+            // execute statement
+            if (userCreationConn.NonQuery(cmd) > 0)
+            {
+                Clock_in.Visible = false;
+            }
+            else
+            {
+                displayError("Error Clocking In");
+
+            }
+        }
+
+        private void Clockin_Click(object sender, EventArgs e)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO dbo.timetracking(userID,inDate,inTime)VALUES(@userID,@inDate,@inTime)");
+            cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = this.UserID;
+            cmd.Parameters.Add("@inDate", MySqlDbType.Date).Value = DateTime.Now.Date;
+            cmd.Parameters.Add("@inTime", MySqlDbType.Time).Value = Clock1.Text;
+            // connect to database
+            DBConnect userCreationConn = new DBConnect();
+
+            // execute statement
+            if (userCreationConn.NonQuery(cmd) > 0)
+            {
+                Clock_in.Visible = false;
+            }
+            else
+            {
+                displayError("Error Clocking In");
+
+            }
+
+        }
+        private void displayError(string errorMessage)
+        {
+            lblError.Text = "Error: " + errorMessage;
+            lblError.Visible = true;
+        }
+
     }
 }
