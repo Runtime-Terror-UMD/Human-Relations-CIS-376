@@ -175,7 +175,7 @@
             // clock_out
             // 
             this.clock_out.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clock_out.Location = new System.Drawing.Point(600, 288);
+            this.clock_out.Location = new System.Drawing.Point(395, 288);
             this.clock_out.Margin = new System.Windows.Forms.Padding(4);
             this.clock_out.Name = "clock_out";
             this.clock_out.Size = new System.Drawing.Size(267, 62);

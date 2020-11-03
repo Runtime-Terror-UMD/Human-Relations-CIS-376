@@ -161,7 +161,7 @@ namespace Human_Relations
             MySqlCommand cmd = new MySqlCommand(@"INSERT INTO dbo.timetracking(userID,outDate,outTime)VALUES(@userID,@outDate,@outTime)");
             cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = this.UserID;
             cmd.Parameters.Add("@outDate", MySqlDbType.Date).Value = DateTime.Now.Date;
-            cmd.Parameters.Add("@outTime", MySqlDbType.Time).Value = Clock1.Text;
+            cmd.Parameters.Add("@outTime", MySqlDbType.Time).Value = TimeSpan.Parse(Clock1.Text);
             // connect to database
             DBConnect userCreationConn = new DBConnect();
 
@@ -175,6 +175,8 @@ namespace Human_Relations
                 displayError("Error Clocking In");
 
             }
+            Clock_in.Visible = true;
+            clock_out.Visible = false;
         }
 
         private void Clockin_Click(object sender, EventArgs e)
@@ -182,7 +184,7 @@ namespace Human_Relations
             MySqlCommand cmd = new MySqlCommand(@"INSERT INTO dbo.timetracking(userID,inDate,inTime)VALUES(@userID,@inDate,@inTime)");
             cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = this.UserID;
             cmd.Parameters.Add("@inDate", MySqlDbType.Date).Value = DateTime.Now.Date;
-            cmd.Parameters.Add("@inTime", MySqlDbType.Time).Value = Clock1.Text;
+            cmd.Parameters.Add("@inTime", MySqlDbType.Time).Value = TimeSpan.Parse(Clock1.Text);
             // connect to database
             DBConnect userCreationConn = new DBConnect();
 
@@ -196,7 +198,8 @@ namespace Human_Relations
                 displayError("Error Clocking In");
 
             }
-
+            Clock_in.Visible = false;
+            clock_out.Visible = true;
         }
         private void displayError(string errorMessage)
         {
