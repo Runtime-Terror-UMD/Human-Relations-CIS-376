@@ -96,7 +96,7 @@
             this.reportDataGrid.AllowUserToDeleteRows = false;
             this.reportDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.reportDataGrid.Location = new System.Drawing.Point(49, 204);
-            this.reportDataGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.reportDataGrid.Margin = new System.Windows.Forms.Padding(2);
             this.reportDataGrid.Name = "reportDataGrid";
             this.reportDataGrid.ReadOnly = true;
             this.reportDataGrid.RowHeadersWidth = 62;
@@ -119,9 +119,9 @@
             this.grpProfileInfo.Controls.Add(this.lblUsernameDesc);
             this.grpProfileInfo.Controls.Add(this.lblAccountIDDesc);
             this.grpProfileInfo.Location = new System.Drawing.Point(49, 92);
-            this.grpProfileInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpProfileInfo.Margin = new System.Windows.Forms.Padding(2);
             this.grpProfileInfo.Name = "grpProfileInfo";
-            this.grpProfileInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpProfileInfo.Padding = new System.Windows.Forms.Padding(2);
             this.grpProfileInfo.Size = new System.Drawing.Size(675, 108);
             this.grpProfileInfo.TabIndex = 17;
             this.grpProfileInfo.TabStop = false;
@@ -259,7 +259,7 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnLogOut);
             this.Name = "History";
-            this.Text = "Hotel Reservation: History";
+            this.Text = "Human Resources: History";
             ((System.ComponentModel.ISupportInitialize)(this.reportDataGrid)).EndInit();
             this.grpProfileInfo.ResumeLayout(false);
             this.grpProfileInfo.PerformLayout();

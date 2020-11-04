@@ -158,6 +158,21 @@ namespace Human_Relations
             return userID;
         }
 
+        // returns true if user ID is clocked in. Returns false if they are not.
+        public bool isClockedIn(int userID)
+
+        {
+            DBConnect isClockedInConn = new DBConnect();
+            MySqlCommand cmd = new MySqlCommand(@"SELECT COUNT(*) 
+                                                FROM dbo.timetracking
+                                                WHERE userID = @userID
+                                                and shiftOn = 1;");
+            cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
+            int status = isClockedInConn.intScalar(cmd);
+            if (status == 0)
+                return false;
+            return true;
+        }
 
         // DESCRIPTION: Checks if entered password matches specified username
         public bool passwordMatches(string username, string password)
