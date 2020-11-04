@@ -34,7 +34,7 @@ namespace Human_Relations
             database = "dbo";
             uid = "root";
             password = "hotelmgmt";
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";Allow User Variables=True;";
 
         }
 
