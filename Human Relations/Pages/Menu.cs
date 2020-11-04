@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Human_Relations.Pages;
+using Human_Relations.Utilities_Classes;
+using MySql.Data.MySqlClient;
 
 namespace Human_Relations
 {
@@ -15,6 +17,8 @@ namespace Human_Relations
     {
         public int UserID;
         Login loginWind;
+        Timer t = new Timer();
+        
         public Menu(Login loginInstance, DateTime current)
         {
             InitializeComponent();
@@ -24,12 +28,30 @@ namespace Human_Relations
         // DESCRIPTION: Initializer. Shows/hides hotel management button based on isCustomer
         public Menu(bool isAdmin, int userID, Login loginInstance)
         {
+
             InitializeComponent();
             loginWind = loginInstance;
+            
+            t.Interval = 1000;
+            t.Tick += new EventHandler(this.T_Tick);
+            t.Start();
             UserID = userID;
+
             //if (isAdmin == false)
             //    btnHotelManagement.Visible = false;
 
+            Utilities checkStatus = new Utilities();
+            if(checkStatus.isClockedIn(UserID))
+            {
+                Clock_in.Hide(); //hide clock in button
+                clock_out.Show();
+            }
+            else
+            {
+
+                Clock_in.Show(); 
+                clock_out.Hide();
+            }
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -105,5 +127,108 @@ namespace Human_Relations
         {
             this.Show();
         }
+        
+        private void Clock1_Click(object sender, EventArgs e)
+        {
+           
+        }
+        private void T_Tick(object sender, EventArgs e)
+        {
+            string time = "";
+            int hour = DateTime.Now.Hour;
+            int min = DateTime.Now.Minute;
+            int sec = DateTime.Now.Second;
+            
+            if (hour < 10)
+            {
+                time += "0" + hour;
+            }
+            else
+            {
+                time += hour;
+            }
+            time += ":";
+            if (min < 10)
+            {
+                time += "0" + min;
+            }
+            else
+            {
+                time += min;
+            }
+            time += ":";
+            if (sec < 10)
+            {
+                time += "0" + sec;
+            }
+            else
+            {
+                time += sec;
+            }
+            Clock1.Text = time;
+
+        }
+
+        private void ClockOut_Click(object sender, EventArgs e)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"UPDATE dbo.timetracking
+                                                SET outDateTime = @outDateTime,
+                                                    shifton = 0
+                                                WHERE userID = @userID
+                                                AND shifton = 1; ");
+            cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = DateTime.Now;
+            cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
+
+            // connect to database
+            DBConnect userCreationConn = new DBConnect();
+
+            // execute statement
+            if (userCreationConn.NonQuery(cmd) > 0)
+            {
+                Clock_in.Visible = true;
+                clock_out.Visible = false;
+            }
+            else
+            {
+                displayError("Error Clocking In");
+
+            }
+        }
+
+        private void Clockin_Click(object sender, EventArgs e)
+        {
+            int month = DateTime.Now.Month;
+            int day = DateTime.Now.Day;
+
+            payroll getPayPeriodID = new payroll();
+            int payPeriodID = getPayPeriodID.getCurrentPayPeriod(month, day);
+
+            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO dbo.timetracking(userID,payPeriodID,inDateTime,shifton)VALUES(@userID,@payPeriodID,@inDateTime,@shifton)");
+            cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = this.UserID;
+            cmd.Parameters.Add("@payPeriodID", MySqlDbType.VarChar, 45).Value = payPeriodID;
+            cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = DateTime.Now;
+            cmd.Parameters.Add("@shifton", MySqlDbType.VarChar, 45).Value = 1;
+            DBConnect userCreationConn = new DBConnect();
+
+            // execute statement
+            if (userCreationConn.NonQuery(cmd) > 0)
+            {
+                Clock_in.Visible = false;
+                clock_out.Visible = true;
+
+            }
+            else
+            {
+                displayError("Error Clocking In");
+
+            }
+            
+        }
+        private void displayError(string errorMessage)
+        {
+            lblError.Text = "Error: " + errorMessage;
+            lblError.Visible = true;
+        }
+
     }
 }

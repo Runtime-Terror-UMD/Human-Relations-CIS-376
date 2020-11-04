@@ -37,6 +37,10 @@
             this.btnManageEmp = new System.Windows.Forms.Button();
             this.btnScheduleMgmt = new System.Windows.Forms.Button();
             this.btnViewProfile = new System.Windows.Forms.Button();
+            this.Clock1 = new System.Windows.Forms.Label();
+            this.Clock_in = new System.Windows.Forms.Button();
+            this.clock_out = new System.Windows.Forms.Button();
+            this.lblError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnLogOut
@@ -72,7 +76,7 @@
             // btnHistory
             // 
             this.btnHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHistory.Location = new System.Drawing.Point(150, 300);
+            this.btnHistory.Location = new System.Drawing.Point(150, 325);
             this.btnHistory.Name = "btnHistory";
             this.btnHistory.Size = new System.Drawing.Size(200, 50);
             this.btnHistory.TabIndex = 3;
@@ -117,7 +121,7 @@
             // btnScheduleMgmt
             // 
             this.btnScheduleMgmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnScheduleMgmt.Location = new System.Drawing.Point(150, 200);
+            this.btnScheduleMgmt.Location = new System.Drawing.Point(296, 457);
             this.btnScheduleMgmt.Name = "btnScheduleMgmt";
             this.btnScheduleMgmt.Size = new System.Drawing.Size(200, 50);
             this.btnScheduleMgmt.TabIndex = 9;
@@ -128,7 +132,7 @@
             // btnViewProfile
             // 
             this.btnViewProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewProfile.Location = new System.Drawing.Point(450, 300);
+            this.btnViewProfile.Location = new System.Drawing.Point(450, 325);
             this.btnViewProfile.Name = "btnViewProfile";
             this.btnViewProfile.Size = new System.Drawing.Size(200, 50);
             this.btnViewProfile.TabIndex = 10;
@@ -136,11 +140,62 @@
             this.btnViewProfile.UseVisualStyleBackColor = true;
             this.btnViewProfile.Click += new System.EventHandler(this.btnViewProfile_Click);
             // 
+            // Clock1
+            // 
+            this.Clock1.AutoSize = true;
+            this.Clock1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Clock1.Location = new System.Drawing.Point(300, 147);
+            this.Clock1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Clock1.Name = "Clock1";
+            this.Clock1.Size = new System.Drawing.Size(212, 55);
+            this.Clock1.TabIndex = 11;
+            this.Clock1.Text = "00:00:00";
+            this.Clock1.Click += new System.EventHandler(this.Clock1_Click);
+            // 
+            // Clock_in
+            // 
+            this.Clock_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Clock_in.Location = new System.Drawing.Point(296, 235);
+            this.Clock_in.Name = "Clock_in";
+            this.Clock_in.Size = new System.Drawing.Size(200, 50);
+            this.Clock_in.TabIndex = 12;
+            this.Clock_in.Text = "Clock in";
+            this.Clock_in.UseVisualStyleBackColor = true;
+            this.Clock_in.Click += new System.EventHandler(this.Clockin_Click);
+            // 
+            // clock_out
+            // 
+            this.clock_out.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clock_out.Location = new System.Drawing.Point(296, 235);
+            this.clock_out.Name = "clock_out";
+            this.clock_out.Size = new System.Drawing.Size(200, 50);
+            this.clock_out.TabIndex = 13;
+            this.clock_out.Text = "Clock out";
+            this.clock_out.UseVisualStyleBackColor = true;
+            this.clock_out.Visible = false;
+            this.clock_out.Click += new System.EventHandler(this.ClockOut_Click);
+            // 
+            // lblError
+            // 
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(202, 288);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(400, 20);
+            this.lblError.TabIndex = 14;
+            this.lblError.Text = "Error!!";
+            this.lblError.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblError.Visible = false;
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.clock_out);
+            this.Controls.Add(this.Clock_in);
+            this.Controls.Add(this.Clock1);
             this.Controls.Add(this.btnViewProfile);
             this.Controls.Add(this.btnScheduleMgmt);
             this.Controls.Add(this.btnManageEmp);
@@ -154,6 +209,7 @@
             this.Text = "Human Resources: Menu";
             this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -168,5 +224,9 @@
         private System.Windows.Forms.Button btnManageEmp;
         private System.Windows.Forms.Button btnScheduleMgmt;
         private System.Windows.Forms.Button btnViewProfile;
+        private System.Windows.Forms.Label Clock1;
+        private System.Windows.Forms.Button Clock_in;
+        private System.Windows.Forms.Button clock_out;
+        private System.Windows.Forms.Label lblError;
     }
 }
