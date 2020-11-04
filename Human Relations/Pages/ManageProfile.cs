@@ -275,12 +275,12 @@ namespace Human_Relations.Pages
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
+            Utilities accountInfo = new Utilities();
             if (string.IsNullOrWhiteSpace(txtNewPassword.Text))
             {
                 MessageBox.Show("Unable to change password");
             }
-            Utilities accountInfo = new Utilities();
-            if (accountInfo.passwordMatches(current.userID, txtCurrentPassword.Text))
+            else if (accountInfo.passwordMatches(current.userID, txtCurrentPassword.Text))
             {
                 current.password = txtNewPassword.Text;
                 if (current.updateUser(current))
