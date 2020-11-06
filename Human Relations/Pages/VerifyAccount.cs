@@ -47,8 +47,9 @@ namespace Human_Relations.Pages
             this.Close();
         }
 
-        //DESCRIPTION: Verifies entries and updates user data
-
+        /*
+        DESCRIPTION: Verifies information entered by user is filled out and valid. Then updates user profile.
+         */
         private void btnNew_Click(object sender, EventArgs e)
         {
             // checks that first name is entered
@@ -135,7 +136,7 @@ namespace Human_Relations.Pages
                         {
                             // add verification to activity log
                             LoggedActivity logVerification = new LoggedActivity();
-                            logVerification.logActivity(14, userInfo.userID, userInfo.userID, DateTime.Now, userInfo.userID);
+                            logVerification.logActivity(15, userInfo.userID, userInfo.userID, DateTime.Now, userInfo.userID);
 
                             // display success message
                             lblError.ForeColor = Color.Green;

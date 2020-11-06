@@ -31,7 +31,9 @@ namespace Human_Relations.Pages
         MySqlCommand cmd = new MySqlCommand();
 
 
-        // pulls all user schedules for specified date
+/*
+DESCRIPTION: pulls all user schedules for specified date
+*/
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try
@@ -66,6 +68,13 @@ namespace Human_Relations.Pages
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        // logs user out of system
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.OpenForms["Menu"].Close();
         }
     }
 }
