@@ -19,7 +19,7 @@ public class User
     public double payRate { get; set; }
     public int roleID { get; set; }
     public int depID { get; set; }
-    public double ptoDays { get; set; }
+    public double ptoTime { get; set; }
     public string address1 { get; set; }
     public string address2 { get; set; }
     public string city { get; set; }
@@ -64,10 +64,10 @@ public class User
             payRate = Convert.ToDouble(dataReader["payRate"]);
             roleID = Convert.ToInt32(dataReader["roleID"]);
             depID = Convert.ToInt32(dataReader["depID"]);
-            if (dataReader["ptoDays"] == DBNull.Value)
-                ptoDays = 0;
+            if (dataReader["ptoTime"] == DBNull.Value)
+                ptoTime = 0;
             else
-                ptoDays = Convert.ToDouble(dataReader["ptoDays"]);
+                ptoTime = Convert.ToDouble(dataReader["ptoTime"]);
             address1 = Convert.ToString(dataReader["address1"]);
             address2 = Convert.ToString(dataReader["address2"]);
             city = Convert.ToString(dataReader["city"]);
@@ -104,7 +104,7 @@ public class User
                                                         payRate = @payRate,
                                                         roleID = @roleID,
                                                         depID = @depID,
-                                                        ptoDays = @ptoDays,
+                                                        ptoTime = @ptoTime,
                                                         address1 = @address1,
                                                         address2 = @address2,
                                                         city = @city,
@@ -123,7 +123,7 @@ public class User
         updateUserCmd.Parameters.Add("@payRate", MySqlDbType.Decimal).Value = userinfo.payRate;
         updateUserCmd.Parameters.Add("@roleID", MySqlDbType.Int32).Value = userinfo.roleID;
         updateUserCmd.Parameters.Add("@depID", MySqlDbType.Int32).Value = userinfo.depID;
-        updateUserCmd.Parameters.Add("@ptoDays", MySqlDbType.Decimal).Value = userinfo.ptoDays;
+        updateUserCmd.Parameters.Add("@ptoTime", MySqlDbType.Decimal).Value = userinfo.ptoTime;
         updateUserCmd.Parameters.Add("@address1", MySqlDbType.VarChar, 45).Value = userinfo.address1;
         updateUserCmd.Parameters.Add("@address2", MySqlDbType.VarChar, 45).Value = userinfo.address2;
         updateUserCmd.Parameters.Add("@city", MySqlDbType.VarChar, 45).Value = userinfo.city;

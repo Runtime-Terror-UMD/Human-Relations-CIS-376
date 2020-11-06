@@ -171,26 +171,39 @@ namespace Human_Relations
 
         private void ClockOut_Click(object sender, EventArgs e)
         {
-            MySqlCommand cmd = new MySqlCommand(@"UPDATE dbo.timetracking
-                                                SET outDateTime = @outDateTime,
-                                                    shifton = 0
-                                                WHERE userID = @userID
-                                                AND shifton = 1; ");
-            cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = DateTime.Now;
-            cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
-
             // connect to database
-            DBConnect userCreationConn = new DBConnect();
+            DBConnect clockOutConn = new DBConnect();
+            
+            // get logID of shift to pass to payroll calculation
+            MySqlCommand getLogIDCmd = new MySqlCommand(@"SELECT logID 
+                                                        FROM dbo.timetracking
+                                                        WHERE userID = @userID
+                                                        and shifton = 1;");
+            getLogIDCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
+            int logID = clockOutConn.intScalar(getLogIDCmd);
+
+            // clock user out
+            MySqlCommand clockOutCmd = new MySqlCommand(@"UPDATE dbo.timetracking
+                                                        SET outDateTime = @outDateTime,
+                                                            shifton = 0
+                                                        WHERE userID = @userID
+                                                        AND shifton = 1; ");
+            clockOutCmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = DateTime.Now;
+            clockOutCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
 
             // execute statement
-            if (userCreationConn.NonQuery(cmd) > 0)
+            if (clockOutConn.NonQuery(clockOutCmd) > 0)
             {
                 Clock_in.Visible = true;
                 clock_out.Visible = false;
+
+                // update shift pay and PTO
+                payroll calcShiftPay = new payroll();
+                calcShiftPay.onClockOut(logID, this.UserID);
             }
             else
             {
-                displayError("Error Clocking In");
+                displayError("Error Clocking Out");
 
             }
         }
@@ -201,17 +214,17 @@ namespace Human_Relations
             int day = DateTime.Now.Day;
 
             payroll getPayPeriodID = new payroll();
-            int payPeriodID = getPayPeriodID.getCurrentPayPeriod(month, day);
+            int payPeriodID = getPayPeriodID.getPayPeriod(month, day);
 
             MySqlCommand cmd = new MySqlCommand(@"INSERT INTO dbo.timetracking(userID,payPeriodID,inDateTime,shifton)VALUES(@userID,@payPeriodID,@inDateTime,@shifton)");
-            cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = this.UserID;
-            cmd.Parameters.Add("@payPeriodID", MySqlDbType.VarChar, 45).Value = payPeriodID;
+            cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
+            cmd.Parameters.Add("@payPeriodID", MySqlDbType.Int32).Value = payPeriodID;
             cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = DateTime.Now;
-            cmd.Parameters.Add("@shifton", MySqlDbType.VarChar, 45).Value = 1;
-            DBConnect userCreationConn = new DBConnect();
+            cmd.Parameters.Add("@shifton", MySqlDbType.Bit).Value = 1;
+            DBConnect clockInConn = new DBConnect();
 
             // execute statement
-            if (userCreationConn.NonQuery(cmd) > 0)
+            if (clockInConn.NonQuery(cmd) > 0)
             {
                 Clock_in.Visible = false;
                 clock_out.Visible = true;

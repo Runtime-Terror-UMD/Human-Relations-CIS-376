@@ -115,8 +115,8 @@ namespace Human_Relations
                 {
                     // Everything is good. Create user account
                     
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`user`(`isAdmin`,`firstName`,`lastName`,`username`,`email`,`password`,`payrate`,`hiredate`,`roleID`,`depID`,`isActive`,`ptoDays`)
-                                                        VALUES(@isAdmin,@firstName,@lastName,@username,@email,@password,@payrate,@hiredate,@roleID,@depID,@isActive,@ptoDays)");
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`user`(`isAdmin`,`firstName`,`lastName`,`username`,`email`,`password`,`payrate`,`hiredate`,`roleID`,`depID`,`isActive`,`ptoTime`)
+                                                        VALUES(@isAdmin,@firstName,@lastName,@username,@email,@password,@payrate,@hiredate,@roleID,@depID,@isActive,@ptoTime)");
 
                     // assign parameter values
                     cmd.Parameters.Add("@isAdmin", MySqlDbType.Bit);
@@ -126,7 +126,7 @@ namespace Human_Relations
                     cmd.Parameters.Add("@email", MySqlDbType.VarChar, 45).Value = txtEmail.Text;
                     cmd.Parameters.Add("@password", MySqlDbType.VarChar, 45).Value = txtPassword.Text;
                     cmd.Parameters.Add("@payrate", MySqlDbType.Decimal).Value = txtPayRate.Text;
-                    cmd.Parameters.Add("@ptoDays", MySqlDbType.Decimal).Value = 0;
+                    cmd.Parameters.Add("@ptoTime", MySqlDbType.Decimal).Value = 0;
                     cmd.Parameters.Add("@hiredate", MySqlDbType.DateTime).Value = pickHireDate.Value;
                     cmd.Parameters.Add("@roleID", MySqlDbType.VarChar, 45).Value = cBoxRole.SelectedValue;
                     cmd.Parameters.Add("@depID", MySqlDbType.VarChar).Value = cBoxDepartment.SelectedValue;
