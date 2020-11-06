@@ -62,6 +62,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ViewSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ViewSchedule.Designer.cs">
+      <DependentUpon>ViewSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ManageEmp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     <Compile Include="Utilities Classes\payroll.cs" />
     <Compile Include="Utilities Classes\User.cs" />
     <Compile Include="Utilities Classes\Utilities.cs" />
+    <EmbeddedResource Include="Pages\ViewSchedule.resx">
+      <DependentUpon>ViewSchedule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\History.resx">
       <DependentUpon>History.cs</DependentUpon>
     </EmbeddedResource>

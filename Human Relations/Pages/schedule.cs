@@ -18,9 +18,16 @@ namespace Human_Relations.Pages
 {
     public partial class schedule : Form
     {
-        public schedule()
+        int UserID;
+        public schedule(int user)
         {
             InitializeComponent();
+            UserID = user;
+            Utilities employee = new Utilities();
+            if(employee.isAdmin(UserID))
+            {
+                btnCreate.Show();
+            }
         }
 
         // components for schedule viewing
@@ -28,16 +35,12 @@ namespace Human_Relations.Pages
         DBConnect scheduleConn = new DBConnect();
         DataTable scheduleData = new DataTable();
         BindingSource scheduleBindingSource = new BindingSource();
-        MySqlCommand cmd = new MySqlCommand();
 
-
-/*
-DESCRIPTION: pulls all user schedules for specified date
-*/
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void search()
         {
             try
             {
+                MySqlCommand cmd = new MySqlCommand();
                 // formats date value from dateTime picker
                 string formattedDate = scheduleDatePicker.Value.ToString("yyyy-MM-dd");
 
@@ -55,7 +58,7 @@ DESCRIPTION: pulls all user schedules for specified date
 
                 // fills data grid
                 scheduleData = scheduleConn.ExecuteDataTable(cmd);
-                scheduleBindingSource.DataSource =scheduleData;
+                scheduleBindingSource.DataSource = scheduleData;
                 scheduleDataGrid.DataSource = scheduleBindingSource;
                 scheduleDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
@@ -63,6 +66,13 @@ DESCRIPTION: pulls all user schedules for specified date
             {
                 MessageBox.Show(err.ToString());
             }
+        }
+/*
+DESCRIPTION: pulls all user schedules for specified date
+*/
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            search();
         }
         // returns to menu
         private void btnReturn_Click(object sender, EventArgs e)
@@ -76,5 +86,26 @@ DESCRIPTION: pulls all user schedules for specified date
             this.Close();
             Application.OpenForms["Menu"].Close();
         }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            var newSchedule = new ViewSchedule(UserID, "new");
+            newSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
+            this.Hide();
+            newSchedule.Show();
+        }
+
+        private void newSchedule_formClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+            search();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            //TODO: get schedule selected and populate view schedule page
+        }
+
+
     }
 }

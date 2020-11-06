@@ -104,7 +104,7 @@ namespace Human_Relations
 
         private void btnScheduleMgmt_Click(object sender, EventArgs e)
         {
-            var scheduleMgmt = new schedule();
+            var scheduleMgmt = new schedule(UserID);
             scheduleMgmt.FormClosed += new FormClosedEventHandler(scheduleMgmt_formClosed);
             this.Hide();
             scheduleMgmt.Show();
