@@ -24,7 +24,7 @@ namespace Human_Relations.Pages
             InitializeComponent();
         }
 
-
+// DESCRIPTION: Opens new employee account page
         private void btnNewEmployee_Click(object sender, EventArgs e)
         {
             var hire = new NewAccount(adminUserID);
@@ -33,16 +33,13 @@ namespace Human_Relations.Pages
             hire.Show();
         }
 
+// DESCRIPTION: returns to menu if new account window is closed
         private void NewAccount_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+// DESCRIPTION: Logs user out
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -54,6 +51,7 @@ namespace Human_Relations.Pages
             adminUserID = UserID;
         }
 
+// DESCRIPTION: Displays error
         private void displayError(string errorMessage)
         {
             lblError.ForeColor = Color.Red;
@@ -62,65 +60,7 @@ namespace Human_Relations.Pages
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            lblError.Visible = false;
-            Utilities verifyAccount = new Utilities();
-
-            // check that userID is an int
-            if (!(int.TryParse(txtUserID.Text, out empUserID)))
-            {
-                displayError("User ID must be an integer");
-            }
-            // check that userID exists
-            else if(!(verifyAccount.userIDExists(empUserID)))
-            {
-                displayError("User ID does not exist");
-            }    
-            // check that admin is not updating themselves
-            else if (adminUserID == empUserID)
-            { displayError("You must update your own profile through the 'My Account' page"); }    
-
-            else
-            {
-                // TODO: This line of code loads data into the 'dboDataSet.role' table. You can move, or remove it, as needed.
-                this.roleTableAdapter.Fill(this.dboDataSet.role);
-                // TODO: This line of code loads data into the 'dboDataSet.department' table. You can move, or remove it, as needed.
-                this.departmentTableAdapter.Fill(this.dboDataSet.department);
-
-                // fill form fields with user info
-
-                userInfo = new User(empUserID);
-                txtFName.Text = userInfo.firstName;
-                txtLName.Text = userInfo.lastName;
-                txtAddress1.Text = userInfo.address1;
-                txtAddress2.Text = userInfo.address2;
-                txtCity.Text = userInfo.city;
-                cBoxStates.SelectedItem = userInfo.state;
-                txtZIP.Text = userInfo.zip.ToString();
-                txtPhoneNum.Text = userInfo.phoneNum;
-                txtEmail.Text = userInfo.email;
-                txtPayRate.Text = userInfo.payRate.ToString();
-                cBoxDep.SelectedValue = userInfo.depID;
-                cBoxRole.SelectedValue = userInfo.roleID;
-
-                if(userInfo.isAdmin == true)
-                {
-                    cBoxAdmin.SelectedItem = "Yes";
-                }
-                else
-                {
-                    cBoxAdmin.SelectedItem = "No";
-                }    
-                if (userInfo.isActive == true)
-                {
-                    cBoxStatus.SelectedItem = "Active";
-                }
-                else { cBoxStatus.SelectedItem = "Inactive"; }
-            }
-        }
-
-        // return to menu
+// DESCRIPTION return to menu
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -132,6 +72,7 @@ namespace Human_Relations.Pages
 
         }
 
+// DESCRIPTION: Validates updated information and updates data in DB
         private void btnSave_Click(object sender, EventArgs e)
         {
             lblError.Visible = false;
@@ -257,6 +198,65 @@ namespace Human_Relations.Pages
                     //something went wrong with the Database
                     displayError("Unable to update employee profile. Contact IT");
                 }
+            }
+        }
+
+// DESCRIPTION: Conducts search for user ID profile
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            lblError.Visible = false;
+            Utilities verifyAccount = new Utilities();
+
+            // check that userID is an int
+            if (!(int.TryParse(txtUserID.Text, out empUserID)))
+            {
+                displayError("User ID must be an integer");
+            }
+            // check that userID exists
+            else if (!(verifyAccount.userIDExists(empUserID)))
+            {
+                displayError("User ID does not exist");
+            }
+            // check that admin is not updating themselves
+            else if (adminUserID == empUserID)
+            { displayError("You must update your own profile through the 'My Account' page"); }
+
+            else
+            {
+                // TODO: This line of code loads data into the 'dboDataSet.role' table. You can move, or remove it, as needed.
+                this.roleTableAdapter.Fill(this.dboDataSet.role);
+                // TODO: This line of code loads data into the 'dboDataSet.department' table. You can move, or remove it, as needed.
+                this.departmentTableAdapter.Fill(this.dboDataSet.department);
+
+                // fill form fields with user info
+
+                userInfo = new User(empUserID);
+                txtFName.Text = userInfo.firstName;
+                txtLName.Text = userInfo.lastName;
+                txtAddress1.Text = userInfo.address1;
+                txtAddress2.Text = userInfo.address2;
+                txtCity.Text = userInfo.city;
+                cBoxStates.SelectedItem = userInfo.state;
+                txtZIP.Text = userInfo.zip.ToString();
+                txtPhoneNum.Text = userInfo.phoneNum;
+                txtEmail.Text = userInfo.email;
+                txtPayRate.Text = userInfo.payRate.ToString();
+                cBoxDep.SelectedValue = userInfo.depID;
+                cBoxRole.SelectedValue = userInfo.roleID;
+
+                if (userInfo.isAdmin == true)
+                {
+                    cBoxAdmin.SelectedItem = "Yes";
+                }
+                else
+                {
+                    cBoxAdmin.SelectedItem = "No";
+                }
+                if (userInfo.isActive == true)
+                {
+                    cBoxStatus.SelectedItem = "Active";
+                }
+                else { cBoxStatus.SelectedItem = "Inactive"; }
             }
         }
     }
