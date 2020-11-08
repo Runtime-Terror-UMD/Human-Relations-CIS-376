@@ -40,6 +40,7 @@
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.lblError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSet)).BeginInit();
@@ -147,7 +148,7 @@
             // 
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Location = new System.Drawing.Point(701, 8);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(75, 25);
             this.btnLogout.TabIndex = 14;
@@ -155,11 +156,23 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(297, 74);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(32, 13);
+            this.lblError.TabIndex = 15;
+            this.lblError.Text = "Error:";
+            this.lblError.Visible = false;
+            // 
             // schedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCreate);
@@ -175,6 +188,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSet)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -191,5 +205,6 @@
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Label lblError;
     }
 }

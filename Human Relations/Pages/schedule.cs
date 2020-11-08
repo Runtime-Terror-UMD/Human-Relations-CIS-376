@@ -89,7 +89,7 @@ DESCRIPTION: pulls all user schedules for specified date
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            var newSchedule = new ViewSchedule(UserID, "new");
+            var newSchedule = new ViewSchedule(UserID);
             newSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
             this.Hide();
             newSchedule.Show();
@@ -104,6 +104,29 @@ DESCRIPTION: pulls all user schedules for specified date
         private void btnEdit_Click(object sender, EventArgs e)
         {
             //TODO: get schedule selected and populate view schedule page
+            if(scheduleDataGrid.Rows.Count == 0)
+            {
+                lblError.Text += " The selected date has no scheduled shifts";
+                lblError.Visible = true;
+            }
+            else if (scheduleDataGrid.SelectedRows.Count == 0)
+            {
+                lblError.Text += " Please select a row";
+                lblError.Visible = true;
+            }
+            else if(scheduleDataGrid.SelectedRows.Count > 1)
+            {
+                lblError.Text += " Please select one row";
+                lblError.Visible = true;
+            }
+            else
+            {
+
+                var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()));
+                updateSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
+                this.Hide();
+                updateSchedule.Show();;
+            }
         }
 
 
