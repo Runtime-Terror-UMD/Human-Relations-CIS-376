@@ -212,5 +212,15 @@ namespace Human_Relations
                 return returnString;
             }
         }
+        // DESCRIPTION: Executes scalar query of type DateTime
+        public DateTime dateTimeScalar(MySqlCommand cmd)
+        {
+            DateTime returnDateTime;
+            this.OpenConnection();
+            cmd.Connection = connection;
+            returnDateTime = DateTime.Parse(cmd.ExecuteScalar().ToString());
+            this.CloseConnection();
+            return returnDateTime;
+        }
     }
 }
