@@ -304,5 +304,15 @@ namespace Human_Relations.Pages
             txtCurrentPassword.Clear();
             txtNewPassword.Clear();
         }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDescribe_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
