@@ -243,5 +243,20 @@ namespace Human_Relations
             lblError.Visible = true;
         }
 
+ // DESCRIPTION: Opens "My Payroll" page
+        private void btnPayroll_Click(object sender, EventArgs e)
+        {
+            var viewPayroll = new payrollReport(UserID);
+            viewPayroll.FormClosed += new FormClosedEventHandler(payrollReport_formClosed);
+            this.Hide();
+            viewPayroll.Show();
+        }
+
+// DESCRIPTION: Returns to menu when "My Payroll" page is closed
+        private void payrollReport_formClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
     }
 }
