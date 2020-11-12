@@ -38,7 +38,9 @@ namespace Human_Relations
             UserID = userID;
 
             //if (isAdmin == false)
-            //    btnHotelManagement.Visible = false;
+            //{
+
+            //}
 
             Utilities checkStatus = new Utilities();
             if(checkStatus.isClockedIn(UserID))

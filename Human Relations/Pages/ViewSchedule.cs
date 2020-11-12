@@ -100,7 +100,7 @@ namespace Human_Relations.Pages
                             {
                                 schedID = Convert.ToInt32(dataReader["scheduleID"]);
                             }
-                            logging.logActivity(15, user, schedID, DateTime.Now, adminUserID);
+                            logging.logActivity(16, user, schedID, DateTime.Now, adminUserID);
                             MessageBox.Show("Schedule was created.");
                             this.Close();
                         }
@@ -159,7 +159,7 @@ namespace Human_Relations.Pages
                 {
                     //logging activity "created a new acount
                     LoggedActivity log = new LoggedActivity();
-                    log.logActivity(16, employeeUserID, ScheduleID, DateTime.Now, adminUserID);
+                    log.logActivity(17, employeeUserID, ScheduleID, DateTime.Now, adminUserID);
                     MessageBox.Show("Schedule was updated.");
                     this.Close();
                 }

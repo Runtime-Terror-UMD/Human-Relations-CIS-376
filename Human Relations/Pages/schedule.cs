@@ -26,7 +26,13 @@ namespace Human_Relations.Pages
             Utilities employee = new Utilities();
             if(employee.isAdmin(UserID))
             {
-                btnCreate.Show();
+                btnCreate.Visible = true;
+                btnEdit.Visible = true;
+            }
+            else
+            {
+                btnCreate.Visible = false;
+                btnEdit.Visible = false;
             }
         }
 

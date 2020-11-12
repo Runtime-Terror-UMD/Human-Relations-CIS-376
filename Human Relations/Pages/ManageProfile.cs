@@ -170,6 +170,10 @@ namespace Human_Relations.Pages
             {
                 errorMessage("Username is already taken.");
             }
+            else if (txtEmail.Text != current.email && verifyNewAccount.emailExists(txtEmail.Text))
+            {
+                errorMessage("Email must be unique in database.");
+            }
             else
             {
                 current.firstName = txtfname.Text;
@@ -278,7 +282,11 @@ namespace Human_Relations.Pages
             Utilities accountInfo = new Utilities();
             if (string.IsNullOrWhiteSpace(txtNewPassword.Text))
             {
-                MessageBox.Show("Unable to change password");
+                MessageBox.Show("Unable to change password.");
+            }
+            else if(txtNewPassword.Text == txtCurrentPassword.Text)
+            {
+                MessageBox.Show("Cannot set password to current password.");
             }
             else if (accountInfo.passwordMatches(current.userID, txtCurrentPassword.Text))
             {

@@ -95,14 +95,14 @@ namespace Human_Relations
                             {
                                 if (isAdmin(txtUsername.Text))
                                 {
-                                    // re-drecit to menu, hide hotel management button
+                                    // re-drecit to menu, show admin buttons
                                     var menuScreen = new Menu(true, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
                                     menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
                                     this.Hide();
                                     menuScreen.Show();
                                 }
                                 else
-                                {   // re-direct to menu, show hotel management button
+                                {   // re-direct to menu, hide admin buttons
                                     var menuScreen = new Menu(false, verifyCredentials.getUserIDFromUsername(txtUsername.Text), this);
                                     menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
                                     this.Hide();

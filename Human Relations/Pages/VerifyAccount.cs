@@ -106,6 +106,10 @@ namespace Human_Relations.Pages
             {
                 displayError("New password is required");
             }
+            else if(txtNewPW.Text == txtCurrPW.Text)
+            {
+                displayError("Cannot set new password as current password.");
+            }
             // all fields are good. Proceed with update process
             else
             {

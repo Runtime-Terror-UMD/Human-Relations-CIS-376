@@ -109,7 +109,7 @@ namespace Human_Relations
 
         public bool isFirstLogin(int userID)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT Count(*) from dbo.activityLog where createdBy = @userID and activityTypeID = 14");
+            MySqlCommand cmd = new MySqlCommand("SELECT Count(*) from dbo.activityLog where createdBy = @userID and activityTypeID = 15");
             cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
 
             DBConnect firstLoginConn = new DBConnect();
