@@ -14,8 +14,8 @@ public class User
     public string password { get; set; }
     public bool isAdmin { get; set; }
     public bool isActive { get; set; }
-    public DateTime hireDate { get; set; }
-    public DateTime lastDate { get; set; }
+    public DateTime? hireDate { get; set; }
+    public DateTime? lastDate { get; set; }
     public double payRate { get; set; }
     public int roleID { get; set; }
     public int depID { get; set; }
@@ -55,7 +55,7 @@ public class User
             hireDate = Convert.ToDateTime(dataReader["hireDate"]);
             if(dataReader["lastDate"] == DBNull.Value) //cannot convert null to DateTime
             {
-                lastDate = DateTime.MinValue;
+                lastDate = null;
             }
             else
             {
