@@ -24,7 +24,11 @@ namespace Human_Relations.Pages
             txtlname.Text = "" + current.lastName;
             txtUsername.Text = "" + current.username;
             txtEmail.Text = "" + current.email;
-            txtAddress.Text = current.address1 + "\r\n" + ((current.address2 != "") ? current.address2 + "\r\n" : "") + current.city + "\r\n" + current.state + "\r\n" + current.zip;
+            txtAddress1.Text = "" + current.address1;
+            txtAddress2.Text = "" + current.address2;
+            txtCity.Text = "" + current.city;
+            txtStates.Text = "" + current.state;
+            txtZIP.Text = "" + current.zip;
             txtPhoneNum.Text = "" + current.phoneNum;
             switch (current.depID)
             {
@@ -133,12 +137,18 @@ namespace Human_Relations.Pages
             txtlname.Enabled = true;
             txtEmail.Enabled = true;
             txtUsername.Enabled = true;
+            txtStates.Visible = false;
+            cBoxStates.Visible = true;
+            txtAddress1.Enabled = true;
+            txtAddress2.Enabled = true;
+            txtCity.Enabled = true;
+            txtZIP.Enabled = true;        
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             Utilities verifyNewAccount = new Utilities();
-
+            int ZIPInt;
             // checks that first name is entered
             if (string.IsNullOrWhiteSpace(txtfname.Text))
             {
@@ -174,14 +184,50 @@ namespace Human_Relations.Pages
             {
                 errorMessage("Email must be unique in database.");
             }
+            //check that all required fields are there
+            if (string.IsNullOrEmpty(txtAddress1.Text))
+            {
+                errorMessage("Street address is required.");
+            }
+            else if (string.IsNullOrEmpty(txtCity.Text))
+            {
+                errorMessage("City address is required.");
+            }
+            else if (string.IsNullOrEmpty(txtCity.Text))
+            {
+                errorMessage("City is required.");
+            }
+            else if (cBoxStates.SelectedIndex == -1)
+            {
+                errorMessage("State is required.");
+            }
+            // check that zip code is entered
+            else if (string.IsNullOrWhiteSpace(txtZIP.Text))
+            {
+                errorMessage("ZIP code is required.");
+            }
+            // checks ZIP code is a number
+            else if (!(int.TryParse(txtZIP.Text, out ZIPInt)))
+            {
+                errorMessage("Invalid ZIP code.");
+            }
+            else if (txtZIP.TextLength < 5)
+            {
+                errorMessage("Zip code must have 5 numbers.");
+            }
             else
             {
                 current.firstName = txtfname.Text;
                 current.lastName = txtlname.Text;
                 current.phoneNum = txtPhoneNum.Text;
-                current.email = txtEmail.Text;
                 current.username = txtUsername.Text;
-
+                current.email = txtEmail.Text;
+                current.address1 = txtAddress1.Text;
+                current.address2 = txtAddress2.Text;
+                current.city = txtCity.Text;
+                current.state = cBoxStates.SelectedItem.ToString();
+                txtStates.Text = current.state;
+                current.zip = ZIPInt;
                 // update user row in database
                 if (current.updateUser(current))
                 {
@@ -192,7 +238,6 @@ namespace Human_Relations.Pages
                     // display success message
                     MessageBox.Show("Account profile updated successfully");
                     lblError.Visible = false;
-
                     //disable labels and boxes
                     btnEdit.Visible = true;
                     btnSubmit.Visible = false;
@@ -201,7 +246,12 @@ namespace Human_Relations.Pages
                     txtlname.Enabled = false;
                     txtEmail.Enabled = false;
                     txtUsername.Enabled = false;
-
+                    txtStates.Visible = true;
+                    cBoxStates.Visible = false;
+                    txtAddress1.Enabled = false;
+                    txtAddress2.Enabled = false;
+                    txtCity.Enabled = false;
+                    txtZIP.Enabled = false;
                 }
                 else
                 {
@@ -211,7 +261,7 @@ namespace Human_Relations.Pages
             }
         }
 
-        private void btnChangeAddress_Click(object sender, EventArgs e)
+        /*private void btnChangeAddress_Click(object sender, EventArgs e)
         {
             int ZIPInt;
             //check that all required fields are there
@@ -261,7 +311,7 @@ namespace Human_Relations.Pages
                     // display success message
                     MessageBox.Show("Account address changed successfully");
                     lblError.Visible = false;
-                    txtAddress.Text = current.address1 + "\r\n" + ((current.address2 != "") ? current.address2 + "\r\n" : "") + current.city + "\r\n" + current.state + "\r\n" + current.zip;
+                    txtStates.Text = current.address1 + "\r\n" + ((current.address2 != "") ? current.address2 + "\r\n" : "") + current.city + "\r\n" + current.state + "\r\n" + current.zip;
 
                     txtAddress1.Clear();
                     txtAddress2.Clear();
@@ -275,7 +325,7 @@ namespace Human_Relations.Pages
                     errorMessage("Unable to verify account. Contact IT");
                 }
             }
-        }
+        }*/
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
@@ -313,14 +363,5 @@ namespace Human_Relations.Pages
             txtNewPassword.Clear();
         }
 
-        private void lblTitle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDescribe_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
