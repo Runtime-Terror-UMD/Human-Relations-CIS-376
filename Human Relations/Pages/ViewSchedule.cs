@@ -68,10 +68,18 @@ namespace Human_Relations.Pages
             try 
             {
                 user = Int32.Parse(txtUserID.Text);
-
-                if (!employee.isAdmin(user))
+                User isActiveCheck = new User(user);
+                if (!employee.userIDExists(user))
                 {
-                    if(endDate.Value > startDate.Value)
+                    errorMessage("User does not exist.");
+                }
+                else if(!isActiveCheck.isActive)
+                {
+                    errorMessage("User is not active in database.");
+                }
+                else if (!employee.isAdmin(user))
+                {
+                    if (endDate.Value > startDate.Value)
                     {
                         // SQL query
                         MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`schedule`(`userID`,`inDateTime`,`outDateTime`)
@@ -119,6 +127,10 @@ namespace Human_Relations.Pages
                     errorMessage("Admin cannot be scheduled.");
                 }
             }
+            catch(FormatException error)
+            {
+                errorMessage("Invalid user ID." + error);
+            }
             catch(Exception error)
             {
                 errorMessage("Exception " + error);
@@ -130,6 +142,7 @@ namespace Human_Relations.Pages
         {
             //inDateTime = startDate;
             //outDateTime = endDate.Value
+
             if (endDate.Value > startDate.Value)
             {
                 int ScheduleID = -1;

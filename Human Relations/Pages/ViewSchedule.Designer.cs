@@ -58,7 +58,7 @@
             this.lblError.ForeColor = System.Drawing.Color.Red;
             this.lblError.Location = new System.Drawing.Point(123, 48);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(300, 50);
+            this.lblError.Size = new System.Drawing.Size(300, 70);
             this.lblError.TabIndex = 15;
             this.lblError.Text = "Error:";
             this.lblError.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -92,7 +92,7 @@
             // 
             // startDate
             // 
-            this.startDate.CustomFormat = "dd MM yyyy HH mm ss";
+            this.startDate.CustomFormat = "MM-dd-yyyy HH:mm";
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDate.Location = new System.Drawing.Point(200, 200);
             this.startDate.Name = "startDate";
@@ -101,7 +101,7 @@
             // 
             // endDate
             // 
-            this.endDate.CustomFormat = "dd MM yyyy HH mm ss";
+            this.endDate.CustomFormat = "MM-dd-yyyy HH:mm";
             this.endDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.endDate.Location = new System.Drawing.Point(200, 250);
             this.endDate.Name = "endDate";
