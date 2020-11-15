@@ -41,6 +41,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSet)).BeginInit();
@@ -167,11 +168,23 @@
             this.lblError.Text = "Error:";
             this.lblError.Visible = false;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(404, 134);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(162, 25);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.Text = "Delete Selected";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // schedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnEdit);
@@ -206,5 +219,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

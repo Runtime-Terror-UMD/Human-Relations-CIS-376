@@ -33,8 +33,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtUserID = new System.Windows.Forms.TextBox();
             this.lblUserID = new System.Windows.Forms.Label();
-            this.startDate = new System.Windows.Forms.DateTimePicker();
-            this.endDate = new System.Windows.Forms.DateTimePicker();
+            this.startDateTime = new System.Windows.Forms.DateTimePicker();
+            this.endDateTime = new System.Windows.Forms.DateTimePicker();
             this.lblStart = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
@@ -80,6 +80,7 @@
             this.txtUserID.Name = "txtUserID";
             this.txtUserID.Size = new System.Drawing.Size(272, 20);
             this.txtUserID.TabIndex = 1;
+            this.txtUserID.TextChanged += new System.EventHandler(this.txtUserID_TextChanged);
             // 
             // lblUserID
             // 
@@ -90,23 +91,26 @@
             this.lblUserID.TabIndex = 20;
             this.lblUserID.Text = "User ID:";
             // 
-            // startDate
+            // startDateTime
             // 
-            this.startDate.CustomFormat = "MM-dd-yyyy HH:mm";
-            this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(200, 200);
-            this.startDate.Name = "startDate";
-            this.startDate.Size = new System.Drawing.Size(272, 20);
-            this.startDate.TabIndex = 2;
+            this.startDateTime.Checked = false;
+            this.startDateTime.CustomFormat = "MM-dd-yyyy HH:mm";
+            this.startDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startDateTime.Location = new System.Drawing.Point(200, 200);
+            this.startDateTime.Name = "startDateTime";
+            this.startDateTime.Size = new System.Drawing.Size(272, 20);
+            this.startDateTime.TabIndex = 2;
+            this.startDateTime.ValueChanged += new System.EventHandler(this.startDateTime_ValueChanged);
             // 
-            // endDate
+            // endDateTime
             // 
-            this.endDate.CustomFormat = "MM-dd-yyyy HH:mm";
-            this.endDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endDate.Location = new System.Drawing.Point(200, 250);
-            this.endDate.Name = "endDate";
-            this.endDate.Size = new System.Drawing.Size(272, 20);
-            this.endDate.TabIndex = 3;
+            this.endDateTime.CustomFormat = "MM-dd-yyyy HH:mm";
+            this.endDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endDateTime.Location = new System.Drawing.Point(200, 250);
+            this.endDateTime.Name = "endDateTime";
+            this.endDateTime.Size = new System.Drawing.Size(272, 20);
+            this.endDateTime.TabIndex = 3;
+            this.endDateTime.ValueChanged += new System.EventHandler(this.endDateTime_ValueChanged);
             // 
             // lblStart
             // 
@@ -157,8 +161,8 @@
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblStart);
-            this.Controls.Add(this.endDate);
-            this.Controls.Add(this.startDate);
+            this.Controls.Add(this.endDateTime);
+            this.Controls.Add(this.startDateTime);
             this.Controls.Add(this.lblUserID);
             this.Controls.Add(this.txtUserID);
             this.Controls.Add(this.btnReturn);
@@ -177,8 +181,8 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox txtUserID;
         private System.Windows.Forms.Label lblUserID;
-        private System.Windows.Forms.DateTimePicker startDate;
-        private System.Windows.Forms.DateTimePicker endDate;
+        private System.Windows.Forms.DateTimePicker startDateTime;
+        private System.Windows.Forms.DateTimePicker endDateTime;
         private System.Windows.Forms.Label lblStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCreate;

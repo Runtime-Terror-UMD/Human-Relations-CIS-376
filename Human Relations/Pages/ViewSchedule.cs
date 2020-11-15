@@ -27,19 +27,14 @@ namespace Human_Relations.Pages
             btnCreate.Visible = false;
             txtUserID.Text = "" + employeeUserID;
             txtUserID.Enabled = false;
-            //pull existing schedule data
             DBConnect getscheduleConnection = new DBConnect();
-            //create command
             MySqlCommand cmd = new MySqlCommand(@"SELECT InDateTime from dbo.schedule where userID = @userID");
             cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = employeeUserID;
             inDateTime = getscheduleConnection.dateTimeScalar(cmd);
-            startDate.Value = inDateTime;
-            //cmd.CommandType = CommandType.Text;
+            startDateTime.Value = inDateTime;
             cmd.CommandText = @"SELECT outDateTime from dbo.schedule where userID = @userID";
-            //MySqlCommand cmd2 = new MySqlCommand("SELECT outDateTime from dbo.schedule where userID = @userID");
-            //cmd2.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = employeeUserID;
             outDateTime = getscheduleConnection.dateTimeScalar(cmd);
-            endDate.Value = outDateTime;
+            endDateTime.Value = outDateTime;
         }
         //used when new schedule is being created
         public ViewSchedule(int user)
@@ -79,15 +74,16 @@ namespace Human_Relations.Pages
                 }
                 else if (!employee.isAdmin(user))
                 {
-                    if (endDate.Value > startDate.Value)
+                    if (endDateTime.Value > startDateTime.Value)
                     {
                         // SQL query
                         MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`schedule`(`userID`,`inDateTime`,`outDateTime`)
                                                         VALUES(@userID,@inDateTime,@outDateTime)");
                         cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
-                        cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
-                        cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
-
+                        cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDateTime.Value;
+                        cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDateTime.Value;
+                        //DateTime d = DateTime.Now;
+                        //d.AddSeconds(0);
                         // connect to database
                         DBConnect scheduleCreationConn = new DBConnect();
 
@@ -97,8 +93,8 @@ namespace Human_Relations.Pages
                             LoggedActivity logging = new LoggedActivity();
                             cmd = new MySqlCommand("SELECT * FROM dbo.schedule WHERE userID = @UserID AND inDateTime = @inDateTime AND outDateTime = @outDateTime");
                             cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
-                            cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
-                            cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                            cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDateTime.Value;
+                            cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDateTime.Value;
                             DBConnect UserProfileConn = new DBConnect();
 
                             //Create a data reader and Execute the command
@@ -140,10 +136,9 @@ namespace Human_Relations.Pages
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            //inDateTime = startDate;
-            //outDateTime = endDate.Value
+            //in
 
-            if (endDate.Value > startDate.Value)
+            if (endDateTime.Value > startDateTime.Value)
             {
                 int ScheduleID = -1;
                 DBConnect updateScheduleConnection = new DBConnect();
@@ -165,8 +160,8 @@ namespace Human_Relations.Pages
                                     outDateTime = @outDateTime
                                     WHERE scheduleID = @scheduleID;";
                 cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
-                cmd.Parameters["@InDateTime"].Value = startDate.Value;
-                cmd.Parameters["@outDateTime"].Value = endDate.Value;
+                cmd.Parameters["@InDateTime"].Value = startDateTime.Value;
+                cmd.Parameters["@outDateTime"].Value = endDateTime.Value;
                 
                 if (updateScheduleConnection.NonQuery(cmd) > 0)
                 {
@@ -185,6 +180,21 @@ namespace Human_Relations.Pages
             {
                 errorMessage("Invalid Date.");
             }
+        }
+
+        private void txtUserID_TextChanged(object sender, EventArgs e)
+        {
+            lblError.Visible = false;
+        }
+
+        private void startDateTime_ValueChanged(object sender, EventArgs e)
+        {
+            lblError.Visible = false;
+        }
+
+        private void endDateTime_ValueChanged(object sender, EventArgs e)
+        {
+            lblError.Visible = false;
         }
     }
 }
