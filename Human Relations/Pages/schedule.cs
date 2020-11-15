@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Human_Relations.Pages;
-
-
+using System.Globalization;
 
 namespace Human_Relations.Pages
 {
@@ -28,11 +27,13 @@ namespace Human_Relations.Pages
             {
                 btnCreate.Visible = true;
                 btnEdit.Visible = true;
+                btnDelete.Visible = true;
             }
             else
             {
                 btnCreate.Visible = false;
                 btnEdit.Visible = false;
+                btnDelete.Visible = false;
             }
         }
 
@@ -106,7 +107,15 @@ DESCRIPTION: pulls all user schedules for specified date
             this.Show();
             search();
         }
-
+        /*private void SetDateTime(DateTime date, String inTime, String outTime)
+        {
+            //string temp = new string(inTime.TakeWhile(c => c != ' ').ToArray());
+            this.inDateTime = date.Date + TimeSpan.Parse(inTime);
+            if (inTime.Substring(inTime.Length - 2) == "PM" && outTime.Substring(outTime.Length - 2) == "AM")
+                date.AddDays(1);
+            //temp = new string(outTime.TakeWhile(c => c != ' ').ToArray());
+            this.outDateTime = date.Date + TimeSpan.Parse(outTime);
+        }*/
         private void btnEdit_Click(object sender, EventArgs e)
         {
             //TODO: get schedule selected and populate view schedule page
@@ -127,14 +136,60 @@ DESCRIPTION: pulls all user schedules for specified date
             }
             else
             {
-
+                //SetDateTime(scheduleDatePicker.Value, scheduleDataGrid.SelectedRows[0].Cells[2].Value.ToString(), scheduleDataGrid.SelectedRows[0].Cells[3].Value.ToString());
                 var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()));
                 updateSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
                 this.Hide();
-                updateSchedule.Show();;
             }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (scheduleDataGrid.Rows.Count == 0)
+            {
+                lblError.Text += " The selected date has no scheduled shifts";
+                lblError.Visible = true;
+            }
+            else if (scheduleDataGrid.SelectedRows.Count == 0)
+            {
+                lblError.Text += " Please select a row";
+                lblError.Visible = true;
+            }
+            else if (scheduleDataGrid.SelectedRows.Count > 1)
+            {
+                lblError.Text += " Please select one row";
+                lblError.Visible = true;
+            }
+            else
+            {
+                int ScheduleID = -1;
+                DBConnect deleteScheduleConnection = new DBConnect();
+                MySqlCommand cmd = new MySqlCommand(@"SELECT * FROM dbo.schedule 
+                                                        WHERE userID = @userID");
+                cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString());
+                MySqlDataReader dataReader = deleteScheduleConnection.ExecuteReader(cmd);
+                while (dataReader.Read())
+                {
+                    ScheduleID = Convert.ToInt32(dataReader["scheduleID"]);
+                }
+                cmd.CommandText = @"DELETE FROM dbo.schedule WHERE scheduleID = @scheduleID";
+                cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
 
+                if (deleteScheduleConnection.NonQuery(cmd) > 0)
+                {
+                    //logging activity "created a new acount
+                    LoggedActivity log = new LoggedActivity();
+                    log.logActivity(18, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()), ScheduleID, DateTime.Now, UserID);
+                    MessageBox.Show("Schedule was Deleted.");
+                    search();
+                }
+                else
+                {
+                    lblError.Text += " Error Deleting schedule";
+                    lblError.Visible = true;
+                }
+
+            }
+        }
     }
 }
