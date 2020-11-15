@@ -19,7 +19,7 @@ namespace Human_Relations.Pages
         DateTime inDateTime;
         DateTime outDateTime;
         //used when an existing schedule is being updated
-        public ViewSchedule(int adminUserID, int employeeUserID)
+        public ViewSchedule(int adminUserID, int employeeUserID, int schedID)
         {
             InitializeComponent();
             this.adminUserID = adminUserID;
@@ -28,17 +28,19 @@ namespace Human_Relations.Pages
             txtUserID.Text = "" + employeeUserID;
             txtUserID.Enabled = false;
             //pull existing schedule data
-            DBConnect getscheduleConnection = new DBConnect();
             //create command
-            MySqlCommand cmd = new MySqlCommand(@"SELECT InDateTime from dbo.schedule where userID = @userID");
-            cmd.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = employeeUserID;
-            inDateTime = getscheduleConnection.dateTimeScalar(cmd);
+            MySqlCommand cmd = new MySqlCommand(@"SELECT * from dbo.schedule where scheduleID = @scheduleID");
+            cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = schedID;
+
+            DBConnect getscheduleConnection = new DBConnect();
+            MySqlDataReader dataReader = getscheduleConnection.ExecuteReader(cmd);
+
+            while (dataReader.Read())
+            {
+                inDateTime = Convert.ToDateTime(dataReader["inDateTime"]);
+                outDateTime = Convert.ToDateTime(dataReader["outDateTime"]);
+            }
             startDate.Value = inDateTime;
-            //cmd.CommandType = CommandType.Text;
-            cmd.CommandText = @"SELECT outDateTime from dbo.schedule where userID = @userID";
-            //MySqlCommand cmd2 = new MySqlCommand("SELECT outDateTime from dbo.schedule where userID = @userID");
-            //cmd2.Parameters.Add("@userID", MySqlDbType.VarChar, 45).Value = employeeUserID;
-            outDateTime = getscheduleConnection.dateTimeScalar(cmd);
             endDate.Value = outDateTime;
         }
         //used when new schedule is being created
@@ -81,40 +83,59 @@ namespace Human_Relations.Pages
                 {
                     if (endDate.Value > startDate.Value)
                     {
-                        // SQL query
-                        MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`schedule`(`userID`,`inDateTime`,`outDateTime`)
-                                                        VALUES(@userID,@inDateTime,@outDateTime)");
-                        cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
-                        cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
-                        cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                        //find schedules for the same date
+                        MySqlCommand dupCheck = new MySqlCommand(@"select count(*)
+                                                                    from dbo.schedule
+                                                                    where userID = @userID
+                                                                    and ((@inDateTime between inDateTime and outDateTime)
+                                                                    or (@outDateTime between inDateTime and outDateTime)
+                                                                    or (inDateTime between @inDateTime and @outDateTime)
+                                                                    or (outDateTime between @inDateTime and @outDateTime))");
+                        dupCheck.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
+                        dupCheck.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
+                        dupCheck.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
 
-                        // connect to database
-                        DBConnect scheduleCreationConn = new DBConnect();
+                        DBConnect duplicateConn = new DBConnect();
 
-                        if (scheduleCreationConn.NonQuery(cmd) > 0)
+                        if (duplicateConn.intScalar(dupCheck) > 0)
+                            errorMessage("Shift overlaps existing shift.");
+                        else
                         {
-                            //logging activity "created a new acount
-                            LoggedActivity logging = new LoggedActivity();
-                            cmd = new MySqlCommand("SELECT * FROM dbo.schedule WHERE userID = @UserID AND inDateTime = @inDateTime AND outDateTime = @outDateTime");
+                            // SQL query
+                            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`schedule`(`userID`,`inDateTime`,`outDateTime`)
+                                                        VALUES(@userID,@inDateTime,@outDateTime)");
                             cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
                             cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
                             cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
-                            DBConnect UserProfileConn = new DBConnect();
 
-                            //Create a data reader and Execute the command
-                            MySqlDataReader dataReader = UserProfileConn.ExecuteReader(cmd);
-                            int schedID = -1;
-                            while (dataReader.Read())
+                            // connect to database
+                            DBConnect scheduleCreationConn = new DBConnect();
+
+                            if (scheduleCreationConn.NonQuery(cmd) > 0)
                             {
-                                schedID = Convert.ToInt32(dataReader["scheduleID"]);
+                                //logging activity "created a new acount
+                                LoggedActivity logging = new LoggedActivity();
+                                cmd = new MySqlCommand("SELECT * FROM dbo.schedule WHERE userID = @UserID AND inDateTime = @inDateTime AND outDateTime = @outDateTime");
+                                cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
+                                cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
+                                cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                                DBConnect UserProfileConn = new DBConnect();
+
+                                //Create a data reader and Execute the command
+                                MySqlDataReader dataReader = UserProfileConn.ExecuteReader(cmd);
+                                int schedID = -1;
+                                while (dataReader.Read())
+                                {
+                                    schedID = Convert.ToInt32(dataReader["scheduleID"]);
+                                }
+                                logging.logActivity(16, user, schedID, DateTime.Now, adminUserID);
+                                MessageBox.Show("Schedule was created.");
+                                this.Close();
                             }
-                            logging.logActivity(16, user, schedID, DateTime.Now, adminUserID);
-                            MessageBox.Show("Schedule was created.");
-                            this.Close();
-                        }
-                        else
-                        {
-                            errorMessage("Error creating schedule.");
+                            else
+                            {
+                                errorMessage("Error creating schedule.");
+                            }
                         }
                     }
                     else
@@ -159,26 +180,47 @@ namespace Human_Relations.Pages
                 {
                     ScheduleID = Convert.ToInt32(dataReader["scheduleID"]);
                 }
-                cmd.CommandText =@"UPDATE dbo.schedule
+                //find schedules for the same date
+                MySqlCommand dupCheck = new MySqlCommand(@"select count(*)
+                                                                    from dbo.schedule
+                                                                    where scheduleID != @sched
+                                                                    and userID = @userID
+                                                                    and ((@inDateTime between inDateTime and outDateTime)
+                                                                    or (@outDateTime between inDateTime and outDateTime)
+                                                                    or (inDateTime between @inDateTime and @outDateTime)
+                                                                    or (outDateTime between @inDateTime and @outDateTime))");
+                dupCheck.Parameters.Add("@userID", MySqlDbType.Int32).Value = employeeUserID;
+                dupCheck.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
+                dupCheck.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                dupCheck.Parameters.Add("@sched", MySqlDbType.Int32).Value = ScheduleID;
+
+                DBConnect duplicateConn = new DBConnect();
+
+                if (duplicateConn.intScalar(dupCheck) > 0)
+                    errorMessage("Shift overlaps existing shift.");
+                else
+                {
+                    cmd.CommandText = @"UPDATE dbo.schedule
                                     SET
                                     InDateTime = @InDateTime,
                                     outDateTime = @outDateTime
                                     WHERE scheduleID = @scheduleID;";
-                cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
-                cmd.Parameters["@InDateTime"].Value = startDate.Value;
-                cmd.Parameters["@outDateTime"].Value = endDate.Value;
-                
-                if (updateScheduleConnection.NonQuery(cmd) > 0)
-                {
-                    //logging activity "created a new acount
-                    LoggedActivity log = new LoggedActivity();
-                    log.logActivity(17, employeeUserID, ScheduleID, DateTime.Now, adminUserID);
-                    MessageBox.Show("Schedule was updated.");
-                    this.Close();
-                }
-                else
-                {
-                    errorMessage("Error updating schedule.");
+                    cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
+                    cmd.Parameters["@InDateTime"].Value = startDate.Value;
+                    cmd.Parameters["@outDateTime"].Value = endDate.Value;
+
+                    if (updateScheduleConnection.NonQuery(cmd) > 0)
+                    {
+                        //logging activity "created a new acount
+                        LoggedActivity log = new LoggedActivity();
+                        log.logActivity(17, employeeUserID, ScheduleID, DateTime.Now, adminUserID);
+                        MessageBox.Show("Schedule was updated.");
+                        this.Close();
+                    }
+                    else
+                    {
+                        errorMessage("Error updating schedule.");
+                    }
                 }
             }
             else

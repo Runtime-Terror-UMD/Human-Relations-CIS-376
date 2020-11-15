@@ -53,6 +53,7 @@ namespace Human_Relations.Pages
                 // SQL query
                 cmd.CommandText = @"SELECT   
                                     u.userID as 'User ID',
+                                    s.scheduleID as 'Schedule ID',
                                     concat(u.firstName, ' ', u.lastName) as 'Name',
                                     TIME_FORMAT(s.indateTime, '%r') as 'Start Time', 
                                     TIME_FORMAT(s.outDateTime, '%r') as 'End Time'
@@ -128,7 +129,7 @@ DESCRIPTION: pulls all user schedules for specified date
             else
             {
 
-                var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()));
+                var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()), Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[1].Value.ToString()));
                 updateSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
                 this.Hide();
                 updateSchedule.Show();;
