@@ -42,6 +42,7 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnPersonal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSet)).BeginInit();
@@ -84,9 +85,9 @@
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(297, 138);
+            this.btnSearch.Location = new System.Drawing.Point(282, 137);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(75, 22);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -137,7 +138,7 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(572, 134);
+            this.btnEdit.Location = new System.Drawing.Point(225, 95);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(162, 25);
             this.btnEdit.TabIndex = 13;
@@ -168,6 +169,17 @@
             this.lblError.Text = "Error:";
             this.lblError.Visible = false;
             // 
+            // btnPersonal
+            // 
+            this.btnPersonal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPersonal.Location = new System.Drawing.Point(558, 138);
+            this.btnPersonal.Name = "btnPersonal";
+            this.btnPersonal.Size = new System.Drawing.Size(176, 25);
+            this.btnPersonal.TabIndex = 16;
+            this.btnPersonal.Text = "View my upcoming shifts";
+            this.btnPersonal.UseVisualStyleBackColor = true;
+            this.btnPersonal.Click += new System.EventHandler(this.btnPersonal_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -184,6 +196,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnPersonal);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnLogout);
@@ -220,5 +233,6 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnPersonal;
     }
 }

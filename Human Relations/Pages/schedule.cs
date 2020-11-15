@@ -54,6 +54,7 @@ namespace Human_Relations.Pages
                 // SQL query
                 cmd.CommandText = @"SELECT   
                                     u.userID as 'User ID',
+                                    s.scheduleID as 'Schedule ID',
                                     concat(u.firstName, ' ', u.lastName) as 'Name',
                                     TIME_FORMAT(s.indateTime, '%r') as 'Start Time', 
                                     TIME_FORMAT(s.outDateTime, '%r') as 'End Time'
@@ -136,8 +137,8 @@ DESCRIPTION: pulls all user schedules for specified date
             }
             else
             {
-                //SetDateTime(scheduleDatePicker.Value, scheduleDataGrid.SelectedRows[0].Cells[2].Value.ToString(), scheduleDataGrid.SelectedRows[0].Cells[3].Value.ToString());
-                var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()));
+
+                var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()), Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[1].Value.ToString()));
                 updateSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
                 this.Hide();
             }
@@ -175,20 +176,35 @@ DESCRIPTION: pulls all user schedules for specified date
                 cmd.CommandText = @"DELETE FROM dbo.schedule WHERE scheduleID = @scheduleID";
                 cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
 
-                if (deleteScheduleConnection.NonQuery(cmd) > 0)
-                {
-                    //logging activity "created a new acount
-                    LoggedActivity log = new LoggedActivity();
-                    log.logActivity(18, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()), ScheduleID, DateTime.Now, UserID);
-                    MessageBox.Show("Schedule was Deleted.");
-                    search();
-                }
-                else
-                {
-                    lblError.Text += " Error Deleting schedule";
-                    lblError.Visible = true;
-                }
+        private void btnPersonal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
 
+                // SQL query
+                cmd.CommandText = @"SELECT   
+                                    u.userID as 'User ID',
+                                    concat(u.firstName, ' ', u.lastName) as 'Name',
+                                    s.indateTime as 'Start Time', 
+                                    s.outDateTime as 'End Time'
+                                    from dbo.schedule s
+                                    join dbo.user u
+	                                    on u.userID = s.userID
+                                    WHERE s.userID = @userID
+                                    AND DATE(s.inDateTime) >= @currentDate";
+                cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = UserID;
+                cmd.Parameters.Add("@currentDate", MySqlDbType.DateTime).Value = DateTime.Today;
+
+                // fills data grid
+                scheduleData = scheduleConn.ExecuteDataTable(cmd);
+                scheduleBindingSource.DataSource = scheduleData;
+                scheduleDataGrid.DataSource = scheduleBindingSource;
+                scheduleDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
             }
         }
     }
