@@ -40,8 +40,8 @@ namespace Human_Relations.Pages
                 inDateTime = Convert.ToDateTime(dataReader["inDateTime"]);
                 outDateTime = Convert.ToDateTime(dataReader["outDateTime"]);
             }
-            startDate.Value = inDateTime;
-            endDate.Value = outDateTime;
+            startDateTime.Value = inDateTime;
+            endDateTime.Value = outDateTime;
         }
         //used when new schedule is being created
         public ViewSchedule(int user)
@@ -92,8 +92,8 @@ namespace Human_Relations.Pages
                                                                     or (inDateTime between @inDateTime and @outDateTime)
                                                                     or (outDateTime between @inDateTime and @outDateTime))");
                         dupCheck.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
-                        dupCheck.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
-                        dupCheck.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                        dupCheck.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDateTime.Value;
+                        dupCheck.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDateTime.Value;
 
                         DBConnect duplicateConn = new DBConnect();
 
@@ -105,8 +105,8 @@ namespace Human_Relations.Pages
                             MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `dbo`.`schedule`(`userID`,`inDateTime`,`outDateTime`)
                                                         VALUES(@userID,@inDateTime,@outDateTime)");
                             cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
-                            cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
-                            cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                            cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDateTime.Value;
+                            cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDateTime.Value;
 
                             // connect to database
                             DBConnect scheduleCreationConn = new DBConnect();
@@ -117,8 +117,8 @@ namespace Human_Relations.Pages
                                 LoggedActivity logging = new LoggedActivity();
                                 cmd = new MySqlCommand("SELECT * FROM dbo.schedule WHERE userID = @UserID AND inDateTime = @inDateTime AND outDateTime = @outDateTime");
                                 cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = user;
-                                cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
-                                cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                                cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDateTime.Value;
+                                cmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDateTime.Value;
                                 DBConnect UserProfileConn = new DBConnect();
 
                                 //Create a data reader and Execute the command
@@ -189,8 +189,8 @@ namespace Human_Relations.Pages
                                                                     or (inDateTime between @inDateTime and @outDateTime)
                                                                     or (outDateTime between @inDateTime and @outDateTime))");
                 dupCheck.Parameters.Add("@userID", MySqlDbType.Int32).Value = employeeUserID;
-                dupCheck.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDate.Value;
-                dupCheck.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDate.Value;
+                dupCheck.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = startDateTime.Value;
+                dupCheck.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = endDateTime.Value;
                 dupCheck.Parameters.Add("@sched", MySqlDbType.Int32).Value = ScheduleID;
 
                 DBConnect duplicateConn = new DBConnect();
@@ -205,8 +205,8 @@ namespace Human_Relations.Pages
                                     outDateTime = @outDateTime
                                     WHERE scheduleID = @scheduleID;";
                     cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
-                    cmd.Parameters["@InDateTime"].Value = startDate.Value;
-                    cmd.Parameters["@outDateTime"].Value = endDate.Value;
+                    cmd.Parameters["@InDateTime"].Value = startDateTime.Value;
+                    cmd.Parameters["@outDateTime"].Value = endDateTime.Value;
 
                     if (updateScheduleConnection.NonQuery(cmd) > 0)
                     {

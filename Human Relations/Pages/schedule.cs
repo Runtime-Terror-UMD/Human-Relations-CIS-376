@@ -175,6 +175,8 @@ DESCRIPTION: pulls all user schedules for specified date
                 }
                 cmd.CommandText = @"DELETE FROM dbo.schedule WHERE scheduleID = @scheduleID";
                 cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
+            }
+        }
 
         private void btnPersonal_Click(object sender, EventArgs e)
         {

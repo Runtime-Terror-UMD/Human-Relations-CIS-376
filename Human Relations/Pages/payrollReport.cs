@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -69,6 +70,29 @@ namespace Human_Relations.Pages
             txtName.Text = userinfo.firstName + " " + userinfo.lastName;
             txtHoursWorked.Text = String.Format("{0:F1}", hoursWorked);
             txtAmtMade.Text = (amountEarned.ToString("C", CultureInfo.CurrentCulture));
+
+            //view personal attendance
+            DBConnect connection = new DBConnect();
+            DataTable attendance = new DataTable();
+            BindingSource bindingSource = new BindingSource();
+            MySqlCommand cmd = new MySqlCommand();
+
+            // SQL query
+            cmd.CommandText = @"SELECT 
+                                DATE(inDateTime) AS 'In Date',
+                                TIME(inDateTime) AS 'In Time',
+                                DATE(outDateTime) AS 'Out Date',
+                                TIME(outDateTime) AS 'Out Time'
+                                FROM dbo.timetracking
+                                WHERE userID = @userID
+                                AND payPeriodID = @payPeriodID";
+            cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.userinfo.userID;
+            cmd.Parameters.Add("@payperiodID", MySqlDbType.Int32).Value = Int32.Parse(cBoxPayPeriodID.SelectedIndex.ToString()) + 1;
+            attendance = connection.ExecuteDataTable(cmd);
+            bindingSource.DataSource = attendance;
+            personalAttendanceDataGrid.DataSource = bindingSource;
+            personalAttendanceDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
         }
     }
 }
