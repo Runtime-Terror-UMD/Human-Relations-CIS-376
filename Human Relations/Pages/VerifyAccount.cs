@@ -146,7 +146,7 @@ namespace Human_Relations.Pages
                             lblError.ForeColor = Color.Green;
                             lblError.Text = "Account verified successfully";
                             lblError.Visible = true;
-
+                            this.Close();
                         }
                         else
                         {
@@ -162,8 +162,8 @@ namespace Human_Relations.Pages
                 }
             }
 
-            }
-          
         }
+          
     }
+}
 
