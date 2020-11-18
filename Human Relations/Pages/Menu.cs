@@ -18,6 +18,7 @@ namespace Human_Relations
         public int UserID;
         Login loginWind;
         Timer t = new Timer();
+        private Utilities utilityObject = new Utilities();
         
         public Menu(Login loginInstance, DateTime current)
         {
@@ -37,13 +38,12 @@ namespace Human_Relations
             t.Start();
             UserID = userID;
 
-            //if (isAdmin == false)
-            //{
+            if (isAdmin == false)
+            {
+                btnManageEmp.Hide();
+            }
 
-            //}
-
-            Utilities checkStatus = new Utilities();
-            if(checkStatus.isClockedIn(UserID))
+            if(utilityObject.isClockedIn(UserID))
             {
                 Clock_in.Hide(); //hide clock in button
                 clock_out.Show();
@@ -70,19 +70,6 @@ namespace Human_Relations
         }
 
         private void history_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Show();
-        }
-
-        private void btnNewEmployee_Click(object sender, EventArgs e)
-        {
-            var hire = new NewAccount(UserID);
-            hire.FormClosed += new FormClosedEventHandler(NewAccount_FormClosed);
-            this.Hide();
-            hire.Show();
-        }
-
-        private void NewAccount_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }
@@ -260,5 +247,36 @@ namespace Human_Relations
             this.Show();
         }
 
+// DESCRIPTION: Opens different leave management page depending on isAdmin
+        private void btnLeaveMgmt_Click(object sender, EventArgs e)
+        {
+            // if non-admin, redirect to employee leave management page
+            if(!utilityObject.isAdmin(UserID))
+            {
+                var empLeavePage = new employeeLeave(UserID);
+                empLeavePage.FormClosed += new FormClosedEventHandler(employeeLeave_FormClosed);
+                this.Hide();
+                empLeavePage.Show();
+            }
+            else
+            // if admin, redirect to admin leave management page
+            {
+                var adminLeavePage = new adminLeave();
+                adminLeavePage.FormClosed += new FormClosedEventHandler(adminLeave_FormClosed);
+                this.Hide();
+                adminLeavePage.Show();
+            }    
+
+        }
+// DESCRIPTION: Returns to menu when employee "Leave Managementl" page is closed
+        private void employeeLeave_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+// DESCRIPTION: Returns to menu when admin "Leave Managementl" page is closed
+        private void adminLeave_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
     }
 }
