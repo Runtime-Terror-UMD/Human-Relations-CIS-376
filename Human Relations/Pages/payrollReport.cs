@@ -85,7 +85,8 @@ namespace Human_Relations.Pages
                                 TIME(outDateTime) AS 'Out Time'
                                 FROM dbo.timetracking
                                 WHERE userID = @userID
-                                AND payPeriodID = @payPeriodID";
+                                AND payPeriodID = @payPeriodID
+                                order by outDateTime desc";
             cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.userinfo.userID;
             cmd.Parameters.Add("@payperiodID", MySqlDbType.Int32).Value = Int32.Parse(cBoxPayPeriodID.SelectedIndex.ToString()) + 1;
             attendance = connection.ExecuteDataTable(cmd);
