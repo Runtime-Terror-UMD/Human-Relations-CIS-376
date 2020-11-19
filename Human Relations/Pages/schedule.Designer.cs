@@ -160,13 +160,13 @@
             // 
             // lblError
             // 
-            this.lblError.AutoSize = true;
             this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(297, 74);
+            this.lblError.Location = new System.Drawing.Point(200, 70);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(32, 13);
+            this.lblError.Size = new System.Drawing.Size(400, 20);
             this.lblError.TabIndex = 15;
             this.lblError.Text = "Error:";
+            this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblError.Visible = false;
             // 
             // btnDelete
@@ -214,7 +214,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dboDataSet)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

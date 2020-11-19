@@ -209,6 +209,7 @@
             this.btnReport.TabIndex = 16;
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // Menu
             // 

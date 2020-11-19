@@ -181,6 +181,9 @@
     <EmbeddedResource Include="Pages\ReportsList.dje.resx">
       <DependentUpon>ReportsList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ReportsList.en.resx">
+      <DependentUpon>ReportsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ReportsList.resx">
       <DependentUpon>ReportsList.cs</DependentUpon>
     </EmbeddedResource>
