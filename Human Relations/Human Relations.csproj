@@ -95,6 +95,12 @@
     <Compile Include="Pages\payrollReport.Designer.cs">
       <DependentUpon>payrollReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ReportsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ReportsList.Designer.cs">
+      <DependentUpon>ReportsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ViewSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\payrollReport.resx">
       <DependentUpon>payrollReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ReportsList.dje.resx">
+      <DependentUpon>ReportsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ReportsList.resx">
+      <DependentUpon>ReportsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\ViewSchedule.resx">
       <DependentUpon>ViewSchedule.cs</DependentUpon>

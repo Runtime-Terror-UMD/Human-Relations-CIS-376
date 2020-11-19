@@ -10,22 +10,23 @@ using System.Windows.Forms;
 
 namespace Human_Relations.Pages
 {
-    public partial class adminLeave : Form
+    public partial class ReportsList : Form
     {
-        public adminLeave()
+        int userID;
+        public ReportsList()
         {
             InitializeComponent();
         }
-
-        private void btnLogOut_Click(object sender, EventArgs e)
+        public ReportsList(int user)
         {
-            this.Close();
-            Application.OpenForms["Menu"].Close();
+            userID = user;
+            InitializeComponent();
         }
 
-        private void btnReturn_Click(object sender, EventArgs e)
+        public void errorMessage(string error)
         {
-            this.Close();
+            lblError.Text = "Error: " + error;
+            lblError.Visible = true;
         }
     }
 }
