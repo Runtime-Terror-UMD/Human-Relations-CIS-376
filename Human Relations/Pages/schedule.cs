@@ -209,5 +209,6 @@ DESCRIPTION: pulls all user schedules for specified date
                 MessageBox.Show(err.ToString());
             }
         }
+
     }
 }

@@ -41,6 +41,7 @@ namespace Human_Relations
             if (isAdmin == false)
             {
                 btnManageEmp.Hide();
+                btnReport.Hide();
             }
 
             if(utilityObject.isClockedIn(UserID))
@@ -275,6 +276,20 @@ namespace Human_Relations
         }
 // DESCRIPTION: Returns to menu when admin "Leave Managementl" page is closed
         private void adminLeave_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        //description: Shows report page to admins
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            var viewReports = new ReportsList(UserID);
+            viewReports.FormClosed += new FormClosedEventHandler(reportsList_formClosed);
+            this.Hide();
+            viewReports.Show();
+        }
+
+        private void reportsList_formClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }
