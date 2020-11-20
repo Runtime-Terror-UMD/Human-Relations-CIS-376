@@ -4,10 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Human_Relations.Pages;
+using System.Globalization;
 
 namespace Human_Relations.Pages
 {
@@ -49,46 +53,9 @@ namespace Human_Relations.Pages
                 try
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"select userID as 'User ID', concat(firstName, ' ', lastName) as 'Name', from dbo.user where roleID = @roleID";
-                    cmd.Parameters.Add("@roleID", MySqlDbType.Int32, 45).Value = cboxRole.SelectedValue;
+                    cmd.CommandText = @"SELECT u.userID as 'User ID', concat(u.firstName, ' ', u.lastName) as 'Name', d.depName as 'Department', u.isAdmin as 'is Admin?', u.isActive as 'isActive?', u.payRate as 'Pay Rate' FROM dbo.user u join dbo.department d on u.depID = d. depID WHERE roleID = @roleID";
+                    cmd.Parameters.Add("@roleID", MySqlDbType.Int32).Value = cboxRole.SelectedValue;
 
-                    //set role id type
-                    switch (cboxRole.SelectedIndex)
-                    {
-                        case 0:
-                            cmd.Parameters["@roleID"].Value = 1;
-                            break;
-                        case 1:
-                            cmd.Parameters["@roleID"].Value = 2;
-                            break;
-                        case 2:
-                            cmd.Parameters["@roleID"].Value = 3;
-                            break;
-                        case 3:
-                            cmd.Parameters["@roleID"].Value = 4;
-                            break;
-                        case 4:
-                            cmd.Parameters["@roleID"].Value = 5;
-                            break;
-                        case 5:
-                            cmd.Parameters["@roleID"].Value = 6;
-                            break;
-                        case 6:
-                            cmd.Parameters["@roleID"].Value = 7;
-                            break;
-                        case 7:
-                            cmd.Parameters["@roleID"].Value = 8;
-                            break;
-                        case 8:
-                            cmd.Parameters["@roleID"].Value = 9;
-                            break;
-                        case 9:
-                            cmd.Parameters["@roleID"].Value = 10;
-                            break;
-                        case 10:
-                            cmd.Parameters["@roleID"].Value = 11;
-                            break;
-                    }
                     reportData = reportConn.ExecuteDataTable(cmd);
                     reportBindingSource.DataSource = reportData;
                     reportDataGrid.DataSource = reportBindingSource;
@@ -114,47 +81,11 @@ namespace Human_Relations.Pages
             {
                 try
                 {
-                    MySqlCommand cmd = new MySqlCommand(@"select userID as 'User ID', concat(firstName, ' ', lastName) as 'Name', from dbo.user where depID = @depID");
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = @"SELECT u.userID as 'User ID', concat(u.firstName, ' ', u.lastName) as 'Name', r.roleName as 'Role', u.isAdmin as 'is Admin?', u.isActive as 'isActive?', u.payRate as 'Pay Rate' FROM dbo.user u join dbo.role r on u.roleID = r.roleID WHERE depID = @depID";
 
                     cmd.Parameters.Add("@depID", MySqlDbType.Int32).Value = cboxDepartment.SelectedValue;
 
-
-                    //switch (cboxDepartment.SelectedIndex)
-                    //{
-                    //    case 0:
-                    //        cmd.Parameters["@depID"].Value = 1;
-                    //        break;
-                    //    case 1:
-                    //        cmd.Parameters["@depID"].Value = 2;
-                    //        break;
-                    //    case 2:
-                    //        cmd.Parameters["@depID"].Value = 3;
-                    //        break;
-                    //    case 3:
-                    //        cmd.Parameters["@depID"].Value = 4;
-                    //        break;
-                    //    case 4:
-                    //        cmd.Parameters["@depID"].Value = 5;
-                    //        break;
-                    //    case 5:
-                    //        cmd.Parameters["@depID"].Value = 6;
-                    //        break;
-                    //    case 6:
-                    //        cmd.Parameters["@depID"].Value = 7;
-                    //        break;
-                    //    case 7:
-                    //        cmd.Parameters["@depID"].Value = 8;
-                    //        break;
-                    //    case 8:
-                    //        cmd.Parameters["@depID"].Value = 9;
-                    //        break;
-                    //    case 9:
-                    //        cmd.Parameters["@depID"].Value = 10;
-                    //        break;
-                    //    case 10:
-                    //        cmd.Parameters["@depID"].Value = 11;
-                    //        break;
-                    //}
                     reportData = reportConn.ExecuteDataTable(cmd);
                     reportBindingSource.DataSource = reportData;
                     reportDataGrid.DataSource = reportBindingSource;
@@ -174,6 +105,17 @@ namespace Human_Relations.Pages
             }
 
 
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.OpenForms["Menu"].Close();
         }
     }
 }
