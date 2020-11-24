@@ -19,7 +19,11 @@ namespace Human_Relations
         Login loginWind;
         Timer t = new Timer();
         private Utilities utilityObject = new Utilities();
-        
+        private timetracking clockInOut = new timetracking();
+        private notifications pullNotifications = new notifications();
+        private DataTable notificationData = new DataTable();
+        BindingSource notificationBindingSource = new BindingSource();
+
         public Menu(Login loginInstance, DateTime current)
         {
             InitializeComponent();
@@ -38,12 +42,15 @@ namespace Human_Relations
             t.Start();
             UserID = userID;
 
+            // displays notifications based on admin status
+            displayNotifications(isAdmin);
+
             if (isAdmin == false)
             {
+                // hides non-admin buttons
                 btnManageEmp.Hide();
                 btnReport.Hide();
             }
-
             if(utilityObject.isClockedIn(UserID))
             {
                 Clock_in.Hide(); //hide clock in button
@@ -57,6 +64,23 @@ namespace Human_Relations
             }
         }
 
+        // DESCRIPTION: Displays notifications depending on admin/non-admin role
+        private void displayNotifications(bool isAdmin)
+        {
+            if(isAdmin)
+            {
+                notificationData = pullNotifications.getAdminNotifications();
+               
+            }
+            else
+            {
+                notificationData = pullNotifications.getEmployeeNotifications();
+
+            }
+            notificationBindingSource.DataSource = notificationData;
+            notificationDataGrid.DataSource = notificationBindingSource;
+            notificationDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -117,11 +141,7 @@ namespace Human_Relations
         {
             this.Show();
         }
-        
-        private void Clock1_Click(object sender, EventArgs e)
-        {
-           
-        }
+
         private void T_Tick(object sender, EventArgs e)
         {
             string time = "";
@@ -159,30 +179,14 @@ namespace Human_Relations
 
         }
 
+        // DESCRIPTION: Clocks user out
         private void ClockOut_Click(object sender, EventArgs e)
         {
-            // connect to database
-            DBConnect clockOutConn = new DBConnect();
-            
-            // get logID of shift to pass to payroll calculation
-            MySqlCommand getLogIDCmd = new MySqlCommand(@"SELECT logID 
-                                                        FROM dbo.timetracking
-                                                        WHERE userID = @userID
-                                                        and shifton = 1;");
-            getLogIDCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
-            int logID = clockOutConn.intScalar(getLogIDCmd);
+            // clocks user out from timetracking object
+           int logID = clockInOut.clockOut(this.UserID);
 
-            // clock user out
-            MySqlCommand clockOutCmd = new MySqlCommand(@"UPDATE dbo.timetracking
-                                                        SET outDateTime = @outDateTime,
-                                                            shifton = 0
-                                                        WHERE userID = @userID
-                                                        AND shifton = 1; ");
-            clockOutCmd.Parameters.Add("@outDateTime", MySqlDbType.DateTime).Value = DateTime.Now;
-            clockOutCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
-
-            // execute statement
-            if (clockOutConn.NonQuery(clockOutCmd) > 0)
+            // if clock-out succeeded
+           if(logID != -1)
             {
                 Clock_in.Visible = true;
                 clock_out.Visible = false;
@@ -198,34 +202,21 @@ namespace Human_Relations
             }
         }
 
+        // DESCRIPTION: Clocks user in
         private void Clockin_Click(object sender, EventArgs e)
         {
-            int month = DateTime.Now.Month;
-            int day = DateTime.Now.Day;
-
-            payroll getPayPeriodID = new payroll();
-            int payPeriodID = getPayPeriodID.getPayPeriod(month, day);
-
-            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO dbo.timetracking(userID,payPeriodID,inDateTime,shifton)VALUES(@userID,@payPeriodID,@inDateTime,@shifton)");
-            cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = this.UserID;
-            cmd.Parameters.Add("@payPeriodID", MySqlDbType.Int32).Value = payPeriodID;
-            cmd.Parameters.Add("@inDateTime", MySqlDbType.DateTime).Value = DateTime.Now;
-            cmd.Parameters.Add("@shifton", MySqlDbType.Bit).Value = 1;
-            DBConnect clockInConn = new DBConnect();
-
-            // execute statement
-            if (clockInConn.NonQuery(cmd) > 0)
+            // clocks user in using timetracking object
+            if(clockInOut.clockIn(this.UserID))
             {
+
                 Clock_in.Visible = false;
                 clock_out.Visible = true;
-
             }
             else
             {
                 displayError("Error Clocking In");
 
             }
-            
         }
         private void displayError(string errorMessage)
         {
@@ -294,4 +285,5 @@ namespace Human_Relations
             this.Show();
         }
     }
+
 }

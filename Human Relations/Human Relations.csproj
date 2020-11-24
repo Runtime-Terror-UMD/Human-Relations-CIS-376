@@ -93,6 +93,12 @@
     <Compile Include="Pages\employeeLeave.Designer.cs">
       <DependentUpon>employeeLeave.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Notifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Notifications.Designer.cs">
+      <DependentUpon>Notifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\payrollReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,7 +176,9 @@
     <Compile Include="Utilities Classes\DBConnect.cs" />
     <Compile Include="Utilities Classes\leavemgmtclass.cs" />
     <Compile Include="Utilities Classes\LoggedActivity.cs" />
+    <Compile Include="Utilities Classes\notifications.cs" />
     <Compile Include="Utilities Classes\payroll.cs" />
+    <Compile Include="Utilities Classes\timetracking.cs" />
     <Compile Include="Utilities Classes\User.cs" />
     <Compile Include="Utilities Classes\Utilities.cs" />
     <EmbeddedResource Include="Pages\adminLeave.resx">
@@ -178,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\employeeLeave.resx">
       <DependentUpon>employeeLeave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Notifications.resx">
+      <DependentUpon>Notifications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\payrollReport.resx">
       <DependentUpon>payrollReport.cs</DependentUpon>
