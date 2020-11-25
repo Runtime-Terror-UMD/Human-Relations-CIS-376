@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Human_Relations;
 using MySql.Data.MySqlClient;
 
@@ -17,8 +18,8 @@ using MySql.Data.MySqlClient;
             DBConnect reqLeaveConn = new DBConnect();
             MySqlCommand reqLeaveCmd = new MySqlCommand(@"INSERT INTO dbo.leavemgmt
                                                             (userID,
-                                                            dateTimeStart,
-                                                            dateTimeEnd,
+                                                            dateStart,
+                                                            dateEnd,
                                                             approvalStatus,
                                                             created)
                                                             VALUES
@@ -28,8 +29,8 @@ using MySql.Data.MySqlClient;
                                                             @approvalStatus,
                                                             @created);");
             reqLeaveCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
-            reqLeaveCmd.Parameters.Add("@dateTimeStart", MySqlDbType.DateTime).Value = startDateTime;
-            reqLeaveCmd.Parameters.Add("@dateTimeEnd", MySqlDbType.DateTime).Value = endDateTime;
+            reqLeaveCmd.Parameters.Add("@dateTimeStart", MySqlDbType.Date).Value = startDateTime.Date;
+            reqLeaveCmd.Parameters.Add("@dateTimeEnd", MySqlDbType.Date).Value = endDateTime.Date;
             reqLeaveCmd.Parameters.Add("approvalStatus", MySqlDbType.VarChar).Value = "Pending";
             reqLeaveCmd.Parameters.Add("@created", MySqlDbType.DateTime).Value = DateTime.Now;
             if (reqLeaveConn.NonQuery(reqLeaveCmd) > 0)
@@ -53,4 +54,30 @@ using MySql.Data.MySqlClient;
             }
         return false;
         }
+
+        public DataTable employeeLeaveHistory(int userID)
+    {
+        DBConnect leaveReportConn = new DBConnect();
+        MySqlCommand leaveReportCmd = new MySqlCommand(@"SELECT
+                                        DATE(dateStart) AS 'Start Date',
+                                        DATE(dateEnd) AS 'End Date',
+                                        approvalStatus AS 'Approval Status'
+                                        FROM leavemgmt
+                                        WHERE userID = @userID
+                                        ORDER BY created desc");
+        leaveReportCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
+        DataTable reportData = leaveReportConn.ExecuteDataTable(leaveReportCmd);
+        return reportData;
+    }
+
+    public double getAccruedPTO(int userID)
+    {
+        DBConnect getPTOConn = new DBConnect();
+        MySqlCommand getPTOCmd = new MySqlCommand(@"SELECT ptoTime
+                                                        FROM dbo.user
+                                                        where userID = @userID");
+        getPTOCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
+        double ptoHours = getPTOConn.doubleScalar(getPTOCmd);
+        return ptoHours;
+    }
     }

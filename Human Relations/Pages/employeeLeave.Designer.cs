@@ -49,9 +49,10 @@
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(10, 21);
+            this.btnReturn.Location = new System.Drawing.Point(15, 32);
+            this.btnReturn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(75, 25);
+            this.btnReturn.Size = new System.Drawing.Size(112, 38);
             this.btnReturn.TabIndex = 9;
             this.btnReturn.Text = "Return";
             this.btnReturn.UseVisualStyleBackColor = true;
@@ -60,9 +61,10 @@
             // lblDescribe
             // 
             this.lblDescribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescribe.Location = new System.Drawing.Point(198, 69);
+            this.lblDescribe.Location = new System.Drawing.Point(297, 106);
+            this.lblDescribe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDescribe.Name = "lblDescribe";
-            this.lblDescribe.Size = new System.Drawing.Size(400, 20);
+            this.lblDescribe.Size = new System.Drawing.Size(600, 31);
             this.lblDescribe.TabIndex = 7;
             this.lblDescribe.Text = "Manage your leave requests";
             this.lblDescribe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -70,18 +72,20 @@
             // lblTitle
             // 
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(198, 24);
+            this.lblTitle.Location = new System.Drawing.Point(297, 37);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(400, 40);
+            this.lblTitle.Size = new System.Drawing.Size(600, 62);
             this.lblTitle.TabIndex = 8;
             this.lblTitle.Text = "Human Resources";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnLogOut
             // 
-            this.btnLogOut.Location = new System.Drawing.Point(695, 21);
+            this.btnLogOut.Location = new System.Drawing.Point(1042, 32);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(75, 25);
+            this.btnLogOut.Size = new System.Drawing.Size(112, 38);
             this.btnLogOut.TabIndex = 10;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
@@ -91,10 +95,9 @@
             // 
             this.lblPTOTitle.AutoSize = true;
             this.lblPTOTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPTOTitle.Location = new System.Drawing.Point(27, 115);
-            this.lblPTOTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPTOTitle.Location = new System.Drawing.Point(40, 177);
             this.lblPTOTitle.Name = "lblPTOTitle";
-            this.lblPTOTitle.Size = new System.Drawing.Size(158, 20);
+            this.lblPTOTitle.Size = new System.Drawing.Size(244, 29);
             this.lblPTOTitle.TabIndex = 12;
             this.lblPTOTitle.Text = "Available PTO Hours:";
             // 
@@ -103,22 +106,22 @@
             this.ptoDataGrid.AllowUserToAddRows = false;
             this.ptoDataGrid.AllowUserToDeleteRows = false;
             this.ptoDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ptoDataGrid.Location = new System.Drawing.Point(30, 187);
+            this.ptoDataGrid.Location = new System.Drawing.Point(45, 288);
+            this.ptoDataGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ptoDataGrid.Name = "ptoDataGrid";
             this.ptoDataGrid.ReadOnly = true;
             this.ptoDataGrid.RowHeadersWidth = 62;
-            this.ptoDataGrid.Size = new System.Drawing.Size(441, 313);
+            this.ptoDataGrid.Size = new System.Drawing.Size(662, 482);
             this.ptoDataGrid.TabIndex = 19;
             // 
             // txtPtoHours
             // 
             this.txtPtoHours.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtPtoHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPtoHours.Location = new System.Drawing.Point(193, 115);
-            this.txtPtoHours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPtoHours.Location = new System.Drawing.Point(290, 177);
             this.txtPtoHours.Name = "txtPtoHours";
             this.txtPtoHours.ReadOnly = true;
-            this.txtPtoHours.Size = new System.Drawing.Size(68, 26);
+            this.txtPtoHours.Size = new System.Drawing.Size(100, 35);
             this.txtPtoHours.TabIndex = 20;
             // 
             // gBoxMakeRequest
@@ -129,11 +132,9 @@
             this.gBoxMakeRequest.Controls.Add(this.endDateTime);
             this.gBoxMakeRequest.Controls.Add(this.startDateTime);
             this.gBoxMakeRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gBoxMakeRequest.Location = new System.Drawing.Point(476, 164);
-            this.gBoxMakeRequest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gBoxMakeRequest.Location = new System.Drawing.Point(714, 252);
             this.gBoxMakeRequest.Name = "gBoxMakeRequest";
-            this.gBoxMakeRequest.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gBoxMakeRequest.Size = new System.Drawing.Size(294, 206);
+            this.gBoxMakeRequest.Size = new System.Drawing.Size(441, 317);
             this.gBoxMakeRequest.TabIndex = 21;
             this.gBoxMakeRequest.TabStop = false;
             this.gBoxMakeRequest.Text = "Request Leave";
@@ -141,9 +142,10 @@
             // btnRequestLeave
             // 
             this.btnRequestLeave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRequestLeave.Location = new System.Drawing.Point(93, 159);
+            this.btnRequestLeave.Location = new System.Drawing.Point(140, 245);
+            this.btnRequestLeave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRequestLeave.Name = "btnRequestLeave";
-            this.btnRequestLeave.Size = new System.Drawing.Size(117, 25);
+            this.btnRequestLeave.Size = new System.Drawing.Size(176, 38);
             this.btnRequestLeave.TabIndex = 24;
             this.btnRequestLeave.Text = "Request Leave";
             this.btnRequestLeave.UseVisualStyleBackColor = true;
@@ -152,66 +154,68 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1, 111);
+            this.label1.Location = new System.Drawing.Point(2, 171);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 25);
+            this.label1.Size = new System.Drawing.Size(184, 38);
             this.label1.TabIndex = 28;
             this.label1.Text = "End Date/Time:";
             // 
             // lblStart
             // 
             this.lblStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStart.Location = new System.Drawing.Point(-1, 71);
+            this.lblStart.Location = new System.Drawing.Point(-2, 109);
+            this.lblStart.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStart.Name = "lblStart";
-            this.lblStart.Size = new System.Drawing.Size(125, 25);
+            this.lblStart.Size = new System.Drawing.Size(188, 38);
             this.lblStart.TabIndex = 27;
             this.lblStart.Text = "Start Date/Time:";
             // 
             // endDateTime
             // 
-            this.endDateTime.CustomFormat = "MM-dd-yyyy HH:mm";
+            this.endDateTime.CustomFormat = "MM-dd-yyyy";
             this.endDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endDateTime.Location = new System.Drawing.Point(125, 108);
+            this.endDateTime.Location = new System.Drawing.Point(195, 166);
+            this.endDateTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.endDateTime.Name = "endDateTime";
-            this.endDateTime.Size = new System.Drawing.Size(165, 26);
+            this.endDateTime.Size = new System.Drawing.Size(203, 35);
             this.endDateTime.TabIndex = 26;
             // 
             // startDateTime
             // 
             this.startDateTime.Checked = false;
-            this.startDateTime.CustomFormat = "MM-dd-yyyy HH:mm";
+            this.startDateTime.CustomFormat = "MM-dd-yyyy";
             this.startDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDateTime.Location = new System.Drawing.Point(130, 68);
+            this.startDateTime.Location = new System.Drawing.Point(195, 105);
+            this.startDateTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startDateTime.Name = "startDateTime";
-            this.startDateTime.Size = new System.Drawing.Size(161, 26);
+            this.startDateTime.Size = new System.Drawing.Size(203, 35);
             this.startDateTime.TabIndex = 25;
             // 
             // lblLeaveRequestHist
             // 
             this.lblLeaveRequestHist.AutoSize = true;
             this.lblLeaveRequestHist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLeaveRequestHist.Location = new System.Drawing.Point(27, 164);
-            this.lblLeaveRequestHist.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLeaveRequestHist.Location = new System.Drawing.Point(40, 252);
             this.lblLeaveRequestHist.Name = "lblLeaveRequestHist";
-            this.lblLeaveRequestHist.Size = new System.Drawing.Size(170, 20);
+            this.lblLeaveRequestHist.Size = new System.Drawing.Size(254, 29);
             this.lblLeaveRequestHist.TabIndex = 22;
             this.lblLeaveRequestHist.Text = "Leave Request History";
             // 
             // lblError
             // 
             this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError.Location = new System.Drawing.Point(503, 404);
-            this.lblError.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblError.Location = new System.Drawing.Point(754, 622);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(239, 43);
+            this.lblError.Size = new System.Drawing.Size(358, 66);
             this.lblError.TabIndex = 23;
             this.lblError.Visible = false;
             // 
             // employeeLeave
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1176, 863);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.lblLeaveRequestHist);
             this.Controls.Add(this.gBoxMakeRequest);
@@ -222,7 +226,6 @@
             this.Controls.Add(this.lblDescribe);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnLogOut);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "employeeLeave";
             this.Text = "Human Resources: Leave Management";
             ((System.ComponentModel.ISupportInitialize)(this.ptoDataGrid)).EndInit();
