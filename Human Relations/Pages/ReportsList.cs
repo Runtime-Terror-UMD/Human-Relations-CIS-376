@@ -44,8 +44,21 @@ namespace Human_Relations.Pages
                 try
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT u.userID as 'User ID', concat(u.firstName, ' ', u.lastName) as 'Name', d.depName as 'Department', u.isAdmin as 'is Admin?', u.isActive as 'isActive?', u.payRate as 'Pay Rate' FROM dbo.user u join dbo.department d on u.depID = d. depID WHERE roleID = @roleID";
-                    cmd.Parameters.Add("@roleID", MySqlDbType.Int32).Value = cboxRole.SelectedValue;
+                    cmd.CommandText = (@"SELECT u.userID as 'User ID', 
+                                        concat(u.firstName, ' ', u.lastName) as 'Name', 
+                                        d.depName as 'Department', 
+                                        CASE WHEN u.isAdmin = 1 THEN 'Yes'
+                                        ELSE 'No' 
+                                        END AS 'Admin Status', 
+                                        CASE 
+	                                        WHEN u.isActive = 1 THEN 'Yes'
+                                            Else 'No'
+                                            END AS 'Active Status',
+                                        u.payRate as 'Pay Rate' 
+                                        FROM dbo.user u 
+                                        join dbo.department d on u.depID = d. depID 
+                                        WHERE u.roleID = @roleID;");
+                         cmd.Parameters.Add("@roleID", MySqlDbType.Int32).Value = cboxRole.SelectedValue;
 
                     reportData = reportConn.ExecuteDataTable(cmd);
                     reportBindingSource.DataSource = reportData;
@@ -73,8 +86,21 @@ namespace Human_Relations.Pages
                 try
                 {
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = @"SELECT u.userID as 'User ID', concat(u.firstName, ' ', u.lastName) as 'Name', r.roleName as 'Role', u.isAdmin as 'is Admin?', u.isActive as 'isActive?', u.payRate as 'Pay Rate' FROM dbo.user u join dbo.role r on u.roleID = r.roleID WHERE depID = @depID";
-
+                    cmd.CommandText = (@"SELECT u.userID as 'User ID', 
+                                        concat(u.firstName, ' ', u.lastName) as 'Name', 
+                                        r.roleName as 'Role', 
+                                        CASE WHEN u.isAdmin = 1 THEN 'Yes'
+                                        ELSE 'No' 
+                                        END AS 'Admin Status', 
+                                        CASE 
+	                                        WHEN u.isActive = 1 THEN 'Yes'
+                                            Else 'No'
+                                            END AS 'Active Status', 
+                                        u.payRate as 'Pay Rate' 
+                                        FROM dbo.user u 
+                                        join dbo.role r 
+                                        on u.roleID = r.roleID 
+                                        WHERE depID = @depID;");
                     cmd.Parameters.Add("@depID", MySqlDbType.Int32).Value = cboxDepartment.SelectedValue;
 
                     reportData = reportConn.ExecuteDataTable(cmd);
