@@ -55,6 +55,9 @@ using MySql.Data.MySqlClient;
         return false;
         }
 
+    
+    // DESCRIPTION:pulls report of specified employee's leave requests. Returns a datatable to be used on employee leave page
+    
         public DataTable employeeLeaveHistory(int userID)
     {
         DBConnect leaveReportConn = new DBConnect();
@@ -70,6 +73,7 @@ using MySql.Data.MySqlClient;
         return reportData;
     }
 
+    // DESCRIPTION: Gets accrued PTO hours of specified user
     public double getAccruedPTO(int userID)
     {
         DBConnect getPTOConn = new DBConnect();
