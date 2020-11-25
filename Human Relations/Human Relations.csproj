@@ -176,7 +176,7 @@
     <Compile Include="Utilities Classes\DBConnect.cs" />
     <Compile Include="Utilities Classes\leavemgmtclass.cs" />
     <Compile Include="Utilities Classes\LoggedActivity.cs" />
-    <Compile Include="Utilities Classes\notifications.cs" />
+    <Compile Include="Utilities Classes\notificationClass.cs" />
     <Compile Include="Utilities Classes\payroll.cs" />
     <Compile Include="Utilities Classes\timetracking.cs" />
     <Compile Include="Utilities Classes\User.cs" />

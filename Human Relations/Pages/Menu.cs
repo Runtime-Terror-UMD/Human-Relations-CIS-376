@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Human_Relations.Pages;
 using Human_Relations.Utilities_Classes;
-using MySql.Data.MySqlClient;
 
 namespace Human_Relations
 {
@@ -20,7 +19,7 @@ namespace Human_Relations
         Timer t = new Timer();
         private Utilities utilityObject = new Utilities();
         private timetracking clockInOut = new timetracking();
-        private notifications pullNotifications = new notifications();
+        private notificationClass pullNotifications = new notificationClass();
         private DataTable notificationData = new DataTable();
         BindingSource notificationBindingSource = new BindingSource();
 
@@ -50,6 +49,7 @@ namespace Human_Relations
                 // hides non-admin buttons
                 btnManageEmp.Hide();
                 btnReport.Hide();
+                btnNotificaitons.Hide();
             }
             if(utilityObject.isClockedIn(UserID))
             {
@@ -281,6 +281,21 @@ namespace Human_Relations
         }
 
         private void reportsList_formClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
+
+        // DESCRIPTION: Opens notification configuration page
+        private void btnNotificaitons_Click(object sender, EventArgs e)
+        {
+            var notificationPage = new Notifications(this.UserID);
+            notificationPage.FormClosed += new FormClosedEventHandler(notificationPage_formClosed);
+            this.Hide();
+            notificationPage.Show();
+        }
+
+        // DESCRIPTION: Displays menu when notification configuration page is closed
+        private void notificationPage_formClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
         }

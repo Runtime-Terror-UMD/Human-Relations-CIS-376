@@ -43,6 +43,7 @@
             this.btnPayroll = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.notificationDataGrid = new System.Windows.Forms.DataGridView();
+            this.btnNotificaitons = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.notificationDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -226,11 +227,24 @@
             this.notificationDataGrid.Size = new System.Drawing.Size(824, 83);
             this.notificationDataGrid.TabIndex = 17;
             // 
+            // btnNotificaitons
+            // 
+            this.btnNotificaitons.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNotificaitons.Location = new System.Drawing.Point(472, 615);
+            this.btnNotificaitons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnNotificaitons.Name = "btnNotificaitons";
+            this.btnNotificaitons.Size = new System.Drawing.Size(262, 77);
+            this.btnNotificaitons.TabIndex = 18;
+            this.btnNotificaitons.Text = "Notifications";
+            this.btnNotificaitons.UseVisualStyleBackColor = true;
+            this.btnNotificaitons.Click += new System.EventHandler(this.btnNotificaitons_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1176, 863);
+            this.Controls.Add(this.btnNotificaitons);
             this.Controls.Add(this.notificationDataGrid);
             this.Controls.Add(this.btnReport);
             this.Controls.Add(this.btnPayroll);
@@ -273,5 +287,6 @@
         private System.Windows.Forms.Button btnPayroll;
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.DataGridView notificationDataGrid;
+        private System.Windows.Forms.Button btnNotificaitons;
     }
 }

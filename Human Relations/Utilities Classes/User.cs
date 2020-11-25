@@ -84,7 +84,7 @@ public class User
         }
 
         //close Data Reader
-        dataReader.Close();;
+        dataReader.Close();
     }
 
     // updates information on user record
