@@ -86,7 +86,7 @@ namespace Human_Relations.Pages
             {
                 // calls function in leavemgmtclass to create leave request and add to activity log
                 leavemgmtclass requestLeave = new leavemgmtclass();
-                if(requestLeave.requestLeave(UserID, startDateTime.Value, endDateTime.Value))
+                if(requestLeave.requestLeave(UserID, startDateTime.Value, endDateTime.Value, CheckPTO.Checked))
                 {
 
                     lblError.ForeColor = Color.Green;
@@ -120,6 +120,10 @@ namespace Human_Relations.Pages
             lblError.Show();
         }
 
+        private void CheckPTO_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
 

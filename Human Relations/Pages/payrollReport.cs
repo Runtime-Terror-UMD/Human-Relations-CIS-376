@@ -101,18 +101,7 @@ namespace Human_Relations.Pages
 
         private void btnPrintPayroll_Click(object sender, EventArgs e)
         {
-            ////create a document
-            //Document pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
-
-
-            //PdfWriter.GetInstance(pdfDoc, new FileStream("Test.pdf", FileMode.Create));
-            ////open doc to write
-            //pdfDoc.Open();
-
-            ////write to the pdf
-            //Paragraph par = new Paragraph("how are your");
-            //pdfDoc.Add(par);
-            //pdfDoc.Close();
+            
 
             try
             {
@@ -193,7 +182,7 @@ namespace Human_Relations.Pages
                 pdfTable3.DefaultCell.BorderWidth = 0.5f;
 
 
-                Chunk c2 = new Chunk(" Thank For Working Hard ", FontFactory.GetFont(" Times New Roman"));
+                Chunk c2 = new Chunk(" Thanks For Working Hard ", FontFactory.GetFont(" Times New Roman"));
                 c2.Font.Color = new iTextSharp.text.BaseColor(0, 0, 0);
                 c2.Font.SetStyle(0);
                 c2.Font.Size = 11;
@@ -225,10 +214,13 @@ namespace Human_Relations.Pages
                 pdfTable3.AddCell(new Phrase(na));
                 pdfTable3.AddCell(new Phrase("JOB TITLE "));
                 pdfTable3.AddCell(new Phrase( role ));
+                pdfTable3.AddCell(new Phrase("Pay Period"));
+                pdfTable3.AddCell(new Phrase(cBoxPayPeriodID.Text));
                 pdfTable3.AddCell(new Phrase("HOURS WORKED"));
                 pdfTable3.AddCell(new Phrase(txtHoursWorked.Text));
                 pdfTable3.AddCell(new Phrase("AMOUNT MADE"));
                 pdfTable3.AddCell(new Phrase(txtAmtMade.Text));
+                
                 #endregion
                 #endregion
                 #region PDF Generation

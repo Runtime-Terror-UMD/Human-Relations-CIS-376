@@ -43,6 +43,7 @@
             this.startDateTime = new System.Windows.Forms.DateTimePicker();
             this.lblLeaveRequestHist = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
+            this.CheckPTO = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ptoDataGrid)).BeginInit();
             this.gBoxMakeRequest.SuspendLayout();
             this.SuspendLayout();
@@ -115,7 +116,7 @@
             this.txtPtoHours.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.txtPtoHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPtoHours.Location = new System.Drawing.Point(193, 115);
-            this.txtPtoHours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPtoHours.Margin = new System.Windows.Forms.Padding(2);
             this.txtPtoHours.Name = "txtPtoHours";
             this.txtPtoHours.ReadOnly = true;
             this.txtPtoHours.Size = new System.Drawing.Size(68, 26);
@@ -123,6 +124,7 @@
             // 
             // gBoxMakeRequest
             // 
+            this.gBoxMakeRequest.Controls.Add(this.CheckPTO);
             this.gBoxMakeRequest.Controls.Add(this.btnRequestLeave);
             this.gBoxMakeRequest.Controls.Add(this.label1);
             this.gBoxMakeRequest.Controls.Add(this.lblStart);
@@ -130,9 +132,9 @@
             this.gBoxMakeRequest.Controls.Add(this.startDateTime);
             this.gBoxMakeRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBoxMakeRequest.Location = new System.Drawing.Point(476, 164);
-            this.gBoxMakeRequest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gBoxMakeRequest.Margin = new System.Windows.Forms.Padding(2);
             this.gBoxMakeRequest.Name = "gBoxMakeRequest";
-            this.gBoxMakeRequest.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gBoxMakeRequest.Padding = new System.Windows.Forms.Padding(2);
             this.gBoxMakeRequest.Size = new System.Drawing.Size(294, 206);
             this.gBoxMakeRequest.TabIndex = 21;
             this.gBoxMakeRequest.TabStop = false;
@@ -141,7 +143,7 @@
             // btnRequestLeave
             // 
             this.btnRequestLeave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRequestLeave.Location = new System.Drawing.Point(93, 159);
+            this.btnRequestLeave.Location = new System.Drawing.Point(163, 166);
             this.btnRequestLeave.Name = "btnRequestLeave";
             this.btnRequestLeave.Size = new System.Drawing.Size(117, 25);
             this.btnRequestLeave.TabIndex = 24;
@@ -207,6 +209,16 @@
             this.lblError.TabIndex = 23;
             this.lblError.Visible = false;
             // 
+            // CheckPTO
+            // 
+            this.CheckPTO.Location = new System.Drawing.Point(16, 167);
+            this.CheckPTO.Name = "CheckPTO";
+            this.CheckPTO.Size = new System.Drawing.Size(102, 24);
+            this.CheckPTO.TabIndex = 0;
+            this.CheckPTO.Text = "Apply PTO";
+            this.CheckPTO.UseVisualStyleBackColor = true;
+            this.CheckPTO.CheckedChanged += new System.EventHandler(this.CheckPTO_CheckedChanged);
+            // 
             // employeeLeave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,7 +234,7 @@
             this.Controls.Add(this.lblDescribe);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnLogOut);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "employeeLeave";
             this.Text = "Human Resources: Leave Management";
             ((System.ComponentModel.ISupportInitialize)(this.ptoDataGrid)).EndInit();
@@ -249,5 +261,6 @@
         private System.Windows.Forms.Label lblLeaveRequestHist;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Button btnRequestLeave;
+        private System.Windows.Forms.CheckBox CheckPTO;
     }
 }

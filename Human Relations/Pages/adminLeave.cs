@@ -13,10 +13,16 @@ namespace Human_Relations.Pages
 {
     public partial class adminLeave : Form
     {
+        
         public adminLeave()
         {
             InitializeComponent();
             //display pending leave requests when the page opens
+            displayPendingLeave();
+
+        }
+        private void displayPendingLeave()
+        {
             try
             {
                 DBConnect connection = new DBConnect();
@@ -27,8 +33,8 @@ namespace Human_Relations.Pages
                 cmd.CommandText = @"select
                                     lm.userID as 'User ID',
                                     concat(emp.firstName, ' ', emp.lastName) as 'Employee',
-                                    lm.dateTimeStart as 'Request Start',
-                                    lm.dateTimeEnd as 'Request End',
+                                    lm.dateStart as 'Request Start',
+                                    lm.dateEnd as 'Request End',
                                     DATE(lm.created) as 'Requested On',
                                     lm.approvalStatus
                                     from dbo.leavemgmt lm
@@ -47,9 +53,7 @@ namespace Human_Relations.Pages
             {
                 MessageBox.Show(err.ToString());
             }
-
         }
-
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -59,6 +63,97 @@ namespace Human_Relations.Pages
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Ac_butn_Click(object sender, EventArgs e)
+        {
+
+            if (adminLeaveDataGrid.Rows.Count == 0)
+            {
+                lblrequesterror.Text = " The selected date has no scheduled shifts";
+                lblrequesterror.Visible = true;
+            }
+            else if (adminLeaveDataGrid.SelectedRows.Count == 0)
+            {
+                lblrequesterror.Text = " Please select a row";
+                lblrequesterror.Visible = true;
+            }
+            else if (adminLeaveDataGrid.SelectedRows.Count > 1)
+            {
+                lblrequesterror.Text = " Please select one row";
+                lblrequesterror.Visible = true;
+            }
+            else
+            {
+                DBConnect updateStatus = new DBConnect();
+                MySqlCommand cmd = new MySqlCommand(@"UPDATE `dbo`.`leavemgmt` SET `approvalStatus` = 'approved' WHERE (`leaveID` = @leaveID);");
+                cmd.Parameters.Add("@leaveID", MySqlDbType.Int32).Value = Int32.Parse(adminLeaveDataGrid.SelectedRows[0].Cells[0].Value.ToString());
+                if (updateStatus.NonQuery(cmd) > 0)
+                {
+                    string check = adminLeaveDataGrid.SelectedRows[0].Cells[7].Value.ToString();
+                    string sdate = adminLeaveDataGrid.SelectedRows[0].Cells[3].Value.ToString();
+                    string edate = adminLeaveDataGrid.SelectedRows[0].Cells[4].Value.ToString();
+                    string userID = adminLeaveDataGrid.SelectedRows[0].Cells[1].Value.ToString();
+                    cmd.CommandText = @"SELECT payRate, ptoTime FROM dbo.user where userID = '@userID';";
+                    cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = Int32.Parse(adminLeaveDataGrid.SelectedRows[0].Cells[1].Value.ToString());
+                    MySqlDataReader dataReader = updateStatus.ExecuteReader(cmd);
+
+                    if (check == "Yes")
+                    {
+                        //cmd.CommandText =@"Insert"
+                    }
+                    lblrequesterror.Text = "The Request was accepted";
+                    lblrequesterror.ForeColor = Color.Green;
+                    lblrequesterror.Visible = true;
+                    displayPendingLeave();
+                }
+                else
+                {
+                    //change
+                    lblrequesterror.Text = "Accepting was unsuccessful";
+                    lblrequesterror.ForeColor = Color.Red;
+                    lblrequesterror.Visible = true;
+                }
+
+            }
+        }
+
+        private void Dec_butn_Click(object sender, EventArgs e)
+        {
+            if (adminLeaveDataGrid.Rows.Count == 0)
+            {
+                lblrequesterror.Text = " The selected date has no scheduled shifts";
+                lblrequesterror.Visible = true;
+            }
+            else if (adminLeaveDataGrid.SelectedRows.Count == 0)
+            {
+                lblrequesterror.Text = " Please select a row";
+                lblrequesterror.Visible = true;
+            }
+            else if (adminLeaveDataGrid.SelectedRows.Count > 1)
+            {
+                lblrequesterror.Text = " Please select one row";
+                lblrequesterror.Visible = true;
+            }
+            else
+            {
+                DBConnect updateStatus = new DBConnect();
+                MySqlCommand cmd = new MySqlCommand(@"UPDATE `dbo`.`leavemgmt` SET `approvalStatus` = 'Declined' WHERE (`leaveID` = @leaveID);");
+                cmd.Parameters.Add("@leaveID", MySqlDbType.Int32).Value = Int32.Parse(adminLeaveDataGrid.SelectedRows[0].Cells[0].Value.ToString());
+                if (updateStatus.NonQuery(cmd) > 0)
+                {
+                    lblrequesterror.Text = "The Request was Declined";
+                    lblrequesterror.ForeColor = Color.Green;
+                    lblrequesterror.Visible = true;
+                    displayPendingLeave();
+                }
+                else
+                {
+                    lblrequesterror.Text = "Declining was unsuccessful";
+                    lblrequesterror.ForeColor = Color.Green;
+                    lblrequesterror.Visible = true;
+                }
+            }
         }
     }
 }

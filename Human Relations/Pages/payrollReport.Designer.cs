@@ -60,7 +60,7 @@
             this.cBoxPayPeriodID.DisplayMember = "payPeriodName";
             this.cBoxPayPeriodID.FormattingEnabled = true;
             this.cBoxPayPeriodID.Location = new System.Drawing.Point(129, 100);
-            this.cBoxPayPeriodID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cBoxPayPeriodID.Margin = new System.Windows.Forms.Padding(2);
             this.cBoxPayPeriodID.Name = "cBoxPayPeriodID";
             this.cBoxPayPeriodID.Size = new System.Drawing.Size(166, 21);
             this.cBoxPayPeriodID.TabIndex = 0;
@@ -99,7 +99,7 @@
             // 
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Location = new System.Drawing.Point(647, 19);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(107, 29);
             this.btnLogout.TabIndex = 7;
@@ -111,7 +111,7 @@
             // 
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.Location = new System.Drawing.Point(24, 19);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(107, 29);
             this.btnBack.TabIndex = 9;
@@ -144,7 +144,7 @@
             // 
             this.btnViewReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewReport.Location = new System.Drawing.Point(647, 89);
-            this.btnViewReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewReport.Name = "btnViewReport";
             this.btnViewReport.Size = new System.Drawing.Size(107, 29);
             this.btnViewReport.TabIndex = 11;
@@ -189,7 +189,7 @@
             // 
             this.txtName.BackColor = System.Drawing.Color.White;
             this.txtName.Location = new System.Drawing.Point(129, 144);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(166, 20);
@@ -199,21 +199,23 @@
             // 
             this.txtAmtMade.BackColor = System.Drawing.Color.White;
             this.txtAmtMade.Location = new System.Drawing.Point(129, 198);
-            this.txtAmtMade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAmtMade.Margin = new System.Windows.Forms.Padding(2);
             this.txtAmtMade.Name = "txtAmtMade";
             this.txtAmtMade.ReadOnly = true;
             this.txtAmtMade.Size = new System.Drawing.Size(166, 20);
             this.txtAmtMade.TabIndex = 17;
+            this.txtAmtMade.Text = "$0.00";
             // 
             // txtHoursWorked
             // 
             this.txtHoursWorked.BackColor = System.Drawing.Color.White;
             this.txtHoursWorked.Location = new System.Drawing.Point(129, 170);
-            this.txtHoursWorked.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHoursWorked.Margin = new System.Windows.Forms.Padding(2);
             this.txtHoursWorked.Name = "txtHoursWorked";
             this.txtHoursWorked.ReadOnly = true;
             this.txtHoursWorked.Size = new System.Drawing.Size(166, 20);
             this.txtHoursWorked.TabIndex = 16;
+            this.txtHoursWorked.Text = "0";
             // 
             // personalAttendanceDataGrid
             // 
@@ -259,7 +261,7 @@
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.cBoxPayPeriodID);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "payrollReport";
             this.Text = "My Payroll";
             this.Load += new System.EventHandler(this.payrollReport_Load);

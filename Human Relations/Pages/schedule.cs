@@ -141,6 +141,7 @@ DESCRIPTION: pulls all user schedules for specified date
                 var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()), Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[1].Value.ToString()));
                 updateSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
                 this.Hide();
+                updateSchedule.Show();
             }
         }
 
@@ -163,18 +164,21 @@ DESCRIPTION: pulls all user schedules for specified date
             }
             else
             {
-                int ScheduleID = -1;
                 DBConnect deleteScheduleConnection = new DBConnect();
-                MySqlCommand cmd = new MySqlCommand(@"SELECT * FROM dbo.schedule 
-                                                        WHERE userID = @userID");
-                cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString());
-                MySqlDataReader dataReader = deleteScheduleConnection.ExecuteReader(cmd);
-                while (dataReader.Read())
+                MySqlCommand cmd = new MySqlCommand(@"DELETE FROM dbo.schedule WHERE scheduleID = @scheduleID");
+                cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[1].Value.ToString());
+                if (deleteScheduleConnection.NonQuery(cmd) > 0)
                 {
-                    ScheduleID = Convert.ToInt32(dataReader["scheduleID"]);
+                    lblError.Text = "Schedule Deleted Successfully";
+                    lblError.ForeColor = Color.Green;
+                    lblError.Visible = true;
+                    search();
                 }
-                cmd.CommandText = @"DELETE FROM dbo.schedule WHERE scheduleID = @scheduleID";
-                cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
+                else
+                {
+                    lblError.Text = "Schedule Deleted Successfully";
+                    lblError.Visible = true;
+                }
             }
         }
 
