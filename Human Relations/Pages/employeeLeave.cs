@@ -9,6 +9,11 @@ namespace Human_Relations.Pages
     public partial class employeeLeave : Form
     {
         public int UserID;
+        private DataTable ptoData;
+        private leavemgmtclass leaveMgmt = new leavemgmtclass();
+        BindingSource ptoBindingSource = new BindingSource();
+        private double ptoHours;
+
         public employeeLeave()
         {
             InitializeComponent();
@@ -16,52 +21,26 @@ namespace Human_Relations.Pages
 
 // DESCRIPTION: Parameterized initializer. Fills the "my leave requests" table and the "Accrued PTO" label
         public employeeLeave(int userID)
-        {
-            
+        {         
             InitializeComponent();
             UserID = userID;
-            // fill PTO history table
-
-            // initialize report connection, binding source, and sql command
-            DBConnect reportConn = new DBConnect();
-            BindingSource ptoBindingSource = new BindingSource();
-            MySqlCommand cmd = new MySqlCommand();
 
             // try-catch block to handle exceptions
             try
             {
-                // SQL command for report
-                cmd.CommandText = @"SELECT 
-                                        DATE(dateTimeStart) AS 'Start Date',
-                                        TIME(dateTimeStart) AS 'Start Time',
-                                        DATE(dateTimeEnd) AS 'End Date',
-                                        TIME(dateTimeEnd) AS 'End Time',
-                                        approvalStatus AS 'Approval Status'
-                                        FROM leavemgmt
-                                        WHERE userID = @userID
-                                        ORDER BY created desc";
-                    cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
-
-                    // fills the data table 
-                    DataTable ptoData = reportConn.ExecuteDataTable(cmd);
-                    ptoBindingSource.DataSource = ptoData;
-                    ptoDataGrid.DataSource = ptoBindingSource;
-                    ptoDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+               // fills the data table 
+                ptoData = leaveMgmt.employeeLeaveHistory(UserID);
+                ptoBindingSource.DataSource = ptoData;
+                ptoDataGrid.DataSource = ptoBindingSource;
+                ptoDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+             catch (Exception err)
+            {
+              MessageBox.Show(err.ToString());
             }
 
-                    catch (Exception err)
-                    {
-                        MessageBox.Show(err.ToString());
-                    }
-
-    // fill accrued PTO text box
-
-            DBConnect getPTOConn = new DBConnect();
-            MySqlCommand getPTOCmd = new MySqlCommand(@"SELECT ptoTime
-                                                        FROM dbo.user
-                                                        where userID = @userID");
-            getPTOCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
-            double ptoHours = getPTOConn.doubleScalar(getPTOCmd);
+            // fill accrued PTO text box
+            ptoHours = leaveMgmt.getAccruedPTO(UserID);
             txtPtoHours.Text = String.Format("{0:F1}", ptoHours);
         }
 
@@ -86,7 +65,7 @@ namespace Human_Relations.Pages
             {
                 // calls function in leavemgmtclass to create leave request and add to activity log
                 leavemgmtclass requestLeave = new leavemgmtclass();
-                if(requestLeave.requestLeave(UserID, startDateTime.Value, endDateTime.Value))
+                if(requestLeave.requestLeave(UserID, startDateTime.Value.Date, endDateTime.Value.Date))
                 {
 
                     lblError.ForeColor = Color.Green;

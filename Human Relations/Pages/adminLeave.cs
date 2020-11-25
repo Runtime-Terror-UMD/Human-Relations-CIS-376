@@ -27,8 +27,8 @@ namespace Human_Relations.Pages
                 cmd.CommandText = @"select
                                     lm.userID as 'User ID',
                                     concat(emp.firstName, ' ', emp.lastName) as 'Employee',
-                                    lm.dateTimeStart as 'Request Start',
-                                    lm.dateTimeEnd as 'Request End',
+                                    lm.dateStart as 'Request Start',
+                                    lm.dateEnd as 'Request End',
                                     DATE(lm.created) as 'Requested On',
                                     lm.approvalStatus
                                     from dbo.leavemgmt lm
