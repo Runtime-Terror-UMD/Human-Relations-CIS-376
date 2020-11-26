@@ -12,7 +12,7 @@ using MySql.Data.MySqlClient;
      DESCRIPTION: creates leave request record in dbo.leavemgmt and adds to activity log table.
     Parameters: userID requesting leave, startDateTime of leave, endDateTime of leave
      */
-        public bool requestLeave(int userID, DateTime startDateTime, DateTime endDateTime)
+        public bool requestLeave(int userID, DateTime startDateTime, DateTime endDateTime, Boolean PTO)
         {
             // SQL command to insert leave request record
             DBConnect reqLeaveConn = new DBConnect();

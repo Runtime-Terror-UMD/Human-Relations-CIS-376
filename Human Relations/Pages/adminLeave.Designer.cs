@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.btnReturn = new System.Windows.Forms.Button();
-            this.lblDescribe = new System.Windows.Forms.Label();
+            this.lblrequesterror = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.adminLeaveDataGrid = new System.Windows.Forms.DataGridView();
+            this.Dec_butn_Click = new System.Windows.Forms.Button();
+            this.Ac_butn_Click = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.adminLeaveDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,15 +48,15 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // lblDescribe
+            // lblrequesterror
             // 
-            this.lblDescribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescribe.Location = new System.Drawing.Point(197, 64);
-            this.lblDescribe.Name = "lblDescribe";
-            this.lblDescribe.Size = new System.Drawing.Size(400, 20);
-            this.lblDescribe.TabIndex = 11;
-            this.lblDescribe.Text = "View your history";
-            this.lblDescribe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblrequesterror.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrequesterror.Location = new System.Drawing.Point(197, 64);
+            this.lblrequesterror.Name = "lblrequesterror";
+            this.lblrequesterror.Size = new System.Drawing.Size(400, 20);
+            this.lblrequesterror.TabIndex = 11;
+            this.lblrequesterror.Text = "View your history";
+            this.lblrequesterror.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblTitle
             // 
@@ -79,19 +81,41 @@
             // adminLeaveDataGrid
             // 
             this.adminLeaveDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.adminLeaveDataGrid.Location = new System.Drawing.Point(29, 204);
+            this.adminLeaveDataGrid.Location = new System.Drawing.Point(29, 119);
             this.adminLeaveDataGrid.Name = "adminLeaveDataGrid";
             this.adminLeaveDataGrid.Size = new System.Drawing.Size(726, 345);
             this.adminLeaveDataGrid.TabIndex = 16;
+            // 
+            // Dec_butn_Click
+            // 
+            this.Dec_butn_Click.Location = new System.Drawing.Point(565, 497);
+            this.Dec_butn_Click.Name = "Dec_butn_Click";
+            this.Dec_butn_Click.Size = new System.Drawing.Size(75, 23);
+            this.Dec_butn_Click.TabIndex = 17;
+            this.Dec_butn_Click.Text = "Decline";
+            this.Dec_butn_Click.UseVisualStyleBackColor = true;
+            this.Dec_butn_Click.Click += new System.EventHandler(this.Dec_butn_Click_Click);
+            // 
+            // Ac_butn_Click
+            // 
+            this.Ac_butn_Click.Location = new System.Drawing.Point(130, 497);
+            this.Ac_butn_Click.Name = "Ac_butn_Click";
+            this.Ac_butn_Click.Size = new System.Drawing.Size(75, 23);
+            this.Ac_butn_Click.TabIndex = 18;
+            this.Ac_butn_Click.Text = "Accept";
+            this.Ac_butn_Click.UseVisualStyleBackColor = true;
+            this.Ac_butn_Click.Click += new System.EventHandler(this.Ac_butn_Click_Click);
             // 
             // adminLeave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.Ac_butn_Click);
+            this.Controls.Add(this.Dec_butn_Click);
             this.Controls.Add(this.adminLeaveDataGrid);
             this.Controls.Add(this.btnReturn);
-            this.Controls.Add(this.lblDescribe);
+            this.Controls.Add(this.lblrequesterror);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnLogOut);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -105,9 +129,11 @@
         #endregion
 
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.Label lblDescribe;
+        private System.Windows.Forms.Label lblrequesterror;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.DataGridView adminLeaveDataGrid;
+        private System.Windows.Forms.Button Dec_butn_Click;
+        private System.Windows.Forms.Button Ac_butn_Click;
     }
 }

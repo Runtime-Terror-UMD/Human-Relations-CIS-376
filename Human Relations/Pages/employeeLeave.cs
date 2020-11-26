@@ -65,7 +65,7 @@ namespace Human_Relations.Pages
             {
                 // calls function in leavemgmtclass to create leave request and add to activity log
                 leavemgmtclass requestLeave = new leavemgmtclass();
-                if(requestLeave.requestLeave(UserID, startDateTime.Value.Date, endDateTime.Value.Date))
+                if(requestLeave.requestLeave(UserID, startDateTime.Value.Date, endDateTime.Value.Date, CheckPTO.Checked))
                 {
 
                     lblError.ForeColor = Color.Green;
