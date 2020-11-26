@@ -17,7 +17,9 @@ namespace Human_Relations.Pages
         {
             InitializeComponent();
             //display pending leave requests when the page opens
-            
+            displayPendingLeave();
+        }
+            private void displayPendingLeave() {
                 try
                 {
                     DBConnect connection = new DBConnect();
@@ -26,12 +28,14 @@ namespace Human_Relations.Pages
                     MySqlCommand cmd = new MySqlCommand();
 
                     cmd.CommandText = @"select
+                                    lm.leaveID as 'leave ID',
                                     lm.userID as 'User ID',
                                     concat(emp.firstName, ' ', emp.lastName) as 'Employee',
                                     lm.dateStart as 'Request Start',
                                     lm.dateEnd as 'Request End',
                                     DATE(lm.created) as 'Requested On',
-                                    lm.approvalStatus
+                                    lm.approvalStatus,
+                                    lm.applyPTO as 'Apply PTO'
                                     from dbo.leavemgmt lm
                                     join dbo.user emp
                                         on emp.userID = lm.userID
@@ -48,8 +52,9 @@ namespace Human_Relations.Pages
                 {
                     MessageBox.Show(err.ToString());
                 }
+            }
             
-        }
+        
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -101,6 +106,7 @@ namespace Human_Relations.Pages
                     lblrequesterror.Text = "The Request was accepted";
                     lblrequesterror.ForeColor = Color.Green;
                     lblrequesterror.Visible = true;
+                    displayPendingLeave();
                 }
                 else
                 {
@@ -140,6 +146,7 @@ namespace Human_Relations.Pages
                     lblrequesterror.Text = "The Request was Declined";
                     lblrequesterror.ForeColor = Color.Green;
                     lblrequesterror.Visible = true;
+                    displayPendingLeave();
                 }
                 else
                 {
