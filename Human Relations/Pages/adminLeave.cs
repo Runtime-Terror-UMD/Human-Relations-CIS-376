@@ -16,7 +16,7 @@ namespace Human_Relations.Pages
         public adminLeave()
         {
             InitializeComponent();
-            //display pending leave requests when the page opens
+            //display pending leave requests (oldest first) when the page opens
             try
             {
                 DBConnect connection = new DBConnect();
@@ -35,9 +35,7 @@ namespace Human_Relations.Pages
                                     join dbo.user emp
                                         on emp.userID = lm.userID
                                     where lm.approvalstatus = 'Pending'
-                                    order by lm.created desc";
-                //cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = UserID;
-                //cmd.Parameters.Add("@currentDate", MySqlDbType.DateTime).Value = DateTime.Today;
+                                    order by lm.created";
                 pendingLeave = connection.ExecuteDataTable(cmd);
                 bindingSource.DataSource = pendingLeave;
                 adminLeaveDataGrid.DataSource = bindingSource;
