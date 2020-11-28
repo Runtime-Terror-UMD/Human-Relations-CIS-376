@@ -33,6 +33,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.adminLeaveDataGrid = new System.Windows.Forms.DataGridView();
+            this.checkAllRequests = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.adminLeaveDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,11 +96,24 @@
             this.adminLeaveDataGrid.Size = new System.Drawing.Size(1089, 531);
             this.adminLeaveDataGrid.TabIndex = 16;
             // 
+            // checkAllRequests
+            // 
+            this.checkAllRequests.AutoSize = true;
+            this.checkAllRequests.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkAllRequests.Location = new System.Drawing.Point(44, 250);
+            this.checkAllRequests.Name = "checkAllRequests";
+            this.checkAllRequests.Size = new System.Drawing.Size(258, 29);
+            this.checkAllRequests.TabIndex = 17;
+            this.checkAllRequests.Text = "Display all leave requests";
+            this.checkAllRequests.UseVisualStyleBackColor = true;
+            this.checkAllRequests.CheckedChanged += new System.EventHandler(this.checkAllRequests_CheckedChanged);
+            // 
             // adminLeave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1176, 863);
+            this.Controls.Add(this.checkAllRequests);
             this.Controls.Add(this.adminLeaveDataGrid);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.lblDescribe);
@@ -109,6 +123,7 @@
             this.Text = "Human Resources: Leave Management";
             ((System.ComponentModel.ISupportInitialize)(this.adminLeaveDataGrid)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -119,5 +134,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.DataGridView adminLeaveDataGrid;
+        private System.Windows.Forms.CheckBox checkAllRequests;
     }
 }
