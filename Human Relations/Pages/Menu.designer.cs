@@ -263,7 +263,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Menu";
             this.Text = "Human Resources: Menu";
-            this.Load += new System.EventHandler(this.Menu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.notificationDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

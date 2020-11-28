@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Human_Relations.Pages;
 using Human_Relations.Utilities_Classes;
+using MySql.Data.MySqlClient;
 
 namespace Human_Relations
 {
     public partial class Menu : Form
     {
         public int UserID;
+        public bool admin;
         Login loginWind;
         Timer t = new Timer();
         private Utilities utilityObject = new Utilities();
@@ -22,12 +24,6 @@ namespace Human_Relations
         private notificationClass pullNotifications = new notificationClass();
         private DataTable notificationData = new DataTable();
         BindingSource notificationBindingSource = new BindingSource();
-
-        public Menu(Login loginInstance, DateTime current)
-        {
-            InitializeComponent();
-            loginWind = loginInstance;
-        }
 
         // DESCRIPTION: Initializer. Shows/hides hotel management button based on isCustomer
         public Menu(bool isAdmin, int userID, Login loginInstance)
@@ -40,8 +36,11 @@ namespace Human_Relations
             t.Tick += new EventHandler(this.T_Tick);
             t.Start();
             UserID = userID;
+            admin = isAdmin;
+
 
             // displays notifications based on admin status
+            adminNotifLeaveMgmt();
             displayNotifications(isAdmin);
 
             if (isAdmin == false)
@@ -99,9 +98,42 @@ namespace Human_Relations
             this.Show();
         }
 
-        private void Menu_Load(object sender, EventArgs e)
-        {
 
+        private void adminNotifLeaveMgmt()
+        {
+            MySqlCommand cmd = new MySqlCommand(@"select count(*) from dbo.leavemgmt where approvalStatus = 'Pending'");
+            DBConnect pendingConn = new DBConnect();
+
+            if (pendingConn.intScalar(cmd) > 0)
+            {
+                //check if there is already a notificaiton
+                MySqlCommand checkNotif = new MySqlCommand(@"select count(*) from dbo.notifications where notificationText = 'Pending Leave Requests' AND isActive = 1");
+                DBConnect existingReq = new DBConnect();
+                if(existingReq.intScalar(checkNotif) == 0) //no active notification
+                {
+                    //add notification to check pending leave management
+                    notificationClass pending = new notificationClass();
+                    pending.createNotification("Pending Leave Requests", DateTime.Now, DateTime.Now.AddDays(2), UserID, true, true);
+                }
+            }
+            else
+            {
+                //delete notification to check pending leave management
+                int notifID = -1;
+                MySqlCommand checkNotif = new MySqlCommand(@"select notificationID from dbo.notifications where notificationText = 'Pending Leave Requests' AND isActive = 1");
+                DBConnect existingNotif = new DBConnect();
+                MySqlDataReader existingReq = existingNotif.ExecuteReader(checkNotif);
+                while(existingReq.Read())
+                {
+                    notifID = Convert.ToInt32(existingReq["notificationID"]);
+                    MySqlCommand updatenotif = new MySqlCommand(@"update dbo.notifications set isActive = 0 WHERE notificationID = @notificationID");
+                    updatenotif.Parameters.Add("@notificationID", MySqlDbType.Int32).Value = notifID;
+                    if (existingNotif.NonQuery(updatenotif) <= 0)
+                        displayError("Unable to deactivate pending leave request notification");
+
+                }
+
+            }
         }
 
         private void btnManageEmp_Click(object sender, EventArgs e)
@@ -264,11 +296,17 @@ namespace Human_Relations
         private void employeeLeave_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
+            adminNotifLeaveMgmt();
+            displayNotifications(admin);
+
         }
-// DESCRIPTION: Returns to menu when admin "Leave Managementl" page is closed
+        // DESCRIPTION: Returns to menu when admin "Leave Managementl" page is closed
         private void adminLeave_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Show();
+            adminNotifLeaveMgmt();
+            displayNotifications(admin);
+
         }
 
         //description: Shows report page to admins
