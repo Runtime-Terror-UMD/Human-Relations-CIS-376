@@ -49,6 +49,7 @@ namespace Human_Relations
                 btnManageEmp.Hide();
                 btnReport.Hide();
                 btnNotificaitons.Hide();
+                btnHistory.Hide();
             }
             if(utilityObject.isClockedIn(UserID))
             {
