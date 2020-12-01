@@ -7,94 +7,24 @@ namespace Human_Relations.Pages
 {
     public partial class History : Form
     {
-        public History(int userID)
+        DBConnect reportConn = new DBConnect();
+        DataTable ReportData = new DataTable();
+        BindingSource bindingSource1 = new BindingSource();
+        MySqlCommand cmd = new MySqlCommand();
+        int empUserID;
+        Utilities verifyUser = new Utilities();
+        LoggedActivity verifyLog = new LoggedActivity();
+        User userinfo;
+
+        public History()
         {
-            
             InitializeComponent();
+        }
 
-            User userInfo = new User(userID);
-            lblAccountID.Text = userID.ToString();
-            lblFirstName.Text = userInfo.firstName;
-            lblLastName.Text = userInfo.lastName;
-            lblEmail.Text = userInfo.email;
-            lblUsername.Text = userInfo.username;
-            //lblRewardsPoints.Text = userInfo.rewardPoints.ToString();
-
-            DBConnect reportConn = new DBConnect();
-            DataTable ReportData = new DataTable();
-            BindingSource bindingSource1 = new BindingSource();
-            MySqlCommand cmd = new MySqlCommand();
-
-            if (userInfo.isAdmin == false)
-            {
-                try
-                {
-                    cmd.CommandText = @"select al.created 'Action Date',
-                                                        case 
-	                                                        when al.activityTypeID in (1,2,3) then concat(atype.activityTypeDescription, ' - Confirmation ID: ', al.refID) 
-                                                            when al.activityTypeID = 8 then concat(atype.activityTypeDescription, '- Pay ID: ', al.refID) 
-	                                                        when al.activityTypeID = 4 then concat(atype.activityTypeDescription, ' - Confirmation ID: ', al.refID) 
-	                                                        when al.activityTypeID = 5 then concat(atype.activityTypeDescription, ' - Confirmation ID: ', al.refID) 
-                                                           end as 'Activity'
-                                                        from activitylog al
-                                                        join activitytype atype
-                                                            on atype.activityTypeID = al.activityTypeID
-                                                        left join payment p
-	                                                        on p.paymentID = al.refID
-                                                            and al.activityTypeID = 8
-                                                        where al.userID = @userID 
-                                                        and al.createdBy = @userID
-                                                        order by al.created desc";
-                    cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
-
-                    ReportData = reportConn.ExecuteDataTable(cmd);
-                    bindingSource1.DataSource = ReportData;
-                    reportDataGrid.DataSource = bindingSource1;
-                    reportDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                }
-
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.ToString());
-                }
-            }
-            else
-            {
-                try
-                {
-                    cmd.CommandText = @"select al.created 'Action Date',
-                                     case 
-	                                     when al.activityTypeID in (1,2,3) then concat(atype.activityTypeDescription, ' - Confirmation ID: ', al.refID, ' - Customer ID ',al.userID) 
-                                         when al.activityTypeID = 6 then concat(atype.activityTypeDescription, ' - Points: ', rl.pointsAmount, ' - Customer ID ',al.userID) 
-                                         when al.activityTypeID = 8 then concat('Processed customer payment ','- Pay ID: ', al.refID, ' - Customer ID ',al.userID) 
-	                                     when al.activityTypeID = 4 then concat(atype.activityTypeDescription, ' - Confirmation ID: ', al.refID, ' - Customer ID ',al.userID) 
-	                                     when al.activityTypeID = 5 then concat(atype.activityTypeDescription, ' - Confirmation ID: ', al.refID, ' - Customer ID ',al.userID) 
-                                        end as 'Activity'
-                                     from activitylog al
-                                     join activitytype atype
-                                         on atype.activityTypeID = al.activityTypeID
-                                     left join reward_log rl
-	                                     on rl.rewardLogID = al.refID
-                                         and al.activityTypeID = 6
-                                     left join payment p
-	                                     on p.paymentID = al.refID
-                                         and al.activityTypeID = 8
-                                     where al.createdBy = @createdBy
-                                     order by al.created desc";
-                    cmd.Parameters.Add("@createdBy", MySqlDbType.Int32).Value = userID;
-
-                    ReportData = reportConn.ExecuteDataTable(cmd);
-                    bindingSource1.DataSource = ReportData;
-                    reportDataGrid.DataSource = bindingSource1;
-                    reportDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.ToString());
-                }
-
-            }
-
+        private void displayError(string error)
+        {
+            lblError.Text = "Error: " + error;
+            lblError.Visible = true;
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -108,14 +38,63 @@ namespace Human_Relations.Pages
             Application.OpenForms["Menu"].Close();
         }
 
-        private void lblTitle_Click(object sender, EventArgs e)
+
+        // DESCRIPTION: verifies fields and pulls activity log report
+        private void btnSearch_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtUserID.Text))
+            {
+                displayError("User ID is required");
+            }
+            else if (!(int.TryParse(txtUserID.Text, out empUserID)))
+            {
+                displayError("User ID must be an integer");
+            }
+            else if (!(verifyUser.userIDExists(empUserID)))
+            {
+                displayError("User ID does not exist");
+            }
+            else if (!verifyLog.checkForLoggedActivity(empUserID))
+            {
+                displayError("No activity logged for this user");
+            }
+            else
+            {
+                userinfo = new User(empUserID);
+                txtName.Text = userinfo.firstName + " " + userinfo.lastName;
+                
+                try
+                {
+                    cmd.CommandText = @"SELECT 
+                                    atype.activityTypeDescription AS 'Action',
+                                    DATE(al.created) AS 'Date',
+                                    CASE
+	                                    when effected.userID IS NULL THEN 'N/A'
+	                                    ELSE concat(effected.firstName, ' ', effected.lastname) 
+                                        END 'Effected User',
+                                    al.effectedUser AS 'Effected User ID'
+                                    FROM dbo.activitylog al
+                                    JOIN dbo.user adminuser
+	                                    on al.createdBy = adminuser.userID
+                                    LEFT JOIN dbo.user effected
+	                                    on al.effectedUser = effected.userID
+                                    join dbo.activitytype atype
+	                                    on atype.activityTypeID = al.activityTypeID
+                                    where al.createdBy = @userID
+                                    order by al.created desc";
+                    cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = txtUserID.Text;
 
-        }
+                    ReportData = reportConn.ExecuteDataTable(cmd);
+                    bindingSource1.DataSource = ReportData;
+                    reportDataGrid.DataSource = bindingSource1;
+                    reportDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
 
-        private void lblDescribe_Click(object sender, EventArgs e)
-        {
-
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString());
+                }
+            }
         }
     }
 }

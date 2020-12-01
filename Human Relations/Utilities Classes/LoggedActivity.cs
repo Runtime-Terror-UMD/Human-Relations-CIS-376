@@ -28,4 +28,18 @@ public class LoggedActivity
             return true;
         return false;
     }
+
+    // DESCRIPTION: Checks to see if any activity has been logged for a specific user ID
+    public bool checkForLoggedActivity(int userID)
+    {
+        DBConnect checkActivityConn = new DBConnect();
+        MySqlCommand checkActivityCmd = new MySqlCommand(@"SELECT COUNT(*)
+                                                            FROM dbo.activitylog al
+                                                            WHERE al.createdBy = @userID");
+        checkActivityCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
+        int count = checkActivityConn.intScalar(checkActivityCmd);
+        if (count > 0)
+            return true;
+        return false;
+    }
 }

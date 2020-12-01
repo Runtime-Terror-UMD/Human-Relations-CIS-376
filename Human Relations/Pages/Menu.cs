@@ -87,7 +87,7 @@ namespace Human_Relations
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
-            var history = new History(UserID);
+            var history = new History();
             history.FormClosed += new FormClosedEventHandler(history_FormClosed);
             this.Hide();
             history.Show();
