@@ -107,6 +107,8 @@ namespace Human_Relations
                                     menuScreen.FormClosed += new FormClosedEventHandler(menuScreen_FormClosed);
                                     this.Hide();
                                     menuScreen.Show();
+
+
                                 }
                             }
                         }
