@@ -62,14 +62,14 @@
             //
             // lblDescribe
             //
-            this.lblDescribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescribe.Location = new System.Drawing.Point(296, 98);
-            this.lblDescribe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblDescribe.Name = "lblDescribe";
-            this.lblDescribe.Size = new System.Drawing.Size(600, 31);
-            this.lblDescribe.TabIndex = 11;
-            this.lblDescribe.Text = "Manage Leave Requests";
-            this.lblDescribe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            //this.lblDescribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.lblDescribe.Location = new System.Drawing.Point(296, 98);
+            //this.lblDescribe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            //this.lblDescribe.Name = "lblDescribe";
+            //this.lblDescribe.Size = new System.Drawing.Size(600, 31);
+            //this.lblDescribe.TabIndex = 11;
+            //this.lblDescribe.Text = "Manage Leave Requests";
+            //this.lblDescribe.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblTitle
             // 

@@ -68,6 +68,8 @@ namespace Human_Relations.Pages
         {
             try
             {
+                MySqlCommand cmd = new MySqlCommand();
+
                 cmd.CommandText = @"select
                                     lm.userID as 'User ID',
                                     concat(emp.firstName, ' ', emp.lastName) as 'Employee',
@@ -215,13 +217,13 @@ namespace Human_Relations.Pages
                     }
 
                     Login login = new Login();
-                    Menu off = new Menu(login, s);
+                   // Menu off = new Menu(login, s);
                     lblrequesterror.Text = "The Request was accepted";
                     lblrequesterror.ForeColor = Color.Green;
                     lblrequesterror.Visible = true;
-                    displayPendingLeave();
+                    displayPendingRequests();
                 }
-                else
+                else 
                 {
                     //change
                     lblrequesterror.Text = "Accepting was unsuccessful";
@@ -259,7 +261,7 @@ namespace Human_Relations.Pages
                     lblrequesterror.Text = "The Request was Declined";
                     lblrequesterror.ForeColor = Color.Green;
                     lblrequesterror.Visible = true;
-                    displayPendingLeave();
+                    displayPendingRequests();
                 }
                 else
                 {
