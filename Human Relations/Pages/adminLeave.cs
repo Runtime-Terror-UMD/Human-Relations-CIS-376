@@ -216,7 +216,7 @@ namespace Human_Relations.Pages
                         lblrequesterror.Text = "Your Database was not updated";
                     }
 
-                    Login login = new Login();
+                    //Login login = new Login();
                    // Menu off = new Menu(login, s);
                     lblrequesterror.Text = "The Request was accepted";
                     lblrequesterror.ForeColor = Color.Green;
