@@ -83,12 +83,14 @@ namespace Human_Relations
         }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            LoggedActivity loginActivity = new LoggedActivity();
+            loginActivity.logActivity(13, UserID, 0, DateTime.Now, UserID);
             this.Close();
         }
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
-            var history = new History();
+            var history = new History(UserID);
             history.FormClosed += new FormClosedEventHandler(history_FormClosed);
             this.Hide();
             history.Show();

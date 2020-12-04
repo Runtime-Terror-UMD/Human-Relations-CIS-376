@@ -202,12 +202,6 @@
     <Compile Include="Pages\schedule.Designer.cs">
       <DependentUpon>schedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Summary Reports.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pages\Summary Reports.designer.cs">
-      <DependentUpon>Summary Reports.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pages\VerifyAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,9 +262,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\schedule.resx">
       <DependentUpon>schedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Summary Reports.resx">
-      <DependentUpon>Summary Reports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\VerifyAccount.resx">
       <DependentUpon>VerifyAccount.cs</DependentUpon>

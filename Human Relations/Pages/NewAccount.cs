@@ -243,6 +243,8 @@ namespace Human_Relations
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            LoggedActivity loginActivity = new LoggedActivity();
+            loginActivity.logActivity(13, loggedUserID, 0, DateTime.Now, loggedUserID);
             this.Close();
             Application.OpenForms["ManageEmp"].Close();
             Application.OpenForms["Menu"].Close();

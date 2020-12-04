@@ -19,13 +19,14 @@ namespace Human_Relations.Pages
         DBConnect connection = new DBConnect();
         DataTable pendingLeave = new DataTable();
         BindingSource bindingSource = new BindingSource();
+        private int UserID;
 
-        public adminLeave()
+        public adminLeave(int user)
         {
             InitializeComponent();
             //display pending leave requests when the page opens
             displayPendingRequests();
-
+            UserID = user;
         }
 
 // DESCRIPTION: Displays all pending leave requests (oldest to newest, by start date of request)
@@ -94,6 +95,8 @@ namespace Human_Relations.Pages
         // DESCRIPTION: Logs user out of application
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            LoggedActivity loginActivity = new LoggedActivity();
+            loginActivity.logActivity(13, UserID, 0, DateTime.Now, UserID);
             this.Close();
             Application.OpenForms["Menu"].Close();
         }
