@@ -288,7 +288,7 @@ namespace Human_Relations
             else
             // if admin, redirect to admin leave management page
             {
-                var adminLeavePage = new adminLeave();
+                var adminLeavePage = new adminLeave(UserID);
                 adminLeavePage.FormClosed += new FormClosedEventHandler(adminLeave_FormClosed);
                 this.Hide();
                 adminLeavePage.Show();
