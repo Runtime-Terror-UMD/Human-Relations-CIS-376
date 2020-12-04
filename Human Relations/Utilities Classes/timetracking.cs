@@ -13,7 +13,7 @@ namespace Human_Relations.Utilities_Classes
         {
             int month = DateTime.Now.Month;
             int day = DateTime.Now.Day;
-
+            
             payroll getPayPeriodID = new payroll();
             int payPeriodID = getPayPeriodID.getPayPeriod(month, day);
 
