@@ -12,7 +12,7 @@ using MySql.Data.MySqlClient;
      DESCRIPTION: creates leave request record in dbo.leavemgmt and adds to activity log table.
     Parameters: userID requesting leave, startDateTime of leave, endDateTime of leave
      */
-        public bool requestLeave(int userID, DateTime startDateTime, DateTime endDateTime)
+        public bool requestLeave(int userID, DateTime startDateTime, DateTime endDateTime, Boolean PTO)
         {
             // SQL command to insert leave request record
             DBConnect reqLeaveConn = new DBConnect();
@@ -21,19 +21,32 @@ using MySql.Data.MySqlClient;
                                                             dateStart,
                                                             dateEnd,
                                                             approvalStatus,
-                                                            created)
+                                                            created,
+                                                            applyPTO)
                                                             VALUES
                                                             (@userID,
                                                             @dateTimeStart,
                                                             @dateTimeEnd,
                                                             @approvalStatus,
-                                                            @created);");
+                                                            @created,
+                                                            @applyPTO);");
             reqLeaveCmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = userID;
             reqLeaveCmd.Parameters.Add("@dateTimeStart", MySqlDbType.Date).Value = startDateTime.Date;
             reqLeaveCmd.Parameters.Add("@dateTimeEnd", MySqlDbType.Date).Value = endDateTime.Date;
             reqLeaveCmd.Parameters.Add("approvalStatus", MySqlDbType.VarChar).Value = "Pending";
             reqLeaveCmd.Parameters.Add("@created", MySqlDbType.DateTime).Value = DateTime.Now;
-            if (reqLeaveConn.NonQuery(reqLeaveCmd) > 0)
+        if (PTO)
+        {
+            reqLeaveCmd.Parameters.Add("applyPTO", MySqlDbType.VarChar).Value = "Yes";
+
+
+
+        }
+        else if (!PTO)
+        {
+            reqLeaveCmd.Parameters.Add("applyPTO", MySqlDbType.VarChar).Value = "No";
+        }
+        if (reqLeaveConn.NonQuery(reqLeaveCmd) > 0)
             {
                 // get leaveID for logged activty record
                 int leaveID = -1;
