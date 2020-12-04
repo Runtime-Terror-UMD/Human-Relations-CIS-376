@@ -15,19 +15,24 @@ namespace Human_Relations.Pages
 {
     public partial class adminLeave : Form
     {
-       
+
+        DBConnect connection = new DBConnect();
+        DataTable pendingLeave = new DataTable();
+        BindingSource bindingSource = new BindingSource();
+
         public adminLeave()
         {
             InitializeComponent();
             //display pending leave requests when the page opens
-            displayPendingLeave();
+            displayPendingRequests();
+
         }
-            private void displayPendingLeave() {
-                try
-                {
-                    DBConnect connection = new DBConnect();
-                    DataTable pendingLeave = new DataTable();
-                    BindingSource bindingSource = new BindingSource();
+
+// DESCRIPTION: Displays all pending leave requests (oldest to newest, by start date of request)
+        private void displayPendingRequests()
+        {
+            try
+            {
                     MySqlCommand cmd = new MySqlCommand();
 
                     cmd.CommandText = @"select
@@ -56,14 +61,42 @@ namespace Human_Relations.Pages
                     MessageBox.Show(err.ToString());
                 }
             }
-            
-        
 
+
+        // DESCRIPTION: Displays all leave requests (oldest to newest, by start date of request)
+        private void displayAllRequests()
+        {
+            try
+            {
+                cmd.CommandText = @"select
+                                    lm.userID as 'User ID',
+                                    concat(emp.firstName, ' ', emp.lastName) as 'Employee',
+                                    lm.dateStart as 'Request Start',
+                                    lm.dateEnd as 'Request End',
+                                    DATE(lm.created) as 'Requested On',
+                                    lm.approvalStatus
+                                    from dbo.leavemgmt lm
+                                    join dbo.user emp
+                                        on emp.userID = lm.userID
+                                    order by lm.dateStart";
+                pendingLeave = connection.ExecuteDataTable(cmd);
+                bindingSource.DataSource = pendingLeave;
+                adminLeaveDataGrid.DataSource = bindingSource;
+                adminLeaveDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+        }
+        // DESCRIPTION: Logs user out of application
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             this.Close();
             Application.OpenForms["Menu"].Close();
         }
+
+        //DESCRIPTION: Returns user to menu screen
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -234,6 +267,21 @@ namespace Human_Relations.Pages
                     lblrequesterror.ForeColor = Color.Green;
                     lblrequesterror.Visible = true;
                 }
+            }
+        }
+        
+        // DESCRIPTION: Handler for when checkbox is checked
+        private void checkAllRequests_CheckedChanged(object sender, EventArgs e)
+        {
+            // if checked
+            if(checkAllRequests.Checked == true)
+            {
+                displayAllRequests();
+            }
+            //if not checked
+            else if(checkAllRequests.Checked == false)
+            {
+                displayPendingRequests();
             }
         }
     }

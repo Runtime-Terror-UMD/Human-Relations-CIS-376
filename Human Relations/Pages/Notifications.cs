@@ -139,13 +139,13 @@ namespace Human_Relations.Pages
                     AdminOnly = false;
                 }
                 // if start date in future
-                if(startDate >= DateTime.Today)
+                if(startDate >= DateTime.Today.Date)
                 {
-                    isActive = false;
+                    isActive = true;
                 }    
                 else
                 {
-                    isActive = true;
+                    isActive = false;
                 }
                 createNotification = new notificationClass();
                 // create notification

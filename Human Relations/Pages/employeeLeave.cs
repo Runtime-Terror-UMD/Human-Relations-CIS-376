@@ -24,19 +24,25 @@ namespace Human_Relations.Pages
         {         
             InitializeComponent();
             UserID = userID;
-
+            refreshLeaveReport(UserID);
+          
+         
+        }
+//DESCRIPTION: Pulls leave request report for user
+        private void refreshLeaveReport(int UserID)
+        {
             // try-catch block to handle exceptions
             try
             {
-               // fills the data table 
+                // fills the data table 
                 ptoData = leaveMgmt.employeeLeaveHistory(UserID);
                 ptoBindingSource.DataSource = ptoData;
                 ptoDataGrid.DataSource = ptoBindingSource;
                 ptoDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
-             catch (Exception err)
+            catch (Exception err)
             {
-              MessageBox.Show(err.ToString());
+                MessageBox.Show(err.ToString());
             }
 
             // fill accrued PTO text box
@@ -67,7 +73,7 @@ namespace Human_Relations.Pages
                 leavemgmtclass requestLeave = new leavemgmtclass();
                 if(requestLeave.requestLeave(UserID, startDateTime.Value.Date, endDateTime.Value.Date, CheckPTO.Checked))
                 {
-
+                    refreshLeaveReport(UserID);
                     lblError.ForeColor = Color.Green;
                     lblError.Text = "Request created and pending review";
                     lblError.Visible = true;

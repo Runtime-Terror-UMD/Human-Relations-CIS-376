@@ -218,7 +218,7 @@
             // 
             // EndDatePicker
             // 
-            this.EndDatePicker.Location = new System.Drawing.Point(114, 214);
+            this.EndDatePicker.Location = new System.Drawing.Point(124, 214);
             this.EndDatePicker.Name = "EndDatePicker";
             this.EndDatePicker.Size = new System.Drawing.Size(329, 30);
             this.EndDatePicker.TabIndex = 2;
@@ -226,7 +226,7 @@
             // 
             // startDatePicker
             // 
-            this.startDatePicker.Location = new System.Drawing.Point(115, 118);
+            this.startDatePicker.Location = new System.Drawing.Point(124, 118);
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(329, 30);
             this.startDatePicker.TabIndex = 1;
