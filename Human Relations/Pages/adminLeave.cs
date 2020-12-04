@@ -107,12 +107,7 @@ namespace Human_Relations.Pages
 
         private void Ac_butn_Click_Click(object sender, EventArgs e)
         {
-            if (adminLeaveDataGrid.Rows.Count == 0)
-            {
-                lblrequesterror.Text = " The selected date has no scheduled shifts";
-                lblrequesterror.Visible = true;
-            }
-            else if (adminLeaveDataGrid.SelectedRows.Count == 0)
+            if (adminLeaveDataGrid.SelectedRows.Count == 0)
             {
                 lblrequesterror.Text = " Please select a row";
                 lblrequesterror.Visible = true;
@@ -217,7 +212,7 @@ namespace Human_Relations.Pages
                     }
 
                     //Login login = new Login();
-                   // Menu off = new Menu(login, s);
+                    //Menu off = new Menu(login, s);
                     lblrequesterror.Text = "The Request was accepted";
                     lblrequesterror.ForeColor = Color.Green;
                     lblrequesterror.Visible = true;
@@ -236,12 +231,7 @@ namespace Human_Relations.Pages
 
         private void Dec_butn_Click_Click(object sender, EventArgs e)
         {
-            if (adminLeaveDataGrid.Rows.Count == 0)
-            {
-                lblrequesterror.Text = " The selected date has no scheduled shifts";
-                lblrequesterror.Visible = true;
-            }
-            else if (adminLeaveDataGrid.SelectedRows.Count == 0)
+            if (adminLeaveDataGrid.SelectedRows.Count == 0)
             {
                 lblrequesterror.Text = " Please select a row";
                 lblrequesterror.Visible = true;
