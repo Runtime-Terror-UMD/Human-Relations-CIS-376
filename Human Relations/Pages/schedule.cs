@@ -142,6 +142,7 @@ DESCRIPTION: pulls all user schedules for specified date
 
                 var updateSchedule = new ViewSchedule(UserID, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()), Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[1].Value.ToString()));
                 updateSchedule.FormClosed += new FormClosedEventHandler(newSchedule_formClosed);
+                updateSchedule.Show();
                 this.Hide();
             }
         }

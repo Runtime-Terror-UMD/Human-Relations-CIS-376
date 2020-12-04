@@ -93,7 +93,6 @@
             // 
             // startDateTime
             // 
-            this.startDateTime.Checked = false;
             this.startDateTime.CustomFormat = "MM-dd-yyyy HH:mm";
             this.startDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDateTime.Location = new System.Drawing.Point(200, 200);
