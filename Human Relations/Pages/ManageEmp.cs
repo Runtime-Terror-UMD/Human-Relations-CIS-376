@@ -19,12 +19,13 @@ namespace Human_Relations.Pages
         public double payRateDouble;
         public User userInfo;
 
-        public ManageEmp()
+        public ManageEmp(int UserID)
         {
             InitializeComponent();
+            adminUserID = UserID;
         }
 
-// DESCRIPTION: Opens new employee account page
+        // DESCRIPTION: Opens new employee account page
         private void btnNewEmployee_Click(object sender, EventArgs e)
         {
             var hire = new NewAccount(adminUserID);
@@ -42,13 +43,10 @@ namespace Human_Relations.Pages
 // DESCRIPTION: Logs user out
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            LoggedActivity loginActivity = new LoggedActivity();
+            loginActivity.logActivity(13, adminUserID, 0, DateTime.Now, adminUserID);
             this.Close();
             Application.OpenForms["Menu"].Close();
-        }
-        public ManageEmp(int UserID)
-        {
-            InitializeComponent();
-            adminUserID = UserID;
         }
 
 // DESCRIPTION: Displays error

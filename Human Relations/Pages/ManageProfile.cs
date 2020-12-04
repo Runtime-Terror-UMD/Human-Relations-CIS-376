@@ -124,6 +124,8 @@ namespace Human_Relations.Pages
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            LoggedActivity loginActivity = new LoggedActivity();
+            loginActivity.logActivity(13, userID, 0, DateTime.Now, userID);
             this.Close();
             Application.OpenForms["Menu"].Close();
         }

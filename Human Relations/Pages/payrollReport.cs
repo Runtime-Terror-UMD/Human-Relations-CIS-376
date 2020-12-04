@@ -15,10 +15,12 @@ namespace Human_Relations.Pages
         private double minutesWorked;
         private double hoursWorked;
         private double amountEarned;
+        private int UserID;
         public payrollReport(int userID)
         {
             InitializeComponent();
             userinfo = new User(userID);
+            UserID = userID;
         }
 
 // DESCRIPTION: Loads comboBox data
@@ -32,6 +34,8 @@ namespace Human_Relations.Pages
  // DESCRIPTION: Logs the user out
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            LoggedActivity loginActivity = new LoggedActivity();
+            loginActivity.logActivity(13, UserID, 0, DateTime.Now, UserID);
             this.Close();
             Application.OpenForms["Menu"].Close();
         }

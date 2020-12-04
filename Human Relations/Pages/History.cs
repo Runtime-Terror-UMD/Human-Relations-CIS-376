@@ -15,10 +15,12 @@ namespace Human_Relations.Pages
         Utilities verifyUser = new Utilities();
         LoggedActivity verifyLog = new LoggedActivity();
         User userinfo;
+        private int UserID;
 
-        public History()
+        public History(int user)
         {
             InitializeComponent();
+            UserID = user;
         }
 
         private void displayError(string error)
@@ -34,6 +36,8 @@ namespace Human_Relations.Pages
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            LoggedActivity loginActivity = new LoggedActivity();
+            loginActivity.logActivity(13, UserID, 0, DateTime.Now, UserID);
             this.Close();
             Application.OpenForms["Menu"].Close();
         }
