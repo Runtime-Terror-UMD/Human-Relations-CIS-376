@@ -31,6 +31,7 @@ namespace Human_Relations
 
             InitializeComponent();
             loginWind = loginInstance;
+            pullNotifications.deactivateOldNotifications();
             
             t.Interval = 1000;
             t.Tick += new EventHandler(this.T_Tick);

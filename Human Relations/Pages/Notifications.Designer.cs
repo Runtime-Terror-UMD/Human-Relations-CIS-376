@@ -47,6 +47,7 @@
             this.txtNotificationText = new System.Windows.Forms.TextBox();
             this.btnNewNotification = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnUpdateNotification = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.notificationDataGrid)).BeginInit();
             this.gBoxDetails.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,7 @@
             this.notificationDataGrid.ReadOnly = true;
             this.notificationDataGrid.RowHeadersWidth = 62;
             this.notificationDataGrid.RowTemplate.Height = 28;
+            this.notificationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.notificationDataGrid.Size = new System.Drawing.Size(1019, 278);
             this.notificationDataGrid.TabIndex = 18;
             // 
@@ -124,6 +126,7 @@
             // 
             // gBoxDetails
             // 
+            this.gBoxDetails.Controls.Add(this.btnUpdateNotification);
             this.gBoxDetails.Controls.Add(this.btnCreateNotification);
             this.gBoxDetails.Controls.Add(this.lblType);
             this.gBoxDetails.Controls.Add(this.rBtnEndDate);
@@ -211,7 +214,7 @@
             this.cBoxType.Items.AddRange(new object[] {
             "Admins Only",
             "All Employees"});
-            this.cBoxType.Location = new System.Drawing.Point(784, 113);
+            this.cBoxType.Location = new System.Drawing.Point(784, 115);
             this.cBoxType.Name = "cBoxType";
             this.cBoxType.Size = new System.Drawing.Size(203, 33);
             this.cBoxType.TabIndex = 3;
@@ -237,7 +240,7 @@
             this.txtNotificationText.Multiline = true;
             this.txtNotificationText.Name = "txtNotificationText";
             this.txtNotificationText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotificationText.Size = new System.Drawing.Size(971, 26);
+            this.txtNotificationText.Size = new System.Drawing.Size(971, 35);
             this.txtNotificationText.TabIndex = 0;
             // 
             // btnNewNotification
@@ -260,6 +263,19 @@
             this.btnEdit.TabIndex = 37;
             this.btnEdit.Text = "Edit Selected";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnUpdateNotification
+            // 
+            this.btnUpdateNotification.Location = new System.Drawing.Point(762, 209);
+            this.btnUpdateNotification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnUpdateNotification.Name = "btnUpdateNotification";
+            this.btnUpdateNotification.Size = new System.Drawing.Size(225, 35);
+            this.btnUpdateNotification.TabIndex = 39;
+            this.btnUpdateNotification.Text = "Update Notification";
+            this.btnUpdateNotification.UseVisualStyleBackColor = true;
+            this.btnUpdateNotification.Visible = false;
+            this.btnUpdateNotification.Click += new System.EventHandler(this.btnUpdateNotification_Click);
             // 
             // Notifications
             // 
@@ -306,5 +322,6 @@
         private System.Windows.Forms.ComboBox cBoxType;
         private System.Windows.Forms.Button btnCreateNotification;
         private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.Button btnUpdateNotification;
     }
 }
