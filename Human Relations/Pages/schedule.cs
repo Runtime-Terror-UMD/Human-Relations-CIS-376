@@ -166,18 +166,17 @@ DESCRIPTION: pulls all user schedules for specified date
             }
             else
             {
-                int ScheduleID = -1;
+                int ScheduleID = Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[1].Value.ToString());
                 DBConnect deleteScheduleConnection = new DBConnect();
-                MySqlCommand cmd = new MySqlCommand(@"SELECT * FROM dbo.schedule 
-                                                        WHERE userID = @userID");
-                cmd.Parameters.Add("@userID", MySqlDbType.Int32).Value = Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString());
-                MySqlDataReader dataReader = deleteScheduleConnection.ExecuteReader(cmd);
-                while (dataReader.Read())
-                {
-                    ScheduleID = Convert.ToInt32(dataReader["scheduleID"]);
-                }
-                cmd.CommandText = @"DELETE FROM dbo.schedule WHERE scheduleID = @scheduleID";
+                MySqlCommand cmd = new MySqlCommand(@"DELETE FROM dbo.schedule WHERE scheduleID = @scheduleID");
                 cmd.Parameters.Add("@scheduleID", MySqlDbType.Int32).Value = ScheduleID;
+                if(deleteScheduleConnection.NonQuery(cmd) > 0)
+                {
+                    MessageBox.Show("Schedule " + ScheduleID + " was deleted.");
+                    search();
+                    LoggedActivity updateSched = new LoggedActivity();
+                    updateSched.logActivity(17, Int32.Parse(scheduleDataGrid.SelectedRows[0].Cells[0].Value.ToString()), ScheduleID, DateTime.Now, UserID);
+                }
             }
         }
 
