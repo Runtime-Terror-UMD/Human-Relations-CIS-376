@@ -16,6 +16,7 @@ namespace Human_Relations.Pages
         private notificationClass createNotification;
         private DataTable notificationData = new DataTable();
         private int userID;
+        public User current;
 
         public Notifications(int UserID)
         {
@@ -45,11 +46,11 @@ namespace Human_Relations.Pages
         private void btnLogout_Click(object sender, EventArgs e)
         {
             LoggedActivity loginActivity = new LoggedActivity();
-            loginActivity.logActivity(13, userID, 0, DateTime.Now, userID); 
+            loginActivity.logActivity(13, userID, 0, DateTime.Now, userID);
             this.Close();
             Application.OpenForms["Menu"].Close();
         }
-        
+
         //DESCRIPTION: Returns user to menu screen
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -63,13 +64,15 @@ namespace Human_Relations.Pages
             EndDatePicker.Visible = true;
         }
 
-// DESCRIPTION: Shows new notification details window
+        // DESCRIPTION: Shows new notification details window
         private void btnNewNotification_Click(object sender, EventArgs e)
         {
+            upBTN.Visible = false;
+            btnCreateNotification.Visible = true;
             gBoxDetails.Visible = true;
         }
 
-// DESCRIPTION: Validates data and creates notification
+        // DESCRIPTION: Validates data and creates notification
         private void btnCreateNotification_Click(object sender, EventArgs e)
         {
             lblError.Visible = false;
@@ -79,7 +82,7 @@ namespace Human_Relations.Pages
                 displayError("Notification text is requred");
             }
             // if text entered is longer than 250 charcters
-            else if(txtNotificationText.Text.Length > 250)
+            else if (txtNotificationText.Text.Length > 250)
             {
                 displayError("Notifications are limited to 250 characters");
             }
@@ -106,7 +109,7 @@ namespace Human_Relations.Pages
                     displayError("Start date cannot be after end date");
                 }
             }
-            else 
+            else
             {
                 // fields are valid, create notification
                 string notificationText;
@@ -121,18 +124,18 @@ namespace Human_Relations.Pages
                 // set start date
                 startDate = startDatePicker.Value;
                 // if end date specified
-                if(rBtnEndDate.Checked == true)
+                if (rBtnEndDate.Checked == true)
                 {
                     // set end date
                     endDate = EndDatePicker.Value;
-                }    
+                }
                 else
                 {
                     // set end date to null
                     endDate = null;
                 }
                 // if admin-only notification
-                if(cBoxType.SelectedItem.ToString() == "Admins Only")
+                if (cBoxType.SelectedItem.ToString() == "Admins Only")
                 {
                     AdminOnly = true;
                 }
@@ -141,17 +144,17 @@ namespace Human_Relations.Pages
                     AdminOnly = false;
                 }
                 // if start date in future
-                if(startDate >= DateTime.Today.Date)
+                if (startDate >= DateTime.Today.Date)
                 {
                     isActive = true;
-                }    
+                }
                 else
                 {
                     isActive = false;
                 }
                 createNotification = new notificationClass();
                 // create notification
-                if(createNotification.createNotification(notificationText, startDate, endDate, userID, AdminOnly, isActive))
+                if (createNotification.createNotification(notificationText, startDate, endDate, userID, AdminOnly, isActive))
                 {
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Notification created successfully";
@@ -164,6 +167,31 @@ namespace Human_Relations.Pages
                 }
             }
 
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (notificationDataGrid.SelectedRows.Count == 0)
+            {
+                lblError.Text = " Please select a row";
+                lblError.Visible = true;
+            }
+            else if (notificationDataGrid.SelectedRows.Count > 1)
+            {
+                lblError.Text = " Please select one row";
+                lblError.Visible = true;
+            }
+            else
+            {
+                upBTN.Visible = true;
+                btnCreateNotification.Visible = false;
+                gBoxDetails.Visible = true;
+                InitializeComponent();
+                current = new User(userID);
+                string nID = notificationDataGrid.SelectedRows[0].Cells[0].Value.ToString();
+                int NID = Int16.Parse(nID);
+
+            }
         }
     }
 }
