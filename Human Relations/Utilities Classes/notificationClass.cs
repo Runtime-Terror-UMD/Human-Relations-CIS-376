@@ -8,8 +8,8 @@ namespace Human_Relations.Utilities_Classes
     {
         public int notificationID { get; set; }
         public string notificationText { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
+        public DateTime? startDate { get; set; }
+        public DateTime? endDate { get; set; }
         public int createdBy { get; set; }
         public bool AdminOnlyNotification { get; set; }
         public bool isActive { get; set; }
@@ -31,7 +31,14 @@ namespace Human_Relations.Utilities_Classes
                 notificationID = Convert.ToInt32(dataReader["notificationID"]);
                 notificationText = dataReader["notificationText"].ToString();
                 startDate = Convert.ToDateTime(dataReader["startDate"]);
-                endDate = Convert.ToDateTime(dataReader["endDate"]);
+                if(dataReader["endDate"] == DBNull.Value)
+                {
+                    endDate = null;
+                }
+                else
+                {
+                    endDate = Convert.ToDateTime(dataReader["endDate"]);
+                }  
                 AdminOnlyNotification = Convert.ToBoolean(dataReader["AdminOnlyNotification"]);
                 isActive = Convert.ToBoolean(dataReader["isActive"]);
             }
@@ -59,6 +66,30 @@ namespace Human_Relations.Utilities_Classes
             return false;
         }
 
+        // DESCRIPTION: Updates notification
+        public bool updateNotifcation()
+        {
+            notificationCmd.CommandText = (@"UPDATE dbo.notifications
+                                            SET
+                                            notificationText = @notificationText,
+                                            startDate = @startDate,
+                                            endDate = @endDate,
+                                            AdminOnlyNotification = @adminOnly,
+                                            isActive = @isActive
+                                            WHERE notificationID = @ID;");
+            notificationCmd.Parameters.Add("@notificationText", MySqlDbType.VarChar).Value = this.notificationText;
+            notificationCmd.Parameters.Add("@startDate", MySqlDbType.Date).Value = this.startDate;
+            notificationCmd.Parameters.Add("@endDate", MySqlDbType.Date).Value = this.endDate;
+            notificationCmd.Parameters.Add("@adminOnly", MySqlDbType.Bit).Value = this.AdminOnlyNotification;
+            notificationCmd.Parameters.Add("@isActive", MySqlDbType.Bit).Value = this.isActive;
+            notificationCmd.Parameters.Add("@ID", MySqlDbType.Int32).Value = this.notificationID;
+            if (notificationConn.NonQuery(notificationCmd) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
 // DESCRIPTION: Returns data table of employee notifications for menu page
 
         public DataTable getEmployeeNotifications()
@@ -83,6 +114,7 @@ namespace Human_Relations.Utilities_Classes
             return reportData;
         }
 
+// DESCRIPTION: Returns data table of admin notifications for notification management  page
         public DataTable getAdminPageNotifications()
         {
             notificationCmd.CommandText = (@"SELECT 
@@ -102,6 +134,18 @@ namespace Human_Relations.Utilities_Classes
                                             ORDER by n.startDate DESC;");
             DataTable reportData = notificationConn.ExecuteDataTable(notificationCmd);
             return reportData;
+        }
+
+// DESCRIPTION: Deactivates any notifications with an end date before today
+        public void deactivateOldNotifications()
+        {
+            notificationCmd.CommandText = (@"UPDATE dbo.notifications
+                                            SET
+                                            isActive = false
+                                            WHERE endDate IS NOT NULL
+                                            AND endDate <= current_date()
+                                            and isActive = 1;");
+            notificationConn.NonQuery(notificationCmd);
         }
     }
 }
