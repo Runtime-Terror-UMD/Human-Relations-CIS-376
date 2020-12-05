@@ -279,5 +279,18 @@ namespace Human_Relations.Pages
                 displayPendingRequests();
             }
         }
+
+        private void btnPersonalLeave_Click(object sender, EventArgs e)
+        {
+            var empLeavePage = new employeeLeave(UserID);
+            empLeavePage.FormClosed += new FormClosedEventHandler(employeeLeave_FormClosed);
+            this.Hide();
+            empLeavePage.Show();
+        }
+
+        private void employeeLeave_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
     }
 }

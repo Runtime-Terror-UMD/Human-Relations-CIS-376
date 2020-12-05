@@ -36,6 +36,7 @@
             this.Dec_butn_Click = new System.Windows.Forms.Button();
             this.Ac_butn_Click = new System.Windows.Forms.Button();
             this.checkAllRequests = new System.Windows.Forms.CheckBox();
+            this.btnPersonalLeave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.adminLeaveDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,7 +98,7 @@
             // Dec_butn_Click
             // 
             this.Dec_butn_Click.Location = new System.Drawing.Point(565, 497);
-            this.Dec_butn_Click.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Dec_butn_Click.Margin = new System.Windows.Forms.Padding(2);
             this.Dec_butn_Click.Name = "Dec_butn_Click";
             this.Dec_butn_Click.Size = new System.Drawing.Size(75, 23);
             this.Dec_butn_Click.TabIndex = 17;
@@ -108,7 +109,7 @@
             // Ac_butn_Click
             // 
             this.Ac_butn_Click.Location = new System.Drawing.Point(130, 497);
-            this.Ac_butn_Click.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Ac_butn_Click.Margin = new System.Windows.Forms.Padding(2);
             this.Ac_butn_Click.Name = "Ac_butn_Click";
             this.Ac_butn_Click.Size = new System.Drawing.Size(75, 23);
             this.Ac_butn_Click.TabIndex = 18;
@@ -121,7 +122,7 @@
             this.checkAllRequests.AutoSize = true;
             this.checkAllRequests.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkAllRequests.Location = new System.Drawing.Point(29, 93);
-            this.checkAllRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkAllRequests.Margin = new System.Windows.Forms.Padding(2);
             this.checkAllRequests.Name = "checkAllRequests";
             this.checkAllRequests.Size = new System.Drawing.Size(188, 21);
             this.checkAllRequests.TabIndex = 17;
@@ -129,11 +130,22 @@
             this.checkAllRequests.UseVisualStyleBackColor = true;
             this.checkAllRequests.CheckedChanged += new System.EventHandler(this.checkAllRequests_CheckedChanged);
             // 
+            // btnPersonalLeave
+            // 
+            this.btnPersonalLeave.Location = new System.Drawing.Point(594, 88);
+            this.btnPersonalLeave.Name = "btnPersonalLeave";
+            this.btnPersonalLeave.Size = new System.Drawing.Size(161, 25);
+            this.btnPersonalLeave.TabIndex = 19;
+            this.btnPersonalLeave.Text = "Request Personal Leave";
+            this.btnPersonalLeave.UseVisualStyleBackColor = true;
+            this.btnPersonalLeave.Click += new System.EventHandler(this.btnPersonalLeave_Click);
+            // 
             // adminLeave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnPersonalLeave);
             this.Controls.Add(this.Ac_butn_Click);
             this.Controls.Add(this.Dec_butn_Click);
             this.Controls.Add(this.checkAllRequests);
@@ -142,7 +154,7 @@
             this.Controls.Add(this.lblrequesterror);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnLogOut);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "adminLeave";
             this.Text = "Human Resources: Leave Management";
             ((System.ComponentModel.ISupportInitialize)(this.adminLeaveDataGrid)).EndInit();
@@ -161,5 +173,6 @@
         private System.Windows.Forms.Button Dec_butn_Click;
         private System.Windows.Forms.Button Ac_butn_Click;
         private System.Windows.Forms.CheckBox checkAllRequests;
+        private System.Windows.Forms.Button btnPersonalLeave;
     }
 }
