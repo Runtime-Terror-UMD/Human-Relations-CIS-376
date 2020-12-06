@@ -176,7 +176,7 @@ DESCRIPTION: pulls all user schedules for specified date
                     MessageBox.Show("Schedule " + ScheduleID + " was deleted.");
                     search();
                     LoggedActivity updateSched = new LoggedActivity();
-                    updateSched.logActivity(17, empID, ScheduleID, DateTime.Now, UserID);
+                    updateSched.logActivity(19, empID, ScheduleID, DateTime.Now, UserID);
                 }
             }
         }
