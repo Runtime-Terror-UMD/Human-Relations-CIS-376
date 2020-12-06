@@ -227,6 +227,8 @@ namespace Human_Relations.Pages
                 #region section Table
                 pdfTable3.AddCell(new Phrase("FULL NAME "));
                 pdfTable3.AddCell(new Phrase(na));
+                pdfTable3.AddCell(new Phrase("Pay Period "));
+                pdfTable3.AddCell(new Phrase(cBoxPayPeriodID.Text));
                 pdfTable3.AddCell(new Phrase("JOB TITLE "));
                 pdfTable3.AddCell(new Phrase( role ));
                 pdfTable3.AddCell(new Phrase("HOURS WORKED"));
