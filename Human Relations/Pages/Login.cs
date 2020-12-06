@@ -93,6 +93,8 @@ namespace Human_Relations
 
                             else
                             {
+                                LoggedActivity loginActivity = new LoggedActivity();
+                                loginActivity.logActivity(12, userID, 0, DateTime.Now, userID);
                                 if (isAdmin(txtUsername.Text))
                                 {
                                     // re-drecit to menu, show admin buttons
